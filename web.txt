@@ -1,0 +1,776 @@
+当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
+
+js中跨域方法
+1、jsonp跨域(只能解决get）
+原理：动态创建一个script标签。利用script标签的src属性不受同源策略限制，因为所有的src属性和href属性都不受同源策略的限制，可以请求第三方服务器资源内容
+4、服务器设置对CORS的支持 原理：服务器设置Access-Control-Allow-Origin HTTP响应头之后，浏览器将会允许跨域请求
+
+
+
+正则表达式replace的结果是字符串类型当要使用tostring转换时需要将结果转换为数字，可以在结果前使用+号让他转换为数字(+arguments[1]).toString(16)也可以用parseInt转换
+
+注意 splice会直接修改数组信息无需赋值，而使用join时需要赋值才能生效 slice不是修改在本身上返回最后结果
+                newstr.splice(0,1)
+                newstr=newstr.join('')
+
+ toString(xxx) 方法
+ 2 - 数字以二进制值显示
+8 - 数字以八进制值显示
+16 - 数字以十六进制值显示
+
+html标签中的this：<input type="text" οnkeyup="showHint(this.value)"/> <!--此处，在html标签中的this代表的是此标签-->
+
+ xxx.sort((a,b)=>{return a-b} 按从小到大排序)  return b-a 按从大到小排序
+
+
+js遍历字符串for(var i in s) s.charAt(i) 
+s.charCodeAt(i) 返回字符串第i个字符的 Unicode 编码
+s.charAt(i) 方法 返回字符串第i个字符   根据索引取得字符串第i个值
+
+oNode1.contains(oNode2) 判断node2是否为node1子节点
+
+展开数组 ...arguments   。。。为展开表达式
+数组参数只能用arguments表示    //不能在数组arguments上操作需要操作时用一个数组接收展开的arguments
+call()、bind()、apply()的用法，改变this的指向，第一个参数代表this的指向，区别在于 
+f.call(obj, arg1, arg2...),
+f.bind(obj, arg1, arg2,...)(),  bind返回一个函数需要重新调用
+f.apply(obj, [arg1, arg2, .]) apply使用数组方式传参
+
+垂直居中
+position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);
+
+在实现点击某个目标该目标有自己的样式，其他兄弟普通样式有两个方法，一种是使用排他思想，另一种是用v-bind动态绑定class 通过判断条件进行class设定如 :class="{'pages':true,'pagesselect':start === 1}" 当data中start等于1时有该classname
+
+实现识别文本换行 style="white-space:pre-line;"
+
+vue实现分页加省略号 https://blog.csdn.net/weixin_44599931/article/details/114366095
+<span @click='changepage(item)' v-for="(item, index) in pages" :key="index" style="border: 1px solid red;display: inline-block;margin: 10px;">{{item}}</span>
+            data: {
+                start: 1,//当前页
+                end: 27  //最后一页
+            },
+            methods: {
+                changepage(page) {
+                    this.start = page   //start变更之后computed会自动重新计算，页面会重新渲染
+                    // console.log(page);
+                }
+            },
+            computed: {
+                //使用计算属性返回
+                pages() {
+                    if (this.end < 10) return this.end;	//省略号的添加是分页大于10的时候
+                    if (this.start <= 5) {  //当前页码小于等于5
+                        return [1, 2, 3, 4, 5, 6, '...', this.end]		//[1,2,3,4,5,6,'...',最后一页]
+                    } else if (this.start > this.end - 5) {      //当前页码大于等于最后一页-5
+                        return [1, '...', this.end - 5, this.end - 4, this.end - 3, this.end - 2, this.end - 1, this.end] 
+		 //[1,'...',尾页-5,尾页-4,尾页-3,尾页-2,尾页-1,尾页]
+                    } else { //当前页码大于5并且当前页码小于最后一页页码-5
+                        return [1, '...', this.start - 3, this.start - 2, this.start - 1, this.start, this.start + 1, this.start + 2, this.start + 3, '...', this.end]			
+		//[1,'...',当前页-3,当前页-2,当前页-1,当前页,当前页+1,当前页+2,当前页+3,'...',尾页]
+                    }
+                }
+            }
+
+
+
+css实现倒三角 https://blog.csdn.net/LLL_liuhui/article/details/80916265
+#triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid red;
+}
+
+位数不够自动左补0显示	var mycode = "11";
+mycode = (Array(4).join(0) + parseInt(mycode)).slice(-4);//0011
+mycode1 = (Array(3).join(0) + parseInt(mycode)).slice(-3);//011
+
+js取小数部分，将结果转换为字符串然后通过split（‘.’）分割取值，再通过字符串拼接成0.xxx形式，最后通过parseFloat方法转换为小数 注意parseint方法只会取整
+
+Vue判断对象中是否存在某个属性  取反需要把一整个括号起来  !('lr' in trackIds[index+3])
+a属性存在obj中   	 b不存在obj中
+("a" in obj); // true 
+("b" in obj); // false 
+
+
+时间戳转日期：new Date(parseInt('1626827280725//这个是时间戳')).toLocaleString()
+
+vue watch用法  https://www.cnblogs.com/xiaozhumaopao/p/11077234.html
+ watch:{
+     a(val, oldVal){//普通的watch监听   oldval非必须传入
+         console.log("a: "+val, oldVal);
+     },
+     b:{//深度监听，可监听到对象、数组的变化,普通的watch方法无法监听到对象内部属性的改变
+         handler(val, oldVal){
+             console.log("b.c: "+val.c, oldVal.c);
+         },
+         deep:true // 深度监听 此时会给b的所有属性都加上这个监听器，当对象属性较多时，每个属性值的变化都会	       //执行handler。将b改为'b.name'这样只会给对象的某个特定的属性加监听器。
+         immediate: true // 当值第一次绑定的时候，不会执行监听函数，只有值发生改变才会执行。将immediate设	                 //为true即可在最初绑定值的时候也执行函数
+     }
+ }
+
+渲染错误问题，如果页面正常显示但报错无法识别的类型只需要给用到该数据的的标签加上v-if=data中的对应参数，初始渲染没找到不显示，当进行到后面找到数据再渲染显示
+
+解决图片缩放不清晰 backface-visibility:hidden; 或   -webkit-backface-visibility:hidden;/* Chrome 和 Safari */
+ 
+返回顶部：通过a标签的href=‘#xxx’ 返回id为xxx的锚点
+// window对象，所有浏览器都支持window对象。它表示浏览器窗口，监听滚动事件
+mounted () {
+  window.addEventListener('scroll', this.scrollToTop)
+},
+destroyed () {
+  window.removeEventListener('scroll', this.scrollToTop)
+}
+
+  // 为了计算距离顶部的高度，当高度大于60显示回顶部图标，小于60则隐藏
+  scrollToTop () {
+    const that = this
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop ||document.body.scrollTop  
+    if ( scrollTop > 60) {
+      that.btnFlag = true         //btnFlag来控制a的显示隐藏
+    } else {
+      that.btnFlag = false
+    }
+  }
+
+设置控件点击后不能重复点击
+@click="clickable && albumleft()"  设置变量clickable,当clickable为true时才执行后面的函数,后面的函数得加括号;在函数开头设置clickable为false,在函数最后设置定时器 setTimeout(() => {this.clickable = true}, 1000)来定时
+
+左右滑动效果：
+通过对两个组件进行定位使之在一行，并用transition-group对两个组件逐一包裹,命名name定义对应css动画，如果需要根据控件切换动画效果，只需要给transition-group的name动态绑定,通过控件修改name呈现对应的css动画
+最外层父标签加上overflow:hidden
+====================================================================
+    图片方向=》
+.slide-forward-enter {
+  transform: translate(-100%);
+}
+
+.slide-forward-enter-active {
+  transition: all 1s ease-in-out;
+}
+
+.slide-forward-leave-active {
+  transform: translate(100%);
+  transition: all 1s ease-in-out;
+}
+===================================================================
+       图片方向《=
+.slide-back-enter {
+  transform: translate(100%);
+}
+
+.slide-back-enter-active {
+  transition: all 1s ease-in-out;
+}
+
+.slide-back-leave-active {
+  transform: translate(-100%);
+  transition: all 1s ease-in-out;
+}
+====================================================================
+遮罩层：使用z-index:该元素设置定位position：realative，然后设置z-index=-1
+
+去除标签字体特效 font-style:normal 如i标签
+
+段落开头自动空两格
+<div style="text-indent:2em;">你的文章内容！</div>
+
+overflow超出部分省略号
+//两行超出
+	.overhide {
+	　　display: -webkit-box !important;
+	　　text-overflow: ellipsis;
+	　　overflow: hidden;
+	　　-webkit-line-clamp: 2;  可修改
+	　　-webkit-box-orient: vertical;
+	　　word-break:break-all;
+	}
+//单行文本 超出盒子隐藏
+div{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+vertical-align: middle;overflow:hidden属性导致样式错位只要加任意vertical-align无论top, middle属性就能解决
+}
+
+
+<div v-bind:id="rawId | formatId">{{rawId | formatId}}</div>
+你可以在一个组件的选项中定义本地的过滤器： https://cn.vuejs.org/v2/guide/filters.html
+filters: {
+  capitalize: function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  }
+}
+
+
+精灵图的使用
+1.给盒子设置高度宽度来放背景图片
+ 2.设置背景图片为精灵图，并不重复 background: url("../assets/xuebitu.png") no-repeat;
+3.设置背景图片位置左上角为xy起点，y轴的高度是到要的图片的顶部 x轴是到要的图片的最左侧部background-position: 0px -195px ;   x轴右边是负数 y下方是负数
+
+border-radius: 50%;实现圆形
+
+设置post请求头
+const param = new URLSearchParams()
+param.append('username', 'admin')
+param.append('pwd', 'admin')
+axios({
+    method: 'post',
+    url: '/api/lockServer/search',
+    data: param
+})
+
+axios的使用 import axios from 'axios'  Vue.prototype.$axios = axios   	 因为axios中的this指向是axios内部不属于vue 所以axios中then和catch的回调函数最好使用()=>{}来写函数,可以让this指向vue
+  this.$axios({
+    method: "post",//指定请求方式
+    url: "/business-app/getCityShopList.cgi",//请求接口（相对接口，后面会介绍到）
+    data: {
+      cityId: cityId,
+      data:{},
+      isDebug:"1",
+      longitude: "",
+      latitude: ""
+    }
+  })
+  .then(function(res){
+    //接口成功返回结果执行
+  })
+  .catch(function(err){
+      log(err);//请求失败或者接口返回失败或者.then()中的代码发生错误时执行
+  })
+}
+
+axios中使用get  注意get参数的载体是params 不是data   请求地址url?rid=1&day=3
+//写法一
+            axios.get('接口地址', {
+                params: {
+                    id: 12,//请求参数
+                },
+            }).then(
+                (res) => {
+                    //执行成功后代码处理
+                }
+            )
+            //写法二
+            axios({
+                method: 'get',//请求方法
+                params: {
+                    id: 12,//请求参数
+                },
+                url: '后台接口地址',
+            }).then(res => {
+                //执行成功后代码处理
+            })
+        }
+
+// 添加响应拦截器
+axios.interceptors.response.use(function (response) {
+　　// 对响应数据做点什么
+　　return response
+}, function (error) {
+　　// 对响应错误做点什么
+　　return Promise.reject(error)
+});
+
+filter: blur(5px); imgcss样式 虚化图片
+
+去除input:focus状态下边框的方法 Bootstrap style="outline:none;box-shadow: none;"
+
+使用bootstrap的ico且使用css的伪类选择器添加 在main.js导入svg
+.search::before {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  content: "";
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='svg中的d 每个d都隔开一个空格如 d1 d2' clip-rule='evenodd'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 1rem 1rem;
+}
+
+当需要更小的字体时可以用缩放实现 transform: scale(0.5);
+
+当使用bootstrap设置的行原先四个内容一行，想通过响应式改变成一行两个内容，除了用col-xxx-xxx分配不同width下的栅格之外，还可以使用元素的宽度来把其他元素挤下去
+
+width:100% 和 max-width:100%的区别：不想图片自适应拉伸的话就是max-width:100%,想图片都统一拉升的话就用width:100%
+width: 100%(不包括margin和padding和border)是将所有指定元素的宽度拉伸或收缩到和父元素的宽度一致，
+而max-width: 100%则是如果指定元素的宽度不超过父元素的宽度，则大小不变，如果超过了父元素的宽度，则将宽度收缩为父元素的宽度。(用于bootstrap中响应式图片的显示的宽度，避免过度拉伸)
+
+设置其他屏幕宽度时如果需要改变标签css样式，采用媒体查询来重新设置css样式完成不同宽度下组件的样式
+@media screen and （max-width：xxxxpx）{ // 当宽度小于xxxxpx时生效 max-width或min-width包括后面限定的值 max-width：100px即最大宽度为100包括100 min-width：100px 最小宽度为100包括100
+   css样式
+}
+
+background-color:rgba(0,0,0,0.5);实现背景透明
+
+a标签内放入img和p标签然后对p进行定位即可完成在图片底部有文字的效果
+
+bootstrap响应式只在乎宽度不在乎高度
+
+使用bootstrap步骤在main.js引入
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.bundle'
+import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'bootstrap-icons/bootstrap-icons.svg'
+
+当一个组件在sm md lg 栅格比例都不变时，栅格定义在col-sm-xxx即可，sm往上都自动使用sm的比例
+
+在bootstrap中如果因为前一个元素浮动且大盒子也没有给高度要清除浮动 在该浮动的元素的外层一个标签的class加上 clearfix类名
+
+兄弟选择器 li + li{} 选择排在li下方的第一个li应用样式
+
+p:nth-child(odd)p:nth-child(even)Odd 和 even 是可用于匹配下标是奇数或偶数的子元素的关键词
+选择第1个到第6个 :nth-child(-n+6)   选择从第6个开始的，直到最后:nth-child(n+6)    两者结合使用，可以限制选择某一个范围，选择第6个到第9个  :nth-child(n+6):nth-child(-n+9)
+:nth-child(n) 选择器匹配属于其父元素的第 N 个子元素，不论元素的类型。
+body li :nth-child(n)  指的是li的父亲body的第n个子节点，且当选到的第N个节点类型为li时选择器生效
+body li :nth-child(1) p 指的是li的父亲body的第1个子节点，且当第1个节点类型为li时该li的子节点p的css效果生效
+
+:hover:after支持多个选择器嵌套来筛选元素
+:after :before 伪类选择器就是两个定位盒子。after生成在元素屁股后before在元素最前方
+xxx:after{
+content: ''; 必须有这个属性
+position: absolute; 通过定位来控制盒子位置 元素本身必须有相对定位
+}
+如果需要实现元素宽度向两侧延伸 css加上  transform: rotateY(180deg); 将元素沿着Y轴旋转xxx度数
+transition 多个属性的用法:transition:  transform   2s ease, border-radius  3s ease-out;    // 多个属性逗号隔开
+
+bootstrap中的contanier会默认左右pading15px，只要在container内加个class=row的div就可以消除padding
+
+ul>li{count$@4}*3 从4开始自增 自增符$ 
+页面水平居中 margin：0 auto
+
+文字居中 style{
+	display:flex;
+	justifycontent:center
+	alignitems:center
+}
+
+ <router-link to="/home/login">登录</router-link>
+ { path: '/', redirect: '/home' },
+
+没有e.targe.name用 e.target.getAttribute（'name'） 来取属性值
+
+e.currentTarget 和e.target
+// e.target 是你当前点击的元素     	// e.currentTarget 是你绑定事件的元素     
+
+组件<m1></m1>若要添加事件@click=‘xxx' 使其生效 方法1 <btn @click.native='alert(1)'>点击</btn>
+方法2 <div id="app">
+       <btn @click='alert（$event）'>点击</btn>
+</div>
+<script>
+        Vue.component('btn', {
+            template:`
+            <button @click='handleClick'> 在temple最外层添加事件 此时组件内e和组件外e一致
+                <slot></slot>
+            </button>
+            `,
+            methods: {
+                handleClick(e){
+                    this.$emit('click','e')
+                }
+            },
+        })
+https://blog.csdn.net/qq_41818857/article/details/106752513
+
+
+v-on绑定多个方法：
+<p v-on="{click:dbClick,mousemove:MouseClick}"></p>
+一个事件绑定多个函数：
+<p @click="one(),two()">点击</p>
+
+
+
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  float: left;
+}去除默认样式li横排列
+
+event.target.nodeName  　　//获取事件触发元素标签name（li,p...）
+event.target.id　　　　　　　//获取事件触发元素id
+event.target.className　　//获取事件触发元素classname
+event.target.innerHTML　　//获取事件触发元素的内容（li）
+
+display:inline-block不在同一行或字体图标不居中 在样式加上vertical-align: middle即可同一行
+
+过渡要是想使用自己的开头类，给transtion加上name属性
+如name=‘my’
+.my-enter,.my-my-leave-to
+
+②v-for='count in 4'循环数字{{count}}可以使用
+
+对于绝对定位position:absolute的子元素，其基准点是相对于离其最近的一层定位父元素而言。如果其所有父级元素均无定位，则是相对于body而言。
+
+动画过渡：第三方依赖 animate。css  。:duration='毫秒值' 统一动画时间 :duration='{enter：毫秒值，leave：毫秒值}'
+使用方式
+<transition enter-active-class='animated 效果'  leave-active-class='animated 效果' :duration='毫秒值'>
+  xxxx
+</transition>
+npm版本语法变化为enter-active-class="animate__animated animate__swing"
+
+
+不论鼠标指针穿过被选元素或其子元素，都会触发 mouseover 事件。
+不论鼠标指针离开被选元素还是任何子元素，都会触发 mouseout 事件。
+
+vue cli 的项目引入img，需要动态引入 img放在src的assets文件夹中 assets文件夹是放静态资源
+    <img :src="myimags[0].path">
+    <img :src="myimags[1].path">
+data: function () {
+    return {
+      myimags: [
+        {
+          path: require('../assets/img/plus.png')
+        },
+        {
+          path: require('../assets/img/banner3.jpg')
+        }
+
+
+
+
+vue inspect > output.js   生成webapck.config文件
+
+slot组件设置样式不生效，需要加到父组件中
+
+在app.vue中使用外部组件，需要import外部组件然后在app的vue实例内部注册该组件后在template中使用
+
+foreach遍历数组
+for in 循环是最基础的遍历对象的方式，它还会得到对象原型链上的属性
+for (const key in obj) {
+ console.log(obj[key]) // foo, bar
+}
+
+
+使用三元表达式绑定内联样式
+<div :style="{ display: [isshow?'none':''] }"></div> 
+:class="{'class1':'true'=='true',class2:status=='status'}"
+<i class="iconfont "  :class="[isShow==='password'?'icon-kejian':'icon-bukejian']"></i>
+三元表达式要加中括号
+v-bind:class="{ active: isActive, 'text-danger': hasError }" 当键对应的值为true时class添加键作为classname
+
+increment (state, payload){state.count += payload.amount1；} 定义方法也只能两个参数，后面那个参数来接受对象
+store.commit('increment', {
+  amount1: 10,
+  amount2: 20，
+  amount3: 30，
+  amount4: 40，
+}
+
+Vuex数据会级联更新，当赋值数据 a=b时两者的id相同，b的数据发生修改a的数据也同步更新（如对b的数组进行增加，删除，修改 obsever中的dep中的id不会发生改变），当对b整个对象进行重新赋值obsever中的dep中的id发生改变ab两者的id不在相同，无法对a中的数据进行同步
+
+条件为x.id == xxx.id  value=>  return value > 14 返回大于14的值
+findindex是对list每一项进行遍历，xxx.xxx.findindex( x=>x.id == xxx.id) 没找到返回-1 找到返回对应的索引值
+x为list的每一项相当于foreach中的x
+xxx.xxx.filter( x=> x.id == xxx.id) 将满足条件的x return一个数组出来 
+js中replace只替换一次字符，需要多次替换用str.split('xxx').join('xxx') split是以xxx为条件分割字符串
+"2:3:4:5".split(":")	//将返回["2", "3", "4", "5"]		 join把数组拼接成字符串
+或者 替换多个子串 通过 /g 运算符使用正则表达式 replace(/sentence/g, 'message');
+
+截取字符串/数组"rcinn.cn";  stmp.slice(1,5) //从下标1，到下标5（不包括5）；返回"cinn" slice（1）从第一位开始截取
+
+jsx 在js中写xml语句 用bable的load处理jsx 在jsx的范围内用js相关的操作（语句，变量）使用{}括起来
+
+/xxx根目录
+./xxx同级文件夹
+
+constructor(){} 构造器
+
+组件中使用vuex 要把store注册进组件
+import store from './store'   ！！！！
+
+ const app = new Vue({
+  el: '#app',
+  // 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件
+  store，
+}
+
+vuex中使用state，在app.vue中import {mapstate} from 'vuex',然后在computer中使用 ...mapstate（['需要的参数']）  或者 this.$store.state.xxxxx
+import { mapState, mapGetters } from 'vuex'   ！！！！
+  computed: {
+    ...mapState(['list', 'inputvalue']),
+    ...mapGetters(['left'])
+  },
+vuex中使用Mutation方法
+mutations传多个参数的写法：
+      this.$store.commit('listpush', {
+        id: this.id,
+        value: e.target.value,
+        done: false
+      })
+此时参数不能继续在后面加，后面的参数无效，传进去的参数为undefined；所以，我们可以将参数以对象的方式传进去，多个属性就是多个参数了。
+
+https://blog.csdn.net/gao_xu_520/article/details/79723613
+mock中使用 /\/studentinfo/ 正则表达式来匹配url
+如果是get请求，可以在options.url中获取到，
+如果是post请求，可以在options.body中获取到。
+Mock.mock(/\/api\/test/,'get',(options)=>{console.log(options)})
+参数顺序:
+参数 rurl：可选。表示需要拦截的 URL，可以是 URL 字符串或 URL 正则。例如 /\/domain\/list.json/、'/domian/list.json'。
+	参数 rtype：可选。表示需要拦截的 Ajax 请求类型。例如 GET、POST、PUT、DELETE 等。
+	参数 template：可选。表示数据模板相当于返回的data，可以是对象或字符串。例如 { 'data|1-10':[{}] }、'@EMAIL'。
+	参数 function(options)：可选。表示用于生成响应数据的函数。
+	参数 options：指向本次请求的 Ajax 选项集。
+
+
+在App.vue的界面使用其他主键，在script 中import组件，然后export default {}中components中注册组件才能使用
+
+换行\n
+
+
+.class1.class2（中间没有空格）匹配的是同时拥有class1和class2的元素
+.class1 .class2匹配的是父节点有.class1，子孙节点有.class2的元素
+
+mouseover/out鼠标在元素上/外
+停止定时器clearinterval（name）
+onblur 相反事件为 onfocus 事件 。
+
+
+[ ] 数组  xxx[0].属性
+{ } 对象 xxx.属性类名
+{NAME:"",
+
+
+v-for 只能用在ul 中的li
+    <ul id="myvue">
+        <li v-for="item in list">{{item}}</li>
+    </ul>
+
+列表删除指定位置list.splice(index,1)  注意要使用在字符串时需要将字符串split分割成list
+
+v-bind:属性="" 缩写 :属性=""
+
+当用model绑定元素后元素值发生变化，this指向的对象会变(当在回调函数中也一样），需要给之前的this留存档
+
+vue 框架内调用内部参数 都要用this 如this.框架内方法() this.框架内变量
+
+vue中通过判断来设置css使用v—bind：绑定样式，通过三元运算符来设置样式
+
+ul>li{$个} *10
+
+在用vue设置class，当用列表表达式时（在列表中用对象表达式括起来也得用）：外部定义的样式引用用单引号，不加单引号会在data中寻找
+用对象表达式时：外部定义的和内部定义的都不需要加符号（外部定义的也可以带）
+
+当vue中的属性有xxx—xxx的一横时，需要把这个属性用单引号括起来
+
+v-for 使用得行内加上一个key的属性 并且用v-bind关联且key的值唯一（key只能string或者number）
+
+
+foreach 和 some和map 都可以遍历集合，xxx（function（item，index）{}），但some在方法return True 后会中断遍历
+1、forEach：用来遍历数组中的每一项，这个方法执行没有返回值，如果return会返回undifine
+2、map：支持return，用变量接收map会得到map返回的一个数组
+
+注意使用indexOf是不能找到数组里的NaN的要用includes
+indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。如果要检索的字符串值没有出现，则该方法返回 -1。 搜索空字符串返回0/s///
+indexof也适用于arry，如果找到一个 item，则返回 item 的第一次出现的位置。如果在数组中没找到指定元素则返回 -1。
+
+如果在数组中没找到指定元素则返回 -1。
+   
+string.includes("text"); 是否包含了text，是则返回true
+
+
+list.filter(function(item){
+	if(xxxx){
+	 return item
+	}
+
+}
+) 返回数组，包含了符合条件的所有元素。如果没有符合条件的元素则返回空数组。
+
+vue中设置Boolean类型的属性需要用函数return True or Flase，无法通过字符设置
+
+click 事件的执行在 v-model 的修改之前,由于 v-model 数据是双向的，所以我认为可以自己直接再事件中先改变
+
+<table style="border-collapse:separate; border-spacing:0px 10px;"> 即可改变tr的间距
+
+去除数组重复元素
+Array.prototype.method1 = function(){  // 为 Array 对象添加一个去除重复项的方法(method1)
+       var arr=[];    //定义一个临时数组 
+       for(var i = 0; i < this.length; i++){    //循环遍历当前数组 
+           //判断当前数组下标为i的元素是否已经保存到临时数组 
+           //如果已保存，则跳过，否则将此元素保存到临时数组中 
+           if(arr.indexOf(this[i]) == -1){ 
+               arr.push(this[i]); 
+           } 
+       } 
+       return arr; 
+   }
+
+vue.directive()自定义指令
+//使用Vue . directive()定义全局的指令
+V- focus
+//其中:参数1:指令的名称，注意，在定义的时候，指令的名称前面，不需要加v-前缀，
+//但是:在调用的时候，必须在指令名称前加上v-前缀来进行调用
+// 参数2:是一个对象，这个对象身上，有一 些指令相关的函数，这些函数可以在特定的阶段,执行相关的操作
+Vue.directive(focus'，{
+bind: function (el) { // 每当指令绑定到元素上的时候，会立即执行这个bind函数，只执行一-次 //用于dom元素内css设置
+
+//注意:在每个函数中，第一个参数，永远是el, 表示被绑定了指令的那个元素，这个el 参数，是个原生的Js对象
+inserted: function (el) { 
+// 用于对dom元素行为设置(js行为有关)
+	e1. focus ()
+// inserted 表示元素插入到DOM中的时候，会执行inserted 函数[触发1次]
+updated: function () { // 当VNode更新的时候会执行updated, 可能会触发多次，也就是绑定的标签有任何变化就触发，包括绑定的值v-lodading='trueorfalse'}
+})
+指令钩子函数会被传入以下参数：
+el：指令所绑定的元素，可以用来直接操作 DOM。
+binding：一个对象，包含以下 property：
+	name：指令名，不包括 v- 前缀。
+	value：指令的绑定值，例如：v-my-directive="1 + 1" 中，绑定值为 2。
+	arg：传给指令的参数，可选。例如 v-my-directive:foo 中，参数为 "foo"。
+	expression：字符串形式的指令表达式。例如 v-my-directive="1 + 1" 中，表达式为 "1 + 1"。(拿双引	号中的表达式)
+vnode.
+vue 指令中如需要用字符串 v-xxxx=“‘字符串’”不加单引号回去data中寻找
+
+create周期函数是指创建完对象，可以使用对象的data的数据和menthods中方法
+生命周期mount的意思是，将el指向的标签内的vue语句进行编译执行，beforemount是指在编译执行vue语句前执行的生命周期函数，在mount前html中的vue指令无法识别，所以当有使用{{}}的语法的标签的内容是无法渲染data的数据，获取到的只有{{xxx}}字符串
+--------------create 和mount 都是属于三大生命周期（创建对象，运行对象，销毁对象）中的创建对象周期.--------操作dom元素在mounted阶段
+
+
+插入数组可以用push ，但插入对象为了重新生成新对象要用assign，assign可以重新在内存中创建对象Object.assign( target, source1)  const copy = Object.assign({},obj);  target: 目标对象,sources: 源对象，用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
+const target = { a: 1, b: 2 };
+const source = { b: 4, c: 5 };
+const returnedTarget = Object.assign(target, source);
+console.log(target);
+// expected output: Object { a: 1, b: 4, c: 5 }
+
+
+//创建obj对象
+    var obj = new Object();
+    //为对象添加动态属性
+    obj.userName = "admin";
+    obj.passWord = "123456";
+//创建固定对象
+    var dt = {userName:"admin",password:"123456"};
+//移除属性
+ delete obj.passWord;
+
+// 1.听过查看数据API接口,发现.要发送一 个Post 请求， this . $http . post
+// 2. this. $http . post() 中接收三个参数:
+2.1第一个参数:要请求的URI地址
+//
+2.2第二个参数:要提交给服务器的数据， 要以对象形式提交给服务器{ name :
+this . name }
+// 3.3第三个参数:是一个配置对象,要以哪种表单数据类型提交过去， 
+{emulateJSON :true}，以普通表单格式,将数据提交给服务器
+
+
+在实现列表过渡的时候，如果需要过渡的元素，是通过v-for 循环渲染出来的,不能使用
+transition包裹,需要使用transition-group -->
+动画钩子函数(在vue中的methods中定义回调函数,并且第一个参数必须要是el,即设你给谁设置动画el就是谁)：
+@beforeEnter:""  动画进来之前,设置初始位置
+@Enter:"" 在函数中第一句加入el.offsetwidth才可以开始动画 ,设置动画结束的位置,以及设置过度函数 transition:all 0.4s ease
+@afterEnter:"" 动画完成之后才会调用
+enter (e1, done) {
+el. offse twidth//这句话，没有实际的作用，但是,如果不写1出不来动画效果;
+//可以认为el . offsetwidth会强制动画刷新
+el. offse twidth
+// enter 表示动画开始之后的样式，这里,可以设置小球完成动画之后的,结束状态
+el. style . transform =” translate (150px, 450px) ”
+el. style. transition = 'all 1s ease
+//这里的done，起始就是afterEnter 这个函数,也就是说: done 是afterEnter 函数的引
+用
+done ()   即可快速在动画结束调用afterenter，不需要等待时间才启动afterenter
+}，
+/*下面的.v-move 和. v-leave-active 配合使用，能够实现列表后续的元素，渐渐地漂上来的效果
+. V-move {
+transition: a11 0. 6a ease ;
+. v-leave - active{
+I
+position: absolute ;
+
+哪里使用哪里注册
+在父组建的html模板中使用子组建的标签,需要在父组件的对象内用components注册子组件。用于私有组建
+当全局组建用于做子组建时不需要在父组建中注册，可以直接用
+
+
+
+子组件和父组件传值：通过给组件的标签用v-bind绑定一个属性如：son=‘父亲data的变量’，之后在component的对象中添加一个叫props的键（他的值是一个列表） props：【‘son’】通过在props的列表中添加绑定的属性的名称完成传值，当templeate中的标签需要用到父亲的变量值只需要{{son}}即可完成调用，因为son属性绑定了父亲data中的值
+
+
+子组件和父组件方法共享：给组件标签通过v-on绑定任意一个参数的方法如 @func=‘父亲methods中的方法’，之后给template模板中的button注册一个click事件的触发器@click=‘方法’，之后在组件的对象中的methods中定义对应button的方法中使用this.$emit('func',‘父亲方法中需要的参数’)语句来触发组件func事件从而调用父亲方法，当父亲方法需要传入参数时，在emit中的第二位写参数，如果需要多个参数，按参数顺序写入并用逗号隔开
+template中button的click触发器会去component（组件）中的对象中的methods中寻找对应方法，不会去父亲组件中的methods中寻找（通过{{参数}}取值的时候也不会去父亲data中寻找,会通过自己的data中的方法return返回的对象中寻找对应参数的值 如 data：function（）{
+return {参数：值}}）
+
+
+vue中为了获取dom对象(或者组件）提供了ref的方法，给标签加上一个ref属性如 <h3 ref='myh3'> (获取组件标签时是给组件标签加上ref如《login ref=‘ xxx’》）。 之后通过 vm（vue内部用this）.$refs.myh3得到dom对象，之后就可以使用dom的方法this.$refs.myh3.innertext
+
+href="#/login"可以跳转到html+login
+path是根据xxx.html(url)#后地址对应规则的，如xxx.html(url)#/account/login则path就得写path：'/account/login'，当url？参数，path会自动识别？前的地址来对应规则不会因为？参数而影响对应的规则
+路由的 routes：【{path：‘’，redirect：‘’，component：只能用组件的第二个参数那个对象{tempalte}不能用一个完整的组件的组件名称}】
+
+当一个地址要对应多个组件时在routes的对象加上一个components:{ }，通过在components的对象内设置{
+'组件名称1'：组件html对象模板 1，'组件名称2'：组件html对象模板 2，}然后给需要显示对应组件的router-view标签加上一个name属性等于对应组件的名称，就可以以name匹配对应的组件 如<router-view name='组件名称1'>则这个router-view就会显示对应的组件（组件html对象模板 1） https://router.vuejs.org/zh/guide/essentials/named-views.html
+
+用路由显示组件要加上<router-view>标签作为容器,每个router-view只能放一个路由组件
+<!-- router-link 默认渲染为一个a标签-- to表示去往哪个路径 tag表示渲染为那种类型的标签>
+<router-link  to=" /login" tag=" span">登录</ router- link>
+<router-link  to=" /register">注册</ router - link:
+这里的to是指在原始url的#后加上to对应的值，如to='/account/login'就会进入xxx.html(url)#/account/login
+
+
+路由传参不仅可以用url加上？id=xxx，然后通过this.$route.query.id来传，用params方法也可以
+path: /login/ :id/ :name' , 通过给路由的path 加上 /:参数来使传入的url的值解析成id=xxx,存入
+this.$route.params
+如url为 /login/12/jane 12就会解析为id=12，name=jane 通过this.$route.params.id取得值
+
+
+npm 安装jquery 
+npm init -y  //创建项目时打包项目命令
+npm i jquery -S
+js文件导入jquery   import $ from 'jquery'  es6语句
+
+在js文件导入css 用import ‘css的路径’
+webpack 无法直接打包css，需要  cnpm i style-loader css-loader -D
+然后// 2.打开webpack . config.is 这个配置文件,在里面，新增一个配置节点，叫做module,它是一 个对
+象;在这个module对象身上，有个rules属性,这个rules属性是个数组;这个数组中，存放了，所有第
+三方文件的匹配和处理规则;
+module: { //这个节点,用于配置所有第三方模块加载器
+	rules: [ 
+		{ test: / \. css$ /, use: ['style-loader'，'css-loader'],exclude:'/node_modules/' }，] //正则表达式匹配
+// 配置处理。css 文件的第三方loader规则
+
+时间 倒计时
+        <div class="time"><i class="el-icon-time"></i> {{min}}分钟 {{sec}}秒 </div>
+      var vm = new Vue({
+            el: '#app',
+            data: {
+                day: 0,
+                hr: 0,
+                min: 0,
+                sec: 0,
+            },
+            methods: {
+                //倒计时
+                countdown() {
+                    const end = Date.parse(new Date('2021-09-19 03:59:23')) //时间戳是毫秒 1s=1000ms
+                    const now = Date.parse(new Date())
+                    const msec = end - now
+                    if (msec < 0) return;
+
+                    let day = parseInt(msec / 1000 / 60 / 60 / 24)
+                    let hr = parseInt(msec / 1000 / 60 / 60 % 24)
+                    let min = parseInt(msec / 1000 / 60 % 60)
+                    let sec = parseInt(msec / 1000 % 60)
+                    this.day = day
+                    this.hr = hr > 9 ? hr : '0' + hr
+                    this.min = min > 9 ? min : '0' + min
+                    this.sec = sec > 9 ? sec : '0' + sec
+                    const that = this
+                    if (min >= 0 && sec >= 0) {
+                        //倒计时结束关闭订单
+                        if (min == 0 && sec == 0) {
+                            return
+                        }
+                        setTimeout(function () {
+                            that.countdown()
+                        }, 1000)
+                    }
+                }
+            },
+            mounted() {
+                this.countdown()
+            },
+        })
