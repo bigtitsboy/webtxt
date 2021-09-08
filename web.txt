@@ -1,5 +1,7 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
+git config --global http.sslVerify "false" git失败时
+
 js中跨域方法
 1、jsonp跨域(只能解决get）
 原理：动态创建一个script标签。利用script标签的src属性不受同源策略限制，因为所有的src属性和href属性都不受同源策略的限制，可以请求第三方服务器资源内容
@@ -23,7 +25,7 @@ html标签中的this：<input type="text" οnkeyup="showHint(this.value)"/> <!--
  xxx.sort((a,b)=>{return a-b} 按从小到大排序)  return b-a 按从大到小排序
 
 
-js遍历字符串for(var i in s) s.charAt(i) 
+js遍历字符串for(var i in s) s.charAt(i)
 s.charCodeAt(i) 返回字符串第i个字符的 Unicode 编码
 s.charAt(i) 方法 返回字符串第i个字符   根据索引取得字符串第i个值
 
@@ -31,7 +33,7 @@ oNode1.contains(oNode2) 判断node2是否为node1子节点
 
 展开数组 ...arguments   。。。为展开表达式
 数组参数只能用arguments表示    //不能在数组arguments上操作需要操作时用一个数组接收展开的arguments
-call()、bind()、apply()的用法，改变this的指向，第一个参数代表this的指向，区别在于 
+call()、bind()、apply()的用法，改变this的指向，第一个参数代表this的指向，区别在于
 f.call(obj, arg1, arg2...),
 f.bind(obj, arg1, arg2,...)(),  bind返回一个函数需要重新调用
 f.apply(obj, [arg1, arg2, .]) apply使用数组方式传参
@@ -62,10 +64,10 @@ vue实现分页加省略号 https://blog.csdn.net/weixin_44599931/article/detail
                     if (this.start <= 5) {  //当前页码小于等于5
                         return [1, 2, 3, 4, 5, 6, '...', this.end]		//[1,2,3,4,5,6,'...',最后一页]
                     } else if (this.start > this.end - 5) {      //当前页码大于等于最后一页-5
-                        return [1, '...', this.end - 5, this.end - 4, this.end - 3, this.end - 2, this.end - 1, this.end] 
+                        return [1, '...', this.end - 5, this.end - 4, this.end - 3, this.end - 2, this.end - 1, this.end]
 		 //[1,'...',尾页-5,尾页-4,尾页-3,尾页-2,尾页-1,尾页]
                     } else { //当前页码大于5并且当前页码小于最后一页页码-5
-                        return [1, '...', this.start - 3, this.start - 2, this.start - 1, this.start, this.start + 1, this.start + 2, this.start + 3, '...', this.end]			
+                        return [1, '...', this.start - 3, this.start - 2, this.start - 1, this.start, this.start + 1, this.start + 2, this.start + 3, '...', this.end]
 		//[1,'...',当前页-3,当前页-2,当前页-1,当前页,当前页+1,当前页+2,当前页+3,'...',尾页]
                     }
                 }
@@ -90,8 +92,8 @@ js取小数部分，将结果转换为字符串然后通过split（‘.’）分
 
 Vue判断对象中是否存在某个属性  取反需要把一整个括号起来  !('lr' in trackIds[index+3])
 a属性存在obj中   	 b不存在obj中
-("a" in obj); // true 
-("b" in obj); // false 
+("a" in obj); // true
+("b" in obj); // false
 
 
 时间戳转日期：new Date(parseInt('1626827280725//这个是时间戳')).toLocaleString()
@@ -113,7 +115,7 @@ vue watch用法  https://www.cnblogs.com/xiaozhumaopao/p/11077234.html
 渲染错误问题，如果页面正常显示但报错无法识别的类型只需要给用到该数据的的标签加上v-if=data中的对应参数，初始渲染没找到不显示，当进行到后面找到数据再渲染显示
 
 解决图片缩放不清晰 backface-visibility:hidden; 或   -webkit-backface-visibility:hidden;/* Chrome 和 Safari */
- 
+
 返回顶部：通过a标签的href=‘#xxx’ 返回id为xxx的锚点
 // window对象，所有浏览器都支持window对象。它表示浏览器窗口，监听滚动事件
 mounted () {
@@ -126,7 +128,7 @@ destroyed () {
   // 为了计算距离顶部的高度，当高度大于60显示回顶部图标，小于60则隐藏
   scrollToTop () {
     const that = this
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop ||document.body.scrollTop  
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop ||document.body.scrollTop
     if ( scrollTop > 60) {
       that.btnFlag = true         //btnFlag来控制a的显示隐藏
     } else {
@@ -338,7 +340,7 @@ transition 多个属性的用法:transition:  transform   2s ease, border-radius
 
 bootstrap中的contanier会默认左右pading15px，只要在container内加个class=row的div就可以消除padding
 
-ul>li{count$@4}*3 从4开始自增 自增符$ 
+ul>li{count$@4}*3 从4开始自增 自增符$
 页面水平居中 margin：0 auto
 
 文字居中 style{
@@ -353,7 +355,7 @@ ul>li{count$@4}*3 从4开始自增 自增符$
 没有e.targe.name用 e.target.getAttribute（'name'） 来取属性值
 
 e.currentTarget 和e.target
-// e.target 是你当前点击的元素     	// e.currentTarget 是你绑定事件的元素     
+// e.target 是你当前点击的元素     	// e.currentTarget 是你绑定事件的元素
 
 组件<m1></m1>若要添加事件@click=‘xxx' 使其生效 方法1 <btn @click.native='alert(1)'>点击</btn>
 方法2 <div id="app">
@@ -445,7 +447,7 @@ for (const key in obj) {
 
 
 使用三元表达式绑定内联样式
-<div :style="{ display: [isshow?'none':''] }"></div> 
+<div :style="{ display: [isshow?'none':''] }"></div>
 :class="{'class1':'true'=='true',class2:status=='status'}"
 <i class="iconfont "  :class="[isShow==='password'?'icon-kejian':'icon-bukejian']"></i>
 三元表达式要加中括号
@@ -464,7 +466,7 @@ Vuex数据会级联更新，当赋值数据 a=b时两者的id相同，b的数据
 条件为x.id == xxx.id  value=>  return value > 14 返回大于14的值
 findindex是对list每一项进行遍历，xxx.xxx.findindex( x=>x.id == xxx.id) 没找到返回-1 找到返回对应的索引值
 x为list的每一项相当于foreach中的x
-xxx.xxx.filter( x=> x.id == xxx.id) 将满足条件的x return一个数组出来 
+xxx.xxx.filter( x=> x.id == xxx.id) 将满足条件的x return一个数组出来
 js中replace只替换一次字符，需要多次替换用str.split('xxx').join('xxx') split是以xxx为条件分割字符串
 "2:3:4:5".split(":")	//将返回["2", "3", "4", "5"]		 join把数组拼接成字符串
 或者 替换多个子串 通过 /g 运算符使用正则表达式 replace(/sentence/g, 'message');
@@ -567,7 +569,7 @@ indexOf() 方法可返回某个指定的字符串值在字符串中首次出现�
 indexof也适用于arry，如果找到一个 item，则返回 item 的第一次出现的位置。如果在数组中没找到指定元素则返回 -1。
 
 如果在数组中没找到指定元素则返回 -1。
-   
+
 string.includes("text"); 是否包含了text，是则返回true
 
 
@@ -587,15 +589,15 @@ click 事件的执行在 v-model 的修改之前,由于 v-model 数据是双向�
 
 去除数组重复元素
 Array.prototype.method1 = function(){  // 为 Array 对象添加一个去除重复项的方法(method1)
-       var arr=[];    //定义一个临时数组 
-       for(var i = 0; i < this.length; i++){    //循环遍历当前数组 
-           //判断当前数组下标为i的元素是否已经保存到临时数组 
-           //如果已保存，则跳过，否则将此元素保存到临时数组中 
-           if(arr.indexOf(this[i]) == -1){ 
-               arr.push(this[i]); 
-           } 
-       } 
-       return arr; 
+       var arr=[];    //定义一个临时数组
+       for(var i = 0; i < this.length; i++){    //循环遍历当前数组
+           //判断当前数组下标为i的元素是否已经保存到临时数组
+           //如果已保存，则跳过，否则将此元素保存到临时数组中
+           if(arr.indexOf(this[i]) == -1){
+               arr.push(this[i]);
+           }
+       }
+       return arr;
    }
 
 vue.directive()自定义指令
@@ -608,7 +610,7 @@ Vue.directive(focus'，{
 bind: function (el) { // 每当指令绑定到元素上的时候，会立即执行这个bind函数，只执行一-次 //用于dom元素内css设置
 
 //注意:在每个函数中，第一个参数，永远是el, 表示被绑定了指令的那个元素，这个el 参数，是个原生的Js对象
-inserted: function (el) { 
+inserted: function (el) {
 // 用于对dom元素行为设置(js行为有关)
 	e1. focus ()
 // inserted 表示元素插入到DOM中的时候，会执行inserted 函数[触发1次]
@@ -653,7 +655,7 @@ console.log(target);
 //
 2.2第二个参数:要提交给服务器的数据， 要以对象形式提交给服务器{ name :
 this . name }
-// 3.3第三个参数:是一个配置对象,要以哪种表单数据类型提交过去， 
+// 3.3第三个参数:是一个配置对象,要以哪种表单数据类型提交过去，
 {emulateJSON :true}，以普通表单格式,将数据提交给服务器
 
 
@@ -717,7 +719,7 @@ this.$route.params
 如url为 /login/12/jane 12就会解析为id=12，name=jane 通过this.$route.params.id取得值
 
 
-npm 安装jquery 
+npm 安装jquery
 npm init -y  //创建项目时打包项目命令
 npm i jquery -S
 js文件导入jquery   import $ from 'jquery'  es6语句
@@ -728,7 +730,7 @@ webpack 无法直接打包css，需要  cnpm i style-loader css-loader -D
 象;在这个module对象身上，有个rules属性,这个rules属性是个数组;这个数组中，存放了，所有第
 三方文件的匹配和处理规则;
 module: { //这个节点,用于配置所有第三方模块加载器
-	rules: [ 
+	rules: [
 		{ test: / \. css$ /, use: ['style-loader'，'css-loader'],exclude:'/node_modules/' }，] //正则表达式匹配
 // 配置处理。css 文件的第三方loader规则
 
