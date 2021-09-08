@@ -94,10 +94,13 @@ mycode1 = (Array(3).join(0) + parseInt(mycode)).slice(-3);//011
 
 js取小数部分，将结果转换为字符串然后通过split（‘.’）分割取值，再通过字符串拼接成0.xxx形式，最后通过parseFloat方法转换为小数 注意parseint方法只会取整
 
-Vue判断对象中是否存在某个属性  取反需要把一整个括号起来  !('lr' in trackIds[index+3])
+Vue判断对象中是否存在某个属性  取反需要把一整个括号起来  !('lr' in trackIds[index+3]) 对象属性
 a属性存在obj中   	 b不存在obj中
 ("a" in obj); // true
 ("b" in obj); // false
+hasOwnProperty()函数用于指示一个对象自身(不包括原型链)是否具有指定名称的属性。如果有，返回true，否则返回false。一般用于找出对象 obj 不在原型链上的属性
+    for(var i in obj){
+        if(obj.hasOwnProperty(i)){
 
 
 时间戳转日期：new Date(parseInt('1626827280725//这个是时间戳')).toLocaleString()
@@ -446,7 +449,7 @@ slot组件设置样式不生效，需要加到父组件中
 foreach遍历数组
 for in 循环是最基础的遍历对象的方式，它还会得到对象原型链上的属性
 for (const key in obj) {
- console.log(obj[key]) // foo, bar
+ console.log(obj[key]) // foo, bar    key的值为obj的属性名称
 }
 
 
@@ -546,7 +549,7 @@ v-for 只能用在ul 中的li
 
 splice直接操作原数组
 列表删除指定位置list.splice(index,1)  注意要使用在字符串时需要将字符串split分割成list
-字符串分割还可以使用slice(start,end) 
+字符串分割还可以使用slice(start,end)
 slice(start,end)：方法可从已有数组中返回选定的元素，返回一个新数组，包含从start到end（不包含end）的数组元素。
 
 注意：该方法不会改变原数组，而是返回一个子数组，如果想删除数组中的一段元素，应该使用Array.splice()方法。
