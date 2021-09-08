@@ -1,5 +1,8 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
+toFixed() 方法可把 Number 四舍五入为指定小数位数的数字。
+NumberObject.toFixed(num)
+
 git config --global http.sslVerify "false" git失败时
 
 js中跨域方法
@@ -14,11 +17,12 @@ js中跨域方法
 注意 splice会直接修改数组信息无需赋值，而使用join时需要赋值才能生效 slice不是修改在本身上返回最后结果
                 newstr.splice(0,1)
                 newstr=newstr.join('')
-
- toString(xxx) 方法
+进制转换
+ toString(xxx) 方法  用于number转换
  2 - 数字以二进制值显示
 8 - 数字以八进制值显示
 16 - 数字以十六进制值显示
+parseInt(str,radix) 用于str转换  二进制转十进制radix选2
 
 html标签中的this：<input type="text" οnkeyup="showHint(this.value)"/> <!--此处，在html标签中的this代表的是此标签-->
 
@@ -84,7 +88,7 @@ css实现倒三角 https://blog.csdn.net/LLL_liuhui/article/details/80916265
     border-top: 100px solid red;
 }
 
-位数不够自动左补0显示	var mycode = "11";
+位数不够自动左补0显示	var mycode = "11"; 注意array用括号不是中括号
 mycode = (Array(4).join(0) + parseInt(mycode)).slice(-4);//0011
 mycode1 = (Array(3).join(0) + parseInt(mycode)).slice(-3);//011
 
