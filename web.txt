@@ -2,7 +2,7 @@
 
 toFixed() 方法可把 Number 四舍五入为指定小数位数的数字。
 NumberObject.toFixed(num)
-
+不在本身数组上操作：let arr1 = [...arr];
 git config --global http.sslVerify "false" git失败时
 
 js中跨域方法
@@ -544,7 +544,12 @@ v-for 只能用在ul 中的li
         <li v-for="item in list">{{item}}</li>
     </ul>
 
+splice直接操作原数组
 列表删除指定位置list.splice(index,1)  注意要使用在字符串时需要将字符串split分割成list
+字符串分割还可以使用slice(start,end) 
+slice(start,end)：方法可从已有数组中返回选定的元素，返回一个新数组，包含从start到end（不包含end）的数组元素。
+
+注意：该方法不会改变原数组，而是返回一个子数组，如果想删除数组中的一段元素，应该使用Array.splice()方法。
 
 v-bind:属性="" 缩写 :属性=""
 
