@@ -476,9 +476,9 @@ store.commit('increment', {
 Vuex数据会级联更新，当赋值数据 a=b时两者的id相同，b的数据发生修改a的数据也同步更新（如对b的数组进行增加，删除，修改 obsever中的dep中的id不会发生改变），当对b整个对象进行重新赋值obsever中的dep中的id发生改变ab两者的id不在相同，无法对a中的数据进行同步
 
 条件为x.id == xxx.id  value=>  return value > 14 返回大于14的值
-findindex是对list每一项进行遍历，xxx.xxx.findindex( x=>x.id == xxx.id) 没找到返回-1 找到返回对应的索引值
+findindex是对list每一项进行遍历，xxx.xxx.findindex( x=>x.id == xxx.id) 没找到返回-1 找到返回对应的索引值不在继续寻找
 x为list的每一项相当于foreach中的x
-xxx.xxx.filter( x=> x.id == xxx.id) 将满足条件的x return一个数组出来
+xxx.xxx.filter( x=> x.id == xxx.id) 将满足条件的x return一个数组出来 全局遍历
 js中replace只替换一次字符，需要多次替换用str.split('xxx').join('xxx') split是以xxx为条件分割字符串
 "2:3:4:5".split(":")	//将返回["2", "3", "4", "5"]		 join把数组拼接成字符串
 或者 替换多个子串 通过 /g 运算符使用正则表达式 replace(/sentence/g, 'message');
