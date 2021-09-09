@@ -36,6 +36,15 @@ html标签中的this：<input type="text" οnkeyup="showHint(this.value)"/> <!--
 
  xxx.sort((a,b)=>{return a-b} 按从小到大排序)  return b-a 按从大到小排序
 
+Array.from()方法就是将一个类数组对象或者可遍历对象转换成一个真正的数组。 用于将对象转换为数组包括字符串，Set结构的数据
+类数组对象呢？所谓类数组对象，最基本的要求就是具有length属性的对象
+let arrayLike = {
+    0: 'tom',
+    1: '65',
+    2: '男',
+    3: ['jane','john','Mary'],
+    'length': 4
+}
 
 js遍历字符串for(var i in s) s.charAt(i)
 s.charCodeAt(i) 返回字符串第i个字符的 Unicode 编码
