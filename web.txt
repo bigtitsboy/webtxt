@@ -1,9 +1,14 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
-toFixed() 方法可把 Number 四舍五入为指定小数位数的数字。
+toFixed(位数) 方法可把 Number 四舍五入为指定小数位数的数字。
 NumberObject.toFixed(num)
 不在本身数组上操作：let arr1 = [...arr];
 git config --global http.sslVerify "false" git失败时
+
+console.log(price.parentNode.parentNode.innerHTML.match(/(\d)+\.(\d)+/)[0]); //innerhtml可以当字符串匹配
+console.log(tbody.children.length); //获取子节点个数
+tbody.innerHTML += tr //innerhtml可以取得标签内部的内容包括子节点通过赋值添加新标签
+
 
 js中跨域方法
 1、jsonp跨域(只能解决get）
