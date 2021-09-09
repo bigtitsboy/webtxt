@@ -8,6 +8,9 @@ git config --global http.sslVerify "false" git失败时
 console.log(price.parentNode.parentNode.innerHTML.match(/(\d)+\.(\d)+/)[0]); //innerhtml可以当字符串匹配
 console.log(tbody.children.length); //获取子节点个数
 tbody.innerHTML += tr //innerhtml可以取得标签内部的内容包括子节点通过赋值添加新标签
+删除标签的方法
+var p1=document.getElementById("p1");
+//移除p1元素    p1.remove();
 
 
 js中跨域方法
