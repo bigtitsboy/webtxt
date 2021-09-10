@@ -1,9 +1,13 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
+floor() 方法可对一个数进行下舍入 Math.floor(x)
 toFixed(位数) 方法可把 Number 四舍五入为指定小数位数的数字。
 NumberObject.toFixed(num)
 不在本身数组上操作：let arr1 = [...arr];
 git config --global http.sslVerify "false" git失败时
+
+获取dom可以嵌套
+document.getElementById("jsCountdown").getElementsByTagName("span");
 
 console.log(price.parentNode.parentNode.innerHTML.match(/(\d)+\.(\d)+/)[0]); //innerhtml可以当字符串匹配
 console.log(tbody.children.length); //获取子节点个数
