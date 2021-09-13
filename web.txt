@@ -251,7 +251,7 @@ axios({
     method: 'post',
     contentType：'applicaiton/json' //post的请求头
     url: '/api/lockServer/search',
-    data: JSON.stringifty(param) // 对象转为json
+    data: JSON.stringifty(param) // 对象转为json，因为contentType是json类型
 })
 
 axios的使用 import axios from 'axios'  Vue.prototype.$axios = axios   	 因为axios中的this指向是axios内部不属于vue 所以axios中then和catch的回调函数最好使用()=>{}来写函数,可以让this指向vue
