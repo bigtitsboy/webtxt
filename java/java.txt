@@ -1,3 +1,8 @@
 mybatis：
 ${}用于sql字符串中需要变量读取 如模糊查询‘%￥{}%’
 #{}用于不在字符串中需要变量读取的情况
+
+
+使用hashmap传参，map实现类中参数使用hash的key值作为参数#{key}
+
+若方法参数不确定个数，使用hashmap  《string，object》 xxxx

@@ -243,12 +243,13 @@ filters: {
 
 border-radius: 50%;实现圆形
 
-设置post请求头
+使用post方法需要设置请求头来传递data
 const param = new URLSearchParams()
 param.append('username', 'admin')
 param.append('pwd', 'admin')
 axios({
     method: 'post',
+    contentType：'applicaiton/json' //post的请求头
     url: '/api/lockServer/search',
     data: param
 })
