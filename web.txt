@@ -250,6 +250,7 @@ param.append('pwd', 'admin')
 axios({
     method: 'post',
     contentType：'applicaiton/json' //post的请求头
+    datatype:'json'  //返回值类型设置
     url: '/api/lockServer/search',
     data: JSON.stringifty(param) // 对象转为json，因为contentType是json类型
 })
