@@ -248,14 +248,15 @@ const param = new URLSearchParams()
 param.append('username', 'admin')
 param.append('pwd', 'admin')
 axios({
-    method: 'post',
+    method: 'post',   //注意是method 没有s
     contentType：'applicaiton/json' //post的请求头
     datatype:'json'  //设置返回值预期服务器返回的类型
     url: '/api/lockServer/search',
     data: JSON.stringifty(param) // 对象转为json，因为contentType是json类型
 })
 
-axios的使用 import axios from 'axios'  Vue.prototype.$axios = axios   	 因为axios中的this指向是axios内部不属于vue 所以axios中then和catch的回调函数最好使用()=>{}来写函数,可以让this指向vue
+axios的使用 import axios from 'axios'  Vue.prototype.$axios = axios 
+因为axios中的this指向是axios内部不属于vue 所以axios中then和catch的回调函数最好使用()=>{}来写函数,可以让this指向vue
   this.$axios({
     method: "post",//指定请求方式
     url: "/business-app/getCityShopList.cgi",//请求接口（相对接口，后面会介绍到）

@@ -9,3 +9,28 @@ ${}用于sql字符串中需要变量读取 如模糊查询‘%￥{}%’
 
     <!--配置静态资源放⾏-->
     <mvc:default-servlet-handler/>
+
+
+问题描述：表单中有中文字段，但后台接收时出现中文乱码，导致存入数据库中的也是乱码
+解决方案一：
+在web.xml中添加字符过滤，最好填加到最前面
+
+<filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+————————————————
+版权声明：本文为CSDN博主「时空如梦」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/sinat_38737592/article/details/89846464
