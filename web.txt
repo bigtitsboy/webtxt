@@ -1,7 +1,17 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
-floor() 方法可对一个数进行下舍入 Math.floor(x)
+vue强制页面刷新 
+  组件中直接使用    this.$forceUpdate()  不需要再main中引入
+
+当设置了多个子路由，只能在一个子路由上使用响应拦截器不能多个子路由都使用
+
+vue 监听路由Vue监听路由的变化
+https://blog.csdn.net/wsln_123456/article/details/102588231
+
+取余 取整
+floor() 方法可对一个数向下取整 Math.floor(x)
 toFixed(位数) 方法可把 Number 四舍五入为指定小数位数的数字。
+向上取整（有小数，整数部分就+1）Math.ceil(5.1234);
 NumberObject.toFixed(num)
 不在本身数组上操作：let arr1 = [...arr];
 git config --global http.sslVerify "false" git失败时
@@ -144,7 +154,8 @@ vue watch用法  https://www.cnblogs.com/xiaozhumaopao/p/11077234.html
 
 解决图片缩放不清晰 backface-visibility:hidden; 或   -webkit-backface-visibility:hidden;/* Chrome 和 Safari */
 
-返回顶部：通过a标签的href=‘#xxx’ 返回id为xxx的锚点
+返回顶部：通过a标签的href=‘#xxx’ 返回id为xxx的锚点 或者使用js语句       window.scrollTo(0, 0)
+返回顶部组件    <span style="position: fixed;right: 20px;bottom: 20px" v-if="btnFlag">123</span>使用fixed定位需要指定right bottom等位置属性
 // window对象，所有浏览器都支持window对象。它表示浏览器窗口，监听滚动事件
 mounted () {
   window.addEventListener('scroll', this.scrollToTop)
@@ -254,6 +265,9 @@ axios({
     url: '/api/lockServer/search',
     data: JSON.stringifty(param) // 对象转为json，因为contentType是json类型
 })
+
+获取对象的长度length res为obj类型
+Object.keys(res).length 获取对象的length   
 
 axios的使用 import axios from 'axios'  Vue.prototype.$axios = axios 
 因为axios中的this指向是axios内部不属于vue 所以axios中then和catch的回调函数最好使用()=>{}来写函数,可以让this指向vue
@@ -433,7 +447,8 @@ display:inline-block不在同一行或字体图标不居中 在样式加上verti
 如name=‘my’
 .my-enter,.my-my-leave-to
 
-②v-for='count in 4'循环数字{{count}}可以使用
+②v-for='count in 4'循环数字{{count}}可以使用  
+<!-- 注意：如果使用v-for迭代数字的话，前面 count 的值从 1 开始-->
 
 对于绝对定位position:absolute的子元素，其基准点是相对于离其最近的一层定位父元素而言。如果其所有父级元素均无定位，则是相对于body而言。
 
