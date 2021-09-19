@@ -1,5 +1,8 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
+关于cookie
+https://blog.csdn.net/eva_feng/article/details/105026754
+
 vue强制页面刷新 
   组件中直接使用    this.$forceUpdate()  不需要再main中引入
 
