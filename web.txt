@@ -1,5 +1,7 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
+border-radius: 40px  变成button
+
 关于cookie
 https://blog.csdn.net/eva_feng/article/details/105026754
 
@@ -157,7 +159,7 @@ vue watch用法  https://www.cnblogs.com/xiaozhumaopao/p/11077234.html
 
 解决图片缩放不清晰 backface-visibility:hidden; 或   -webkit-backface-visibility:hidden;/* Chrome 和 Safari */
 
-返回顶部：通过a标签的href=‘#xxx’ 返回id为xxx的锚点 或者使用js语句       window.scrollTo(0, 0)
+返回顶部：通过a标签的href=‘#xxx’ 返回id为xxx的锚点 或者使用js语句 window.scrollTo(0, 0)
 返回顶部组件    <span style="position: fixed;right: 20px;bottom: 20px" v-if="btnFlag">123</span>使用fixed定位需要指定right bottom等位置属性
 // window对象，所有浏览器都支持window对象。它表示浏览器窗口，监听滚动事件
 mounted () {
