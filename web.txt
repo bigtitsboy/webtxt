@@ -3,6 +3,7 @@
 border-radius: 40px  变成button
 
 关于cookie
+this.$cookies.set('test', '{a:1,b:2}',0,'/')   //意思为创建一个名为 test 的cookie ，值为{a:1,b:2},时间为0，即会话结束就删除cookie，存放在根目录 / 下  修改cookie就是重新设置cookie覆盖旧的
 https://blog.csdn.net/eva_feng/article/details/105026754
 
 vue强制页面刷新 
