@@ -1,12 +1,21 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
+动态绑定disabled属性     :disabled="item.num ===1?'disabled':false"   只有值为false才停止disable !!!
+
+vuex数据变化了，但是页面没有更新时   使用this.$forceUpdate()  在需要更新的那个页面触发
+或
+//先把vuex中用的对象置为空，然后再赋值，这样强制更新，页面才刷新！
+//let newProductList=state.productList.concat(); 复制一个对象
+//state.productList=null;
+//state.productList=newProductList;
+
 border-radius: 40px  变成button
 
 关于cookie
 this.$cookies.set('test', '{a:1,b:2}',0,'/')   //意思为创建一个名为 test 的cookie ，值为{a:1,b:2},时间为0，即会话结束就删除cookie，存放在根目录 / 下  修改cookie就是重新设置cookie覆盖旧的
 https://blog.csdn.net/eva_feng/article/details/105026754
 
-vue强制页面刷新 
+vue强制页面半刷新更新数据（不会影响vuex数据） 
   组件中直接使用    this.$forceUpdate()  不需要再main中引入
 
 当设置了多个子路由，只能在一个子路由上使用响应拦截器不能多个子路由都使用
@@ -541,7 +550,7 @@ import store from './store'   ！！！！
   store，
 }
 
-vuex中使用state，在app.vue中import {mapstate} from 'vuex',然后在computer中使用 ...mapstate（['需要的参数']）  或者 this.$store.state.xxxxx
+vuex中使用state，在app.vue中import {mapstate} from 'vuex',然后在computer中使用 ...mapstate（['需要的参数']）  或者 this.$store.state.xxxxx    this.$store.getters.xxxxx
 import { mapState, mapGetters } from 'vuex'   ！！！！
   computed: {
     ...mapState(['list', 'inputvalue']),
