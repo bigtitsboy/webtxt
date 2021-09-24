@@ -1,5 +1,8 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
+vue v-for渲染数组 页面第一次渲染无法出来的情况：在修改数组的操作最后用push方法提醒vue数组已经更新
+如在axios赋值数组后 对数组使用push
+
 计算属性 computed 的机制 https://www.cnblogs.com/zero-zm/p/12102668.html 
 当依赖的data对象中的属性值发生变化时，将会触发计算方法，在data对象中生成新的变量，并且会将新的变量缓存起来；（只要依赖的（方法中使用到的）data对象属性值不发生改变，将不会触发计算方法；）
 
@@ -280,7 +283,7 @@ param.append('username', 'admin')
 param.append('pwd', 'admin')
 axios({
     method: 'post',   //注意是method 没有s
-    contentType：'applicaiton/json' //post的请求头
+    contentType：'application/json' //post的请求头
     datatype:'json'  //设置返回值预期服务器返回的类型
     url: '/api/lockServer/search',
     data: JSON.stringifty(param) // 对象转为json，因为contentType是json类型
