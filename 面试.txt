@@ -23,3 +23,7 @@ parseInt(string, radix) radix按10进制去处理字符串，碰到非数字字�
 参考回答：
 为了实现两列等高，可以给每列加上 padding-bottom:9999px;
 margin-bottom:-9999px;同时父元素设置overflow:hidden;
+
+
+基本数据类型：Undefined、Null、Boolean、Number、String，Symbol
+引用数据类型 ：Object
