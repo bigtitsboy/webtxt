@@ -30,3 +30,25 @@ margin-bottom:-9999px;同时父元素设置overflow:hidden;
 
 
 为什么要用闭包 即有的函数只需要执行一次，其内部变量无需维护，可以用闭包。
+
+
+let sy = Symbol("KK");
+console.log(sy);   // Symbol(KK)
+typeof(sy);        // "symbol"
+// 相同参数 Symbol() 返回的值不相等
+let sy1 = Symbol("kk"); 
+sy === sy1;       // false
+
+HTML DOM addEventListener() 方法
+第三个参数 可选。布尔值，指定事件是否在捕获或冒泡阶段执行。
+可能值:
+true - 事件句柄在捕获阶段执行
+false- false- 默认。事件句柄在冒泡阶段执行
+
+
+这是dom0级别：
+document.getElementById("btn").onclick = function(){};
+这是dom2级：
+document.getElementById("btn").addEventListener("click", function(){}, false);
+dom0级后面绑定的事件会覆盖前面绑定的事件，点击的时候会执行新绑定的
+dom2级不会覆盖前面绑定的事件，点击的时候所有绑定的事件会依次执行一遍

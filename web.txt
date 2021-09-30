@@ -1,5 +1,8 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
+● 箭头函数获取arguments
+可用…rest参数获取
+
 js类型判断:Object.prototype.toString.call()
 
 vue v-for渲染数组 页面第一次渲染无法出来的情况：在修改数组的操作最后用push方法提醒vue数组已经更新
@@ -85,6 +88,7 @@ let arrayLike = {
     'length': 4
 }
 
+str[0]也可以得到第一个字符串
 js遍历字符串for(var i in s) s.charAt(i)
 s.charCodeAt(i) 返回字符串第i个字符的 Unicode 编码
 s.charAt(i) 方法 返回字符串第i个字符   根据索引取得字符串第i个值
