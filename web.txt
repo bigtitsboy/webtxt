@@ -1,5 +1,7 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
+背景渐变 background: -webkit-linear-gradient (起始方向，颜色1，颜色2,。。。）
+
 ● 箭头函数获取arguments
 可用…rest参数获取
 
@@ -280,6 +282,8 @@ filters: {
 1.给盒子设置高度宽度来放背景图片
  2.设置背景图片为精灵图，并不重复 background: url("../assets/xuebitu.png") no-repeat;
 3.设置背景图片位置左上角为xy起点，y轴的高度是到要的图片的顶部 x轴是到要的图片的最左侧部background-position: 0px -195px ;   x轴右边是负数 y下方是负数
+设置背景图片时，使用background-size：容器大小 auto，
+在量取精灵图位置时把图片缩放宽度等于容器大小在量取
 
 border-radius: 50%;实现圆形
 
