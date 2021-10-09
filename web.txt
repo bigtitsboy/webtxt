@@ -187,6 +187,7 @@ vue watch用法  https://www.cnblogs.com/xiaozhumaopao/p/11077234.html
 
 返回顶部：通过a标签的href=‘#xxx’ 返回id为xxx的锚点 或者使用js语句 window.scrollTo(0, 0)
 返回顶部组件    <span style="position: fixed;right: 20px;bottom: 20px" v-if="btnFlag">123</span>使用fixed定位需要指定right bottom等位置属性
+position:fixed之后的div没有占据一行  直接加上left:0;right:0即可
 // window对象，所有浏览器都支持window对象。它表示浏览器窗口，监听滚动事件
 mounted () {
   window.addEventListener('scroll', this.scrollToTop)
