@@ -74,6 +74,6 @@ null  typeof null 返回 'object' 。
 这是一个对象，但是为空。因为是对象，所以 typeof null 返回 'object' 。
 null 是 JavaScript 保留关键字。
 null 参与数值运算时其值会自动转换为 0 ，因此，下列表达式计算后会得到正确的数值：
-undefined是window对象的一个属性，但却不是anObj对象的一个属性。 
+undefined是window对象的一个属性，但却不是anObj对象的一个属性。  typeof undefined 返回 'undefined' 。
 注意：尽管undefined是有特殊含义的属性，但却不是JavaScript的保留关键字。
 undefined参与任何数值计算时，其结果一定是NaN。
