@@ -58,3 +58,22 @@ stop：阻止事件的冒泡
 prevent：阻止事件的默认行为
 once：只触发一次
 self：只触发自己的事件行为时，才会执行
+
+1.解析HTML文件，创建DOM树 2.解析CSS,形成CSS对象模型 3.将CSS与DOM合并，构建渲染树（renderingtree） 4.布局和绘制<br
+
+async : 并行加载js，下载完毕立即解释执行代码，不会按照页面上的script顺序执行。
+defer : 并行下载js，在页面解析完毕之后，会按照页面上的script标签的顺序执行,同时会在document的DOMContentLoaded之前执行
+
+说一下token 能放在cookie中吗？
+能、不设置cookie有效期、重新登录重写cookie覆盖原来的cookie
+
+信号量
+多个函数同时改变一个变量的值，这个变量成为信号量，（全局变量） 。
+
+null  typeof null 返回 'object' 。
+这是一个对象，但是为空。因为是对象，所以 typeof null 返回 'object' 。
+null 是 JavaScript 保留关键字。
+null 参与数值运算时其值会自动转换为 0 ，因此，下列表达式计算后会得到正确的数值：
+undefined是window对象的一个属性，但却不是anObj对象的一个属性。 
+注意：尽管undefined是有特殊含义的属性，但却不是JavaScript的保留关键字。
+undefined参与任何数值计算时，其结果一定是NaN。
