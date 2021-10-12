@@ -77,3 +77,24 @@ null 参与数值运算时其值会自动转换为 0 ，因此，下列表达式
 undefined是window对象的一个属性，但却不是anObj对象的一个属性。  typeof undefined 返回 'undefined' 。
 注意：尽管undefined是有特殊含义的属性，但却不是JavaScript的保留关键字。
 undefined参与任何数值计算时，其结果一定是NaN。
+
+链接：https://www.nowcoder.com/questionTerminal/27c490714f2f43b894ce578006745ae9?orderByHotValue=1&page=1&onlyReference=false
+来源：牛客网
+
+原型链的顶端：null
+Object的原型：Function.prototype
+Object原型的原型：Object.prototype
+数组原型链上实现数组去重方法：
+Array.prototype.unique = function() {
+    let obj = {}, len = this.length, newArr = [];
+    for (let i = 0; i < len; i++) {
+        if (!obj[this[i]]) {
+            obj[this[i]] = 1;
+            newArr.push(this[i])
+        }
+    }
+    return newArr;
+}
+
+什么是跨域
+当一个请求url的协议、域名、端口三者之间任意一个与当前页面url不同即为跨域
