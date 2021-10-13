@@ -2,6 +2,8 @@
 
 背景渐变 background: -webkit-linear-gradient (起始方向，颜色1，颜色2,。。。）
 
+插入空格 &nbsp
+
 ● 箭头函数获取arguments
 可用…rest参数获取
 
@@ -44,6 +46,7 @@ toFixed(位数) 方法可把 Number 四舍五入为指定小数位数的数字�
 向上取整（有小数，整数部分就+1）Math.ceil(5.1234);
 NumberObject.toFixed(num)
 不在本身数组上操作：let arr1 = [...arr];
+
 git config --global http.sslVerify "false" git失败时
 
 获取dom可以嵌套
