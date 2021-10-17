@@ -1,0 +1,4 @@
+横划效果 scroll-view ：scroll-x=true style：white-space=nowrap 
+锚点效果 在scroll-view加上属性scroll-into-view等于锚点的id,通过动态改变锚点实现点击跳转锚点 
+
+upx是uniapp的单位 iPhone6中1px=2upx 其他型号会自动缩放
