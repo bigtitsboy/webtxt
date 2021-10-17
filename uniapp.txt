@@ -1,4 +1,11 @@
+scroll-view 滚动组件
 横划效果 scroll-view ：scroll-x=true style：white-space=nowrap 
 锚点效果 在scroll-view加上属性scroll-into-view等于锚点的id,通过动态改变锚点实现点击跳转锚点 
 
 upx是uniapp的单位 iPhone6中1px=2upx 其他型号会自动缩放
+
+分页生命周期 onready等效于mounted
+
+小程序无doucument 和window对象
+
+如果一个变量被多个函数操作，想要这个变量最后的值是某个函数修改后的。在这个想要的函数中使用异步方法设置这个变量，如使用定时器然后再定时器的回调函数中修改变量的值，那么这个变量的值最后就是这个异步函数设置的值
