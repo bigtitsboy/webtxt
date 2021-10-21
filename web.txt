@@ -865,3 +865,12 @@ module: { //这个节点,用于配置所有第三方模块加载器
                 this.countdown()
             },
         })
+
+    // 十五分钟计时
+    setcounttime() {
+      const now = new Date()
+      const nowtime = Date.parse(now)
+      const end = new Date() //时间戳是毫秒 1s=1000ms
+      const endtime = end.setTime(now.getTime() + (15 * 60 * 1000))
+      return Date.parse(new Date(endtime))
+    },
