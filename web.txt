@@ -1,5 +1,17 @@
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
+        this.$nextTick(() => {  dom加载完成才操作
+
+span 换行
+span{
+    word-break:normal; 
+    width:auto; 
+    display:block; 
+    white-space:pre-wrap;
+    word-wrap : break-word ;
+    overflow: hidden ;
+} 
+
   font-size: inherit; 自动匹配合适大小
 
 背景渐变 background: -webkit-linear-gradient (起始方向，颜色1，颜色2,。。。）
