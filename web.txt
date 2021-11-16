@@ -272,7 +272,7 @@ overflow超出部分省略号
 	　　display: -webkit-box !important;
 	　　text-overflow: ellipsis;
 	　　overflow: hidden;
-	　　-webkit-line-clamp: 2;  可修改
+	　　-webkit-line-clamp: 2;  
 	　　-webkit-box-orient: vertical;
 	　　word-break:break-all;
 	}
