@@ -1,6 +1,8 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+this.$refs['formName']或者this.$refs.formName  两种refs的使用方法
+
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
 
         this.$nextTick(() => {  dom加载完成才操作
