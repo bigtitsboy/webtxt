@@ -1,6 +1,9 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+csdn本地网页 打开自动跳转首页的 解决办法
+右键用文本编辑器打开离线保存的网页，搜索关键词 window.location.href，找到删除后保存即可。
+
 this.$refs['formName']或者this.$refs.formName  两种refs的使用方法
 
 当设置了display：inline 全在一行时，使用float属性可以使其放不下另起一行
