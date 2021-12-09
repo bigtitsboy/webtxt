@@ -1,6 +1,8 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+this.$refs.askpage.$data.xxxx 获取子组件的data的值
+
 csdn本地网页 打开自动跳转首页的 解决办法
 右键用文本编辑器打开离线保存的网页，搜索关键词 window.location.href，找到删除后保存即可。
 
