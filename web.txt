@@ -1,6 +1,13 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+table tr 元素不支持padding属性  tr  td th 元素不支持margin属性
+
+文字按左右两端对齐
+                text-align: justify;
+                text-align-last: justify;
+                text-justify: inter-ideograph;   
+
 this.$refs.askpage.$data.xxxx 获取子组件的data的值
 
 csdn本地网页 打开自动跳转首页的 解决办法
@@ -559,7 +566,7 @@ for (const key in obj) {
 <i class="iconfont "  :class="[isShow==='password'?'icon-kejian':'icon-bukejian']"></i>
 三元表达式要加中括号
 v-bind:class="{ active: isActive, 'text-danger': hasError }" 当键对应的值为true时class添加键作为classname
-
+ :class="['tab-item', { active: activeDept == index }]"
 increment (state, payload){state.count += payload.amount1；} 定义方法也只能两个参数，后面那个参数来接受对象
 store.commit('increment', {
   amount1: 10,
