@@ -1,6 +1,8 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+filter  过滤器 中无法使用this
+
 table tr 元素不支持padding属性  tr  td th 元素不支持margin属性
 
 文字按左右两端对齐
@@ -811,7 +813,7 @@ position: absolute ;
 
 子组件和父组件传值：通过给组件的标签用v-bind绑定一个属性如：son=‘父亲data的变量’，之后在component的对象中添加一个叫props的键（他的值是一个列表） props：【‘son’】通过在props的列表中添加绑定的属性的名称完成传值，当templeate中的标签需要用到父亲的变量值只需要{{son}}即可完成调用，因为son属性绑定了父亲data中的值
 
-
+解决方法：把监听receivedata写在pagination自定义组件上才可以，我误以为是可以写在父组件的任何地方了
 子组件和父组件方法共享：给组件标签通过v-on绑定任意一个参数的方法如 @func=‘父亲methods中的方法’，之后给template模板中的button注册一个click事件的触发器@click=‘方法’，之后在组件的对象中的methods中定义对应button的方法中使用this.$emit('func',‘父亲方法中需要的参数’)语句来触发组件func事件从而调用父亲方法，当父亲方法需要传入参数时，在emit中的第二位写参数，如果需要多个参数，按参数顺序写入并用逗号隔开
 template中button的click触发器会去component（组件）中的对象中的methods中寻找对应方法，不会去父亲组件中的methods中寻找（通过{{参数}}取值的时候也不会去父亲data中寻找,会通过自己的data中的方法return返回的对象中寻找对应参数的值 如 data：function（）{
 return {参数：值}}）
