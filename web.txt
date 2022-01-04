@@ -1,6 +1,11 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+vue深拷贝
+扩展运算符（...）
+var a = {a:0}
+var b = {...a}
+
 filter  过滤器 中无法使用this
 
 table tr 元素不支持padding属性  tr  td th 元素不支持margin属性
