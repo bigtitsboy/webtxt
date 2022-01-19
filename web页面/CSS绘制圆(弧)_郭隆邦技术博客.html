@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://www.yanhuangxueyuan.com/html5/circle.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="baidu-site-verification" content="sq4c0nNCaH">
+    <title>CSS绘制圆(弧)_郭隆邦技术博客</title>
+    <link href="./CSS绘制圆(弧)_郭隆邦技术博客_files/style.css" rel="stylesheet" type="text/css">
+    <style>
+        body{
+            padding: 0px;
+            margin: 0px;
+            background-color:#fdffee ;
+            font-family: 宋体;
+        }
+        #ul_1{
+            margin-left: -35px;
+        }
+        #ul_2{
+            margin-left: -5px;
+        }
+
+        footer{
+            /*border-top:1px solid black;*/
+        }
+        .footer_font{
+            /*color: #4488ff;font-size: 12px;*/
+        }
+
+        td{
+            padding: 5px;
+            background-color: #888888;
+            color: #dddddd;
+        }
+        td:hover{
+            color: #fff;
+        }
+
+        .ln { color: #606366; font-weight: normal; font-style: normal; }
+        .s0 { color: rgb(232,191,106); }
+        .s1 { color: rgb(186,186,186); }
+        .s2 { color: rgb(169,183,198); }
+        .s3 { color: rgb(165,194,97); }
+        .s4 { color: rgb(128,128,128); }
+        .s5 { color: rgb(204,120,50); font-weight: bold; }
+        .s6 { color: rgb(106,135,89); }
+        .s7 { color: rgb(204,120,50); }
+        .s8 { color: rgb(104,151,187); }
+    </style>
+</head>
+
+<body>
+
+<!--导航栏-->
+<nav style="height: 45px;background-color: #333333;margin-bottom: 0px;position: fixed;width: 100%;top: 0px;z-index: 99">
+    <!--<canvas id="canvas" width="30px" height="45px" style="display: block;float: left"></canvas>-->
+    <img src="./CSS绘制圆(弧)_郭隆邦技术博客_files/favicon.png" alt="WebGL教程_Three.js教程_郭隆邦技术博客" width="40px" height="40px" style="display: block;float: left;margin-top: 2px">
+    <a class="nav_hover nav_a" href="http://www.yanhuangxueyuan.com/" style="margin-left: 0px;font-family: &#39;楷体&#39;;font-size: 20px;margin-top: 12px">郭隆邦_技术博客</a>
+    <div style="margin: auto;width: 950px">
+        <a class="nav_hover nav_a" href="http://www.yanhuangxueyuan.com/" style="margin-left: 10%">首页 </a>
+        <a class="nav_hover nav_a" href="http://www.yanhuangxueyuan.com/WebGL_course.html" target="_blank">WebGL教程</a>
+        <a class="nav_hover nav_a" href="http://www.yanhuangxueyuan.com/Three.js_course.html" target="_blank">Three.js教程</a>
+        <!--<a class="nav_hover nav_a"href="http://www.yanhuangxueyuan.com/HTML5.html" target="_blank">HTML5教程</a>-->
+        <!--<a class="nav_hover nav_a"href="http://www.yanhuangxueyuan.com/Javascript.html" target="_blank">Javascript教程</a>-->
+        <ul class="nav_ul" id="ul_2" style="margin-left: -5px">
+            <a class="nav_hover nav_a" href="http://www.yanhuangxueyuan.com/3D.html" target="_blank">3D案例</a>
+        </ul>
+        <ul class="nav_ul" id="ul_1" style="margin-left: -35px;">
+            <a class="nav_hover nav_a" href="http://www.yanhuangxueyuan.com/html5/circle.html#" target="_blank">帮助文档</a>
+            <li class="li_1 nav_li"><a class="nav_hover nav_a nav_li_a" href="http://www.yanhuangxueyuan.com/doc/WebGL.html" target="_blank" style="margin-top: 10px">WebGL文档</a></li>
+            <li class="li_1 nav_li"><a class="nav_hover nav_a nav_li_a" href="http://www.yanhuangxueyuan.com/doc/three.js.html" target="_blank">Three.js文档</a></li>
+            <li class="li_1 nav_li"><a class="nav_hover nav_a nav_li_a" href="http://www.yanhuangxueyuan.com/doc/GLSL%20ES.html" target="_blank">GLSL ES文档</a></li>
+            <li class="li_1 nav_li"><a class="nav_hover nav_a nav_li_a" href="http://www.yanhuangxueyuan.com/doc/stats.html" target="_blank">stats文档</a></li>
+        </ul>
+        <a class="nav_hover nav_a" href="http://www.yanhuangxueyuan.com/work.html" target="_blank" style="margin-left: -5px">WebGL工作</a>
+        <a class="nav_hover nav_a" href="http://www.yanhuangxueyuan.com/links.html" target="_blank" style="">外链资源</a>
+    </div>
+</nav>
+
+
+
+<nav style="position: fixed;top: 45px;width: 250px;overflow-y: scroll;height: 100%">
+
+</nav>
+
+
+
+
+<article style="margin-top: 60px;margin-left: 260px;width: 600px;font-size: 14px">
+
+    <h1>CSS绘制圆(弧)</h1>
+    <p>
+        &nbsp;&nbsp;上一节课<a href="http://www.yanhuangxueyuan.com/HTML5/icon.html" target="_blank">《CSS绘制三角形》</a>
+        讲解的是利用boder外边框属性绘制各种三角形的案例，本节课讲解如何利用CSS的基本属性圆角border-radius绘制与圆、圆弧相关的图形。
+    </p>
+    <div style="border-top: 1px solid black;border-bottom: 1px solid black;background-color: #aaddff">
+        <h3>1.绘制一个圆</h3>
+        <p>&nbsp;&nbsp;使用块元素或行内块元素可以绘制一个矩形，然后添加一个圆角，如果矩形的长宽一样，圆角半径恰好是边长一半，就会得到一个圆形。</p>
+        <pre style="background-color: #0F110C;display: block;width: 600px">    <span class="s1">&lt;style&gt;</span><span class="s0">
+        .</span><span class="s1">div</span><span class="s0">{
+            </span><span class="s2">width</span><span class="s0">:</span><span class="s3">100</span><span class="s4">px</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">height</span><span class="s0">:</span><span class="s3">100</span><span class="s4">px</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">background-color</span><span class="s0">: </span><span class="s4">black</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">border-radius</span><span class="s0">: </span><span class="s3">50</span><span class="s4">px</span><span class="s5">;</span><span class="s6">/*圆角半径等于正方形区域边长一半*/</span><span class="s0">
+        }
+    </span><span class="s1">&lt;/style&gt;</span></pre>
+        <table>
+            <tbody><tr style="text-align: center">
+                <td>半径值</td>
+                <td>10</td>
+                <td>30</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>效果</td>
+                <td><div style="width:100px;height:100px;background-color: black;border-radius: 10px;display: inline-block"></div></td>
+                <td><div style="width:100px;height:100px;background-color: black;border-radius: 30px;display: inline-block"></div></td>
+                <td><div style="width:100px;height:100px;background-color: black;border-radius: 50px;display: inline-block"></div></td>
+            </tr>
+        </tbody></table>
+        <h3>2.绘制胶囊形状</h3>
+        <p>&nbsp;&nbsp;把上面的方形的一个边长增加即可，也就是说让半径border-radius的值是短的边长的一半。</p>
+        <table>
+            <tbody><tr style="text-align: center">
+                <td>width</td>
+                <td>100</td>
+                <td>120</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>效果</td>
+                <td><div style="width:100px;height:100px;background-color: black;border-radius: 50px;display: inline-block"></div></td>
+                <td><div style="width:120px;height:100px;background-color: black;border-radius: 50px;display: inline-block"></div></td>
+                <td><div style="width:150px;height:100px;background-color: black;border-radius: 50px;display: inline-block"></div></td>
+            </tr>
+        </tbody></table>
+        <h3>3.绘制圆环</h3>
+        <p>&nbsp;&nbsp;同样比较简单，在上面绘制圆的基础上，添加一个外边框，然后把里面的圆添加透明</p>
+        <pre style="background-color: #0F110C;display: block;width: 600px">    <span class="s1">&lt;style&gt;</span><span class="s0">
+        .</span><span class="s1">div</span><span class="s0">{
+            </span><span class="s2">width</span><span class="s0">:</span><span class="s3">100</span><span class="s4">px</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">height</span><span class="s0">:</span><span class="s3">100</span><span class="s4">px</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">background-color</span><span class="s0">: </span><span class="s4">transparent</span><span class="s5">;</span><span class="s6">/*transparent表示背景透明*/</span><span class="s0">
+            </span><span class="s2">border-radius</span><span class="s0">: </span><span class="s3">60</span><span class="s4">px</span><span class="s5">;</span><span class="s6"></span><span class="s6">/*注意这里的倒角半径要加上外边框宽度*/</span><span class="s0">
+            </span><span class="s2">border</span><span class="s0">: </span><span class="s3">10</span><span class="s4">px solid black</span><span class="s5">;</span><span class="s0">
+        }
+    </span><span class="s1">&lt;/style&gt;</span></pre>
+        <table>
+            <tbody><tr style="text-align: center">
+                <td>半径值</td>
+                <td>10</td>
+                <td>30</td>
+                <td>50</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>背景蓝色</td>
+                <td><div style="border: 10px solid black;width:100px;height:100px;background-color: blue;border-radius: 10px;display: inline-block"></div></td>
+                <td><div style="border: 10px solid black;width:100px;height:100px;background-color: blue;border-radius: 30px;display: inline-block"></div></td>
+                <td><div style="border: 10px solid black;width:100px;height:100px;background-color: blue;border-radius: 50px;display: inline-block"></div></td>
+                <td><div style="border: 10px solid black;width:100px;height:100px;background-color: blue;border-radius: 60px;display: inline-block"></div></td>
+            </tr>
+            <tr>
+                <td>背景透明</td>
+                <td><div style="border: 10px solid black;width:100px;height:100px;background-color: transparent;border-radius: 10px;display: inline-block"></div></td>
+                <td><div style="border: 10px solid black;width:100px;height:100px;background-color: transparent;border-radius: 30px;display: inline-block"></div></td>
+                <td><div style="border: 10px solid black;width:100px;height:100px;background-color: transparent;border-radius: 50px;display: inline-block"></div></td>
+                <td><div style="border: 10px solid black;width:100px;height:100px;background-color: transparent;border-radius: 60px;display: inline-block"></div></td>
+            </tr>
+        </tbody></table>
+        <p>&nbsp;&nbsp;注意：绘制圆环“border-radius=边长一半+外边框宽度”,元素的尺寸宽度是width值加上2倍外边框border宽度，高度同理</p>
+        <h3>4.绘制跑道形状</h3>
+        <p>&nbsp;&nbsp;类比的思维，绘制圆环参照圆，添加外边框，绘制跑道自然参照胶囊形状绘制，添加外边框即可</p>
+        <pre style="background-color: #0F110C;display: block;width: 600px">     <span class="s0"></span><span class="s1">&lt;style&gt;</span><span class="s0">
+        .</span><span class="s1">div</span><span class="s0">{
+            </span><span class="s2">width</span><span class="s0">:</span><span class="s3">200</span><span class="s4">px</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">height</span><span class="s0">:</span><span class="s3">100</span><span class="s4">px</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">background-color</span><span class="s0">: </span><span class="s4">transparent</span><span class="s5">;</span><span class="s6"></span><span class="s0">
+            </span><span class="s2">border-radius</span><span class="s0">: </span><span class="s3">60</span><span class="s4">px</span><span class="s5">;</span><span class="s6"></span><span class="s0">
+            </span><span class="s2">border</span><span class="s0">: </span><span class="s3">10</span><span class="s4">px solid black</span><span class="s5">;</span><span class="s0">
+        }
+    </span><span class="s1">&lt;/style&gt;</span></pre>
+        <table>
+            <tbody><tr style="text-align: center">
+                <td>width</td>
+                <td>100</td>
+                <td>120</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>背景蓝色 </td>
+                <td><div style="border: 10px solid black;width:100px;height:100px;background-color: blue;border-radius: 60px;display: inline-block"></div></td>
+                <td><div style="border: 10px solid black;width:120px;height:100px;background-color: blue;border-radius: 60px;display: inline-block"></div></td>
+                <td><div style="border: 10px solid black;width:200px;height:100px;background-color: blue;border-radius: 60px;display: inline-block"></div></td>
+            </tr>
+            <tr>
+                <td>背景透明</td>
+                <td><div style="border: 10px solid black;width:100px;height:100px;background-color: transparent;border-radius: 60px;display: inline-block"></div></td>
+                <td><div style="border: 10px solid black;width:120px;height:100px;background-color: transparent;border-radius: 60px;display: inline-block"></div></td>
+                <td><div style="border: 10px solid black;width:200px;height:100px;background-color: transparent;border-radius: 60px;display: inline-block"></div></td>
+            </tr>
+        </tbody></table>
+        <h3>5.绘制半圆</h3>
+        <p>&nbsp;&nbsp;简单的思路就是绘制一个矩形，随意一侧的两个角圆角即可</p>
+        <pre style="background-color: #0F110C;display: block;width: 600px"><span class="s0">
+    </span><span class="s1">&lt;style&gt;</span><span class="s0">
+        .</span><span class="s1">div</span><span class="s0">{
+            </span><span class="s2">width</span><span class="s0">:</span><span class="s3">160</span><span class="s4">px</span><span class="s5">;</span><span class="s6">/*宽是高的2倍*/</span><span class="s0">
+            </span><span class="s2">height</span><span class="s0">:</span><span class="s3">80</span><span class="s4">px</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">background-color</span><span class="s0">: </span><span class="s4">black</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">border-bottom-right-radius</span><span class="s0">: </span><span class="s3">80</span><span class="s4">px</span><span class="s5">;</span><span class="s6">/*右下角倒圆角，半径是元素宽度一半*/</span><span class="s0">
+            </span><span class="s2">border-bottom-left-radius</span><span class="s0">: </span><span class="s3">80</span><span class="s4">px</span><span class="s5">;</span><span class="s6">/*左下角倒圆角，半径是元素宽度一半*/</span><span class="s0">
+        }
+    </span><span class="s1">&lt;/style&gt;</span></pre>
+        <table>
+            <tbody><tr style="text-align: center">
+                <td>圆角半径</td>
+                <td>10</td>
+                <td>50</td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td>效果</td>
+                <td><div style="width:160px;height:80px;background-color: black;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;display: inline-block"></div></td>
+                <td><div style="width:160px;height:80px;background-color: black;border-bottom-right-radius: 50px;border-bottom-left-radius: 50px;display: inline-block"></div></td>
+                <td><div style="width:160px;height:80px;background-color: black;border-bottom-right-radius: 80px;border-bottom-left-radius: 80px;display: inline-block"></div></td>
+            </tr>
+        </tbody></table>
+        <h3>6.绘制半圆弧</h3>
+        <p>&nbsp;&nbsp;在半圆的基础上添加外边框即可，注意外边框的上边线不用添加</p>
+        <pre style="background-color: #0F110C;display: block;width: 600px">    <span class="s0"></span><span class="s1">&lt;style&gt;</span><span class="s0">
+        .</span><span class="s1">div</span><span class="s0">{
+            </span><span class="s2">/*半圆弧*/</span><span class="s0">
+            </span><span class="s3">width</span><span class="s0">:</span><span class="s4">160</span><span class="s5">px</span><span class="s6">;</span><span class="s0">
+            </span><span class="s3">height</span><span class="s0">:</span><span class="s4">90</span><span class="s5">px</span><span class="s6">;</span><span class="s0">
+            </span><span class="s3">background-color</span><span class="s0">: </span><span class="s5">transparent</span><span class="s6">;</span><span class="s0">
+            </span><span class="s3">border-bottom-right-radius</span><span class="s0">: </span><span class="s4">90</span><span class="s5">px</span><span class="s6">;</span><span class="s0">
+            </span><span class="s3">border-bottom-left-radius</span><span class="s0">: </span><span class="s4">90</span><span class="s5">px</span><span class="s6">;</span><span class="s2">/*增加了边框，圆角半径也要变化*/</span><span class="s0">
+            </span><span class="s3">border-left</span><span class="s0">: </span><span class="s4">10</span><span class="s5">px solid black</span><span class="s6">;</span><span class="s2">/*边框左边线*/</span><span class="s0">
+            </span><span class="s3">border-right</span><span class="s0">: </span><span class="s4">10</span><span class="s5">px solid black</span><span class="s6">;</span><span class="s2">/*边框右边线*/</span><span class="s0">
+            </span><span class="s3">border-bottom</span><span class="s0">: </span><span class="s4">10</span><span class="s5">px solid black</span><span class="s6">;</span><span class="s2">/*边框底边线*/</span><span class="s0">
+        }
+    </span><span class="s1">&lt;/style&gt;</span></pre>
+        <table>
+            <tbody><tr style="text-align: center">
+                <td>圆角</td>
+                <td>50</td>
+                <td>80</td>
+                <td>90</td>
+            </tr>
+            <tr>
+                <td>蓝色</td>
+                <td><div style="width:160px;height:80px;background-color: blue;border-bottom-right-radius: 50px;border-bottom-left-radius: 50px;display: inline-block;border-left: 10px solid black;border-right: 10px solid black;border-bottom: 10px solid black;"></div></td>
+                <td><div style="width:160px;height:80px;background-color: blue;border-bottom-right-radius: 80px;border-bottom-left-radius: 80px;display: inline-block;border-left: 10px solid black;border-right: 10px solid black;border-bottom: 10px solid black;"></div></td>
+                <td><div style="width:160px;height:80px;background-color: blue;border-bottom-right-radius: 90px;border-bottom-left-radius: 90px;display: inline-block;border-left: 10px solid black;border-right: 10px solid black;border-bottom: 10px solid black;"></div></td>
+            </tr>
+            <tr>
+                <td>透明</td>
+                <td><div style="width:160px;height:80px;background-color: transparent;border-bottom-right-radius: 50px;border-bottom-left-radius: 50px;display: inline-block;border-left: 10px solid black;border-right: 10px solid black;border-bottom: 10px solid black;"></div></td>
+                <td><div style="width:160px;height:80px;background-color: transparent;border-bottom-right-radius: 80px;border-bottom-left-radius: 80px;display: inline-block;border-left: 10px solid black;border-right: 10px solid black;border-bottom: 10px solid black;"></div></td>
+                <td><div style="width:160px;height:80px;background-color: transparent;border-bottom-right-radius: 90px;border-bottom-left-radius: 90px;display: inline-block;border-left: 10px solid black;border-right: 10px solid black;border-bottom: 10px solid black;"></div></td>
+            </tr>
+        </tbody></table>
+        <h3>7.绘制U型槽</h3>
+        <p>&nbsp;&nbsp;在上面半圆弧的基础上增加高度即可</p>
+        <table>
+            <tbody><tr style="text-align: center">
+                <td>高度</td>
+                <td>80</td>
+                <td>150</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>效果</td>
+                <td><div style="width:160px;height:80px;background-color: transparent;border-bottom-right-radius: 90px;border-bottom-left-radius: 90px;display: inline-block;border-left: 10px solid black;border-right: 10px solid black;border-bottom: 10px solid black;"></div></td>
+                <td><div style="width:160px;height:150px;background-color: transparent;border-bottom-right-radius: 90px;border-bottom-left-radius: 90px;display: inline-block;border-left: 10px solid black;border-right: 10px solid black;border-bottom: 10px solid black;"></div></td>
+                <td><div style="width:160px;height:200px;background-color: transparent;border-bottom-right-radius: 90px;border-bottom-left-radius: 90px;display: inline-block;border-left: 10px solid black;border-right: 10px solid black;border-bottom: 10px solid black;"></div></td>
+            </tr>
+        </tbody></table>
+        <h3>8.绘制四分之一扇形</h3>
+        <p>&nbsp;&nbsp;这个比较简单，绘制一个方形元素，添加一个倒角，倒角半径恰好等于边长</p>
+        <pre style="background-color: #0F110C;display: block;width: 600px"><span class="s0">
+    </span><span class="s1">&lt;style&gt;</span><span class="s0">
+        .</span><span class="s1">div</span><span class="s0">{
+            </span><span class="s2">width</span><span class="s0">:</span><span class="s3">100</span><span class="s4">px</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">height</span><span class="s0">:</span><span class="s3">100</span><span class="s4">px</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">background-color</span><span class="s0">: </span><span class="s4">black</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">border-bottom-right-radius</span><span class="s0">: </span><span class="s3">100</span><span class="s4">px</span><span class="s5">;</span><span class="s6">/*倒角半径值等于边长*/</span><span class="s0">
+        }
+    </span><span class="s1">&lt;/style&gt;</span></pre>
+        <h3>9.绘制椭圆</h3>
+        <p>&nbsp;&nbsp;这一点要利用border-radius: 百分比;相对圆角定义圆角尺寸，比如元素宽度200，高度100，border-radius: 50%;表示宽度方向圆角100，高度方向圆角50，这时候已经不是倒圆角，而是倒椭圆角</p>
+        <pre style="background-color: #0F110C;display: block;width: 600px">    <span class="s1">&lt;style&gt;</span><span class="s0">
+        .</span><span class="s1">div</span><span class="s0">{
+            </span><span class="s2">width</span><span class="s0">: </span><span class="s3">160</span><span class="s4">px</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">height</span><span class="s0">: </span><span class="s3">100</span><span class="s4">px</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">background-color</span><span class="s0">: </span><span class="s4">black</span><span class="s5">;</span><span class="s0">
+            </span><span class="s2">border-radius</span><span class="s0">: </span><span class="s3">50</span><span class="s0">%</span><span class="s5">;</span><span class="s6">/*倒圆角宽度、高度各自的一半*/</span><span class="s0">
+        }
+    </span><span class="s1">&lt;/style&gt;</span></pre>
+        <table>
+            <tbody><tr style="text-align: center">
+                <td>百分比</td>
+                <td>20%</td>
+                <td>35%</td>
+                <td>50%</td>
+            </tr>
+            <tr>
+                <td>效果</td>
+                <td><div style="width:160px;height:100px;background-color: black;border-radius: 20%;display: inline-block"></div></td>
+                <td><div style="width:160px;height:100px;background-color: black;border-radius: 35%;display: inline-block"></div></td>
+                <td><div style="width:160px;height:100px;background-color: black;border-radius: 50%;display: inline-block"></div></td>
+            </tr>
+        </tbody></table>
+        <h3>10.绘制任意角度扇形</h3>
+        <p>&nbsp;&nbsp;结合<a href="http://www.yanhuangxueyuan.com/HTML5/icon.html" target="_blank">《CSS绘制三角形》</a>中的三角形绘制和本节课的圆弧绘制。</p>
+        <pre style="background-color: #0F110C;display: block;width: 600px"><span class="s0"></span><span class="s1">&lt;style&gt;</span><span class="s0">
+        .</span><span class="s1">div</span><span class="s0">{
+            </span><span class="s2">/*宽高50块元素*/</span><span class="s0">
+            </span><span class="s3">width</span><span class="s0">: </span><span class="s4">50</span><span class="s5">px</span><span class="s6">;</span><span class="s0">
+            </span><span class="s3">height</span><span class="s0">: </span><span class="s4">50</span><span class="s5">px</span><span class="s6">;</span><span class="s0">
+            </span><span class="s3">background-color</span><span class="s0">: </span><span class="s5">blue</span><span class="s6">;</span><span class="s0">
+            </span><span class="s2">/*相邻边框不同色*/</span><span class="s0">
+            </span><span class="s3">border-bottom</span><span class="s0">: </span><span class="s4">30</span><span class="s5">px solid </span><span class="s4">#555555</span><span class="s6">;</span><span class="s0">
+            </span><span class="s3">border-top</span><span class="s0">: </span><span class="s4">30</span><span class="s5">px solid </span><span class="s4">#555555</span><span class="s6">;</span><span class="s0">
+            </span><span class="s3">border-right</span><span class="s0">: </span><span class="s4">30</span><span class="s5">px solid </span><span class="s4">#333333</span><span class="s6">;</span><span class="s0">
+            </span><span class="s3">border-left</span><span class="s0">: </span><span class="s4">30</span><span class="s5">px solid </span><span class="s4">#333333</span><span class="s6">;</span><span class="s0">
+            <span class="s2">/*输入不同圆角半径值测试效果，注意临界值“width一半+边框厚度”*/</span>
+            </span><span class="s3">border-radius</span><span class="s0">: </span><span class="s4">10</span><span class="s5">px</span><span class="s6">;</span><span class="s0">
+        }
+    </span><span class="s1">&lt;/style&gt;</span></pre>
+        <table style="text-align: center">
+            <tbody><tr style="text-align: center">
+                <td>圆角半径</td>
+                <td>0</td>
+                <td>20</td>
+                <td>40</td>
+                <td>55</td>
+            </tr>
+            <tr>
+                <td>效果</td>
+                <td><div class="div" style=" border-radius: 0px;width: 50px;height: 50px;background-color: #8fbfff;border-bottom: 30px solid #555555;border-top: 30px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;"></div></td>
+                <td><div class="div" style=" border-radius: 20px;width: 50px;height: 50px;background-color: #8fbfff;border-bottom: 30px solid #555555;border-top: 30px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;"></div></td>
+                <td><div class="div" style=" border-radius: 40px;width: 50px;height: 50px;background-color: #8fbfff;border-bottom: 30px solid #555555;border-top: 30px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;"></div></td>
+                <td><div class="div" style=" border-radius: 55px;width: 50px;height: 50px;background-color: #8fbfff;border-bottom: 30px solid #555555;border-top: 30px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;"></div></td>
+            </tr>
+        </tbody></table>
+        <p>&nbsp;&nbsp;圆角半径选择临界值55px，改变元素width、height值</p>
+        <table style="text-align: center">
+            <tbody><tr style="text-align: center">
+                <td>width:值</td>
+                <td>50</td>
+                <td>40</td>
+                <td>20</td>
+                <td>10</td>
+            </tr>
+            <tr style="text-align: center">
+                <td>效果</td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;width: 50px;height: 50px;background-color: #8fbfff;border-bottom: 30px solid #555555;border-top: 30px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;display: inline-block"></div></td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;width: 40px;height: 40px;background-color: #8fbfff;border-bottom: 30px solid #555555;border-top: 30px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;display: inline-block"></div></td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;width: 20px;height: 20px;background-color: #8fbfff;border-bottom: 30px solid #555555;border-top: 30px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;display: inline-block"></div></td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;width: 0px;height: 0px;background-color: #8fbfff;border-bottom: 30px solid #555555;border-top: 30px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;display: inline-block"></div></td>
+            </tr>
+        </tbody></table>
+        <p>&nbsp;&nbsp;选择上面的两种情况的临界值，边框部分侧边设置透明，比如border-bottom: 30px solid transparent;</p>
+        <table style="text-align: center">
+            <tbody><tr style="text-align: center">
+                <td>边线透明</td>
+                <td>bottom</td>
+                <td>bottom/right/top</td>
+            </tr>
+            <tr style="text-align: center">
+                <td>效果</td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;width: 0px;height: 0px;border-bottom: 30px solid transparent;border-top: 30px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;display: inline-block"></div></td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;width: 0px;height: 0px;border-bottom: 30px solid transparent;border-top: 30px solid transparent;border-right: 30px solid transparent;border-left: 30px solid #333333;display: inline-block"></div></td>
+            </tr>
+        </tbody></table>
+        <p>&nbsp;&nbsp;把边框的宽度更改为不一致，比如左右宽上下窄</p>
+        <table style="text-align: center">
+            <tbody><tr style="text-align: center">
+                <td>上下边线宽度</td>
+                <td>30</td>
+                <td>20</td>
+                <td>10</td>
+                <td>5</td>
+            </tr>
+            <tr style="text-align: center">
+                <td>效果</td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;background-color: #8fbfff;border-bottom: 30px solid #555555;border-top: 30px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;display: inline-block"></div></td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;background-color: #8fbfff;border-bottom: 20px solid #555555;border-top: 20px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;display: inline-block"></div></td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;background-color: #8fbfff;border-bottom: 10px solid #555555;border-top: 10px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;display: inline-block"></div></td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;background-color: #8fbfff;border-bottom: 5px solid #555555;border-top: 5px solid #555555;border-right: 30px solid #333333;border-left: 30px solid #333333;display: inline-block"></div></td>
+            </tr>
+            <tr style="text-align: center">
+                <td>部分透明</td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;border-bottom: 30px solid transparent;border-top: 30px solid transparent;border-right: 30px solid transparent;border-left: 30px solid #333333;display: inline-block"></div></td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;border-bottom: 20px solid transparent;border-top: 20px solid transparent;border-right: 30px solid transparent;border-left: 30px solid #333333;display: inline-block"></div></td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;border-bottom: 10px solid transparent;border-top: 10px solid transparent;border-right: 30px solid transparent;border-left: 30px solid #333333;display: inline-block"></div></td>
+                <td style="width: 110px"><div class="div" style=" border-radius: 55px;border-bottom: 5px solid transparent;border-top: 5px solid transparent;border-right: 30px solid transparent;border-left: 30px solid #333333;display: inline-block"></div></td>
+            </tr>
+        </tbody></table>
+    </div>
+
+
+
+</article>
+
+
+
+
+
+
+<!--</div>-->
+
+<footer style="width: 800px;height: 24px;margin-top: 300px;margin-left: 300px;font-size: 13px">
+    <p>本站版权所有，本站任何内容未经允许不得转载&nbsp;&nbsp;&nbsp;<a href="http://www.miibeian.gov.cn/state/outPortal/loginPortal.action">备案号：豫ICP备16004767号</a></p>
+    <p>QQ群：187740169 (WebGL-Three.js教程)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 邮箱：guolongbang@163.com</p>
+</footer>
+
+<script type="text/javascript">
+
+
+
+
+
+
+
+
+    //导航栏下拉菜单—3D
+    var ul_2=document.getElementById('ul_2');
+    var li_2=document.getElementsByClassName('li_2');
+    ul_2.addEventListener('mouseover',function hide() {
+        for(var i = 0;i<li_2.length;i++)
+            li_2[i].style.display='block' ;
+
+    });
+    ul_2.addEventListener('mouseout',function hide() {
+        for(var i = 0;i<li_2.length;i++)
+            li_2[i].style.display='none' ;
+    });
+
+    //导航栏下拉菜单—文档
+    var ul_1=document.getElementById('ul_1');
+    var li_1=document.getElementsByClassName('li_1');
+
+    ul_1.addEventListener('mouseover',function hide() {
+        for(var i = 0;i<li_1.length;i++)
+            li_1[i].style.display='block' ;
+
+    });
+    ul_1.addEventListener('mouseout',function hide() {
+        for(var i = 0;i<li_1.length;i++)
+            li_1[i].style.display='none' ;
+    });
+
+
+    //左上角太极logo
+    fun();
+    function fun() {
+        var canvas=document.getElementById('canvas');
+        c=canvas.getContext('2d');
+        var w="#fff";
+        var b="#000";
+        var wid=canvas.width;
+        c.translate(0.5*canvas.width,0.5*canvas.height);
+        c.globalAlpha=1;
+        var k = 0.09;
+        c.scale(k,k);
+
+        c.fillStyle=w;
+        c.arc(0,0,200,Math.PI/2,Math.PI*1.5);
+        c.arc(0,-100,100,Math.PI/2,Math.PI*1.5,true);
+        c.arc(0,100,100,Math.PI*1.5,Math.PI/2,true);
+        c.fill();
+
+        c.beginPath();
+        c.fillStyle=b;
+        c.arc(0,0,200,Math.PI/2,Math.PI*1.5,true);
+        c.arc(0,100,100,Math.PI/2,Math.PI*1.5);
+        c.arc(0,-100,100,Math.PI*1.5,Math.PI/2);
+        c.fill();
+
+    }
+
+
+
+
+</script>
+<script src="./CSS绘制圆(弧)_郭隆邦技术博客_files/ThreeBSP.js.下载"></script>
+<script src="./CSS绘制圆(弧)_郭隆邦技术博客_files/OrbitControls.js.下载"></script>
+<script src="./CSS绘制圆(弧)_郭隆邦技术博客_files/physi.js.下载"></script>
+
+
+
+</body></html>

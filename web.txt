@@ -1,6 +1,21 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+
+div边框半圆角
+.test{
+  width:100px;
+  height:50px; 
+  background-color:#fff;
+  border-radius:50px 50px 0 0; 
+  border:2px solid #666;
+  border-bottom:none;
+}
+
+
+padding撑大盒子解决方案
+box-sizing: border-box;
+
 vue深拷贝
 扩展运算符（...）
 var a = {a:0}
