@@ -1,6 +1,15 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+可编辑div placeholder
+  &:empty::before {
+          content: 'send msg';
+          color:#bbb;
+        }
+        /*不一样的地方*/
+        &:focus {
+          content:none;
+        }
 
 div边框半圆角
 .test{
