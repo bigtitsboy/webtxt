@@ -1,6 +1,14 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+input去除叉号
+input::-webkit-search-cancel-button {
+ display: none;
+}
+input 文字缩进 text-indent属性
+
+router 路由传参 params传参，push里面只能是 name:'xxxx',不能是path:'/xxx'
+
 按位置删除字符串 删除字符串最后一位  this.goodPrice = (this.goodPrice.slice(0, -1))
 
 $emit父子组件传值触发方法，要写在父组件中子组件标签上，不是在父组件中随便一个标签上
