@@ -1,6 +1,14 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+    <template slot-scope="scope">
+        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+        <el-button type="text" size="small">编辑</el-button>
+      </template>
+element 自定义行
+
+文字不换行             white-space: nowrap;
+
 input去除叉号
 input::-webkit-search-cancel-button {
  display: none;
