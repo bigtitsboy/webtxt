@@ -51,7 +51,7 @@ padding撑大盒子解决方案
 box-sizing: border-box;
 
 vue深拷贝
-扩展运算符（...）
+扩展运算符（...） Object.assign()函数  转成 JSON 再转回来
 var a = {a:0}
 var b = {...a}
 
