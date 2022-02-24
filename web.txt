@@ -53,7 +53,7 @@ box-sizing: border-box;
 vue深拷贝
 扩展运算符（...） Object.assign()函数  转成 JSON 再转回来
 var a = {a:0}
-var b = {...a}
+var b = {...a}  注意用{}包裹
 
 filter  过滤器 中无法使用this
 
