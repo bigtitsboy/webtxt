@@ -1,6 +1,13 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+模拟触发dom的事件   注意要跟上$el
+        this.$refs.addButton.$el.click()
+
+Element.getBoundingClientRect()
+Element.getBoundingClientRect() 方法返回元素的大小及其相对于视口的位置。
+
+
 vue实现打电话功能 ===》使用a标签
 <p>联系电话：<a :href="'tel:' + item.phone" rel="external nofollow" >{{item.phone}}</a></p>
 
@@ -659,7 +666,7 @@ import store from './store'   ！！！！
   store，
 }
 
-vuex中使用state，在app.vue中import {mapstate} from 'vuex',然后在computer中使用 ...mapstate（['需要的参数']）  或者 this.$store.state.xxxxx    this.$store.getters.xxxxx
+vuex中使用state，在app.vue中import {mapstate} from 'vuex',然后在computer中使用 ...mapstate（['需要的参数']）  或者 this.$store.state.xxxxx    this.$store.getters.xxxxx 		...mapState({barColor: 'barColor'})
 import { mapState, mapGetters } from 'vuex'   ！！！！
   computed: {
     ...mapState(['list', 'inputvalue']),
