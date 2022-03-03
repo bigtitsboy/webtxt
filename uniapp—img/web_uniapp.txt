@@ -1,0 +1,12 @@
+div 改成 view
+span、font 改成 text
+a 改成 navigator
+img 改成 image
+input 还在，但type属性改成了confirmtype
+
+upx 为单位
+
+
+15                     <block v-for="sk in stuObj.skill">  block标签就是span，用来循环时item在同一行，view会换行
+16                         {{ sk }},
+17                     </block>
