@@ -1,6 +1,8 @@
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
 array.splice(2, 0, "three"); // 
 
+this.$set(this.obj, “test” ,12312)   set设置obj对象的值
+
 模拟触发dom的事件   注意要跟上$el
         this.$refs.addButton.$el.click()
 
