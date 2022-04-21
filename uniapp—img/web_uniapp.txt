@@ -6,7 +6,15 @@ input 还在，但type属性改成了confirmtype
 
 upx 为单位
 
+import {mapState,mapMutations,mapGetters,mapActions} from 'vuex';
 
 15                     <block v-for="sk in stuObj.skill">  block标签就是span，用来循环时item在同一行，view会换行
 16                         {{ sk }},
 17                     </block>
+
+
+uni-app运行在手机端，没有键盘事件，所以不支持按键修饰符。改用下面的方法，完美解决：
+<input confirm-type="search" @confirm="doSearch">
+
+uniapp 中ref不好用 
+https://uniapp.dcloud.io/api/ui/nodes-info.html#createselectorquery 使用uni api中获取高度
