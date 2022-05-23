@@ -1,7 +1,34 @@
+(（）=>{
+	xxx
+})()   立即执行函数表达式
+
 // 拼接函数(索引位置, 要删除元素的数量, 元素)
-array.splice(2, 0, "three"); // 
+array.splice(2, 0, "three","four"); // 从索引2的前面插入4和5
+
+应用 CSS 属性 touch-action: none; 这样任何触摸事件都不会产生默认行为，但是 touch 事件照样触发。
+
+css透明度 opacity
+
+flexible.js 处理动态rem
+
+去除边框			border: none;
+			outline: none;
+			&::after{
+				border: none;
+			}
+
+arry.isarry 去判断是不是arry
+
+js判断一个元素是否在数组中
+let arr = [1,2,3];
+arr.includes(1) // true
+arr.includes(5) //false
+
+vw：Viewport width，即容器（可以是div）的宽度，默认1vw=整个视窗宽度的1%，全屏为100vw。比如视窗宽度为1200px，1vw=120px=1200px*1%，如果是满屏就则为100vw=1200px。
+vh：Viewport height，即容器（如div）的高度，默认1vh=整个可视窗口高度的1%，全屏是100vh。
 
 this.$set(this.obj, “test” ,12312)   set设置obj对象的值
+$set(vm.arr2, 1, 'alpha');  set设置arry的值
 
 模拟触发dom的事件   注意要跟上$el
         this.$refs.addButton.$el.click()
