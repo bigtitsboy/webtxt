@@ -32,6 +32,7 @@
       <option name="presentableId" value="Default" />
       <updated>1653306692294</updated>
       <workItem from="1653306698114" duration="55000" />
+      <workItem from="1653306832541" duration="33000" />
     </task>
     <task id="LOCAL-00001" summary="merg">
       <created>1653306733238</created>
@@ -56,6 +57,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="merg" />
