@@ -1,0 +1,3 @@
+smooth  线条圆滑处理
+
+使用外部的color设置的颜色是全局颜色，会把series和lengend和所有颜色都改变
