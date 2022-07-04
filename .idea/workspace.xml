@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a31e3191-3027-48c8-be5b-291a9f321ffe" name="默认变更列表" comment="2022/3/14">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a31e3191-3027-48c8-be5b-291a9f321ffe" name="默认变更列表" comment="2022/3/14" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,16 +30,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
-      <changelist id="a31e3191-3027-48c8-be5b-291a9f321ffe" name="默认变更列表" comment="2022/3/14" />
+      <changelist id="1e0eb088-2d44-4d9e-a4e4-ae59855d926e" name="变更" comment="" />
       <created>1653306692294</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1653306692294</updated>
       <workItem from="1653306698114" duration="55000" />
       <workItem from="1653306832541" duration="33000" />
-      <workItem from="1653362943480" duration="174000" />
-      <workItem from="1653363159539" duration="16000" />
-      <workItem from="1653372226376" duration="14000" />
     </task>
     <task id="LOCAL-00001" summary="merg">
       <created>1653306733238</created>
@@ -57,14 +52,7 @@
       <option name="project" value="LOCAL" />
       <updated>1653307207622</updated>
     </task>
-    <task id="LOCAL-00003" summary="2022/5/24">
-      <created>1653363112968</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1653363112968</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,7 +74,6 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="merg" />
     <MESSAGE value="2022/5/23" />
-    <MESSAGE value="2022/5/24" />
-    <option name="LAST_COMMIT_MESSAGE" value="2022/5/24" />
+    <option name="LAST_COMMIT_MESSAGE" value="2022/5/23" />
   </component>
 </project>

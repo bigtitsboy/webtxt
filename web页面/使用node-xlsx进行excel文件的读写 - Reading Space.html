@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!-- saved from url=(0094)http://hongchaozhang.github.io/blog/2016/03/04/parsing-and-write-excel-file-using-node-module/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>使用node-xlsx进行excel文件的读写 - Reading Space</title>
+	<meta name="author" content="Zhang Hongchao">
+
+
+	<meta name="description" content="使用node-xlsx进行excel文件的读写 解析excel文件 在我的应用中需要对excel文件内容进行搜索，所以需要一个解析excel文件的插件。 node-xlsx插件可以让我们解析、修改、新建excel文件。 安装到所在文件夹： 1
+npm install excel node- …">
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="http://hongchaozhang.github.io/atom.xml" rel="alternate" title="Reading Space" type="application/atom+xml">
+
+	<link rel="canonical" href="http://hongchaozhang.github.io/blog/2016/03/04/parsing-and-write-excel-file-using-node-module/">
+	<link href="http://hongchaozhang.github.io/favicon.png" rel="shortcut icon">
+	<link href="./使用node-xlsx进行excel文件的读写 - Reading Space_files/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="./使用node-xlsx进行excel文件的读写 - Reading Space_files/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href="./使用node-xlsx进行excel文件的读写 - Reading Space_files/css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script src="./使用node-xlsx进行excel文件的读写 - Reading Space_files/jquery.min.js.下载"></script>
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-62806905-2']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+
+	<script src="./使用node-xlsx进行excel文件的读写 - Reading Space_files/md5.js.下载"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+
+<img src="./使用node-xlsx进行excel文件的读写 - Reading Space_files/d41d8cd98f00b204e9800998ecf8427e.jpg" alt="Profile Picture" style="width: 160px;"></div>
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="http://hongchaozhang.github.io/">Blog</a></li>
+    <li><a href="http://hongchaozhang.github.io/blog/archives">Archives</a></li>
+    <li><a href="http://hongchaozhang.github.io/blog/2016/03/04/parsing-and-write-excel-file-using-node-module/#">About</a></li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+
+
+
+
+
+			<a class="github" href="https://github.com/hongchaozhang" title="GitHub">GitHub</a>
+
+
+
+
+
+
+
+
+
+
+
+
+			<a class="rss" href="http://hongchaozhang.github.io/atom.xml" title="RSS">RSS</a>
+
+	</div>
+</nav>
+
+
+
+<section class="categories">
+          <ul id="category_cloud" class="nav nav-list"><a href="http://hongchaozhang.github.io/blog/categories/algorithm" style="font-size: 102.66666666666667%">algorithm(2)</a> <a href="http://hongchaozhang.github.io/blog/categories/android" style="font-size: 108.0%">android(6)</a> <a href="http://hongchaozhang.github.io/blog/categories/android-studio" style="font-size: 101.33333333333333%">android studio(1)</a> <a href="http://hongchaozhang.github.io/blog/categories/augmented-reality" style="font-size: 105.33333333333333%">augmented reality(4)</a> <a href="http://hongchaozhang.github.io/blog/categories/cs" style="font-size: 101.33333333333333%">cs(1)</a> <a href="http://hongchaozhang.github.io/blog/categories/css" style="font-size: 102.66666666666667%">css(2)</a> <a href="http://hongchaozhang.github.io/blog/categories/design-pattern" style="font-size: 104.0%">design pattern(3)</a> <a href="http://hongchaozhang.github.io/blog/categories/html" style="font-size: 102.66666666666667%">html(2)</a> <a href="http://hongchaozhang.github.io/blog/categories/html-css" style="font-size: 101.33333333333333%">html css(1)</a> <a href="http://hongchaozhang.github.io/blog/categories/http" style="font-size: 104.0%">http(3)</a> <a href="http://hongchaozhang.github.io/blog/categories/ios" style="font-size: 160.0%">ios(45)</a> <a href="http://hongchaozhang.github.io/blog/categories/java" style="font-size: 102.66666666666667%">java(2)</a> <a href="http://hongchaozhang.github.io/blog/categories/javascript" style="font-size: 105.33333333333333%">javascript(4)</a> <a href="http://hongchaozhang.github.io/blog/categories/machine-learning" style="font-size: 113.33333333333333%">machine learning(10)</a> <a href="http://hongchaozhang.github.io/blog/categories/map-tech" style="font-size: 104.0%">map tech(3)</a> <a href="http://hongchaozhang.github.io/blog/categories/mobile" style="font-size: 101.33333333333333%">mobile(1)</a> <a href="http://hongchaozhang.github.io/blog/categories/mongodb" style="font-size: 101.33333333333333%">mongodb(1)</a> <a href="http://hongchaozhang.github.io/blog/categories/music" style="font-size: 109.33333333333333%">music(7)</a> <a href="http://hongchaozhang.github.io/blog/categories/nlp" style="font-size: 102.66666666666667%">nlp(2)</a> <a href="http://hongchaozhang.github.io/blog/categories/nlu" style="font-size: 102.66666666666667%">nlu(2)</a> <a href="http://hongchaozhang.github.io/blog/categories/node" style="font-size: 104.0%">node(3)</a> <a href="http://hongchaozhang.github.io/blog/categories/nodejs" style="font-size: 104.0%">nodejs(3)</a> <a href="http://hongchaozhang.github.io/blog/categories/objective-c" style="font-size: 129.33333333333334%">objective-c(22)</a> <a href="http://hongchaozhang.github.io/blog/categories/philosophy" style="font-size: 102.66666666666667%">philosophy(2)</a> <a href="http://hongchaozhang.github.io/blog/categories/productivity" style="font-size: 130.66666666666666%">productivity(23)</a> <a href="http://hongchaozhang.github.io/blog/categories/python" style="font-size: 108.0%">python(6)</a> <a href="http://hongchaozhang.github.io/blog/categories/reading" style="font-size: 138.66666666666666%">reading(29)</a> <a href="http://hongchaozhang.github.io/blog/categories/server" style="font-size: 101.33333333333333%">server(1)</a> <a href="http://hongchaozhang.github.io/blog/categories/swift" style="font-size: 109.33333333333333%">swift(7)</a> <a href="http://hongchaozhang.github.io/blog/categories/web" style="font-size: 114.66666666666667%">web(11)</a> <a href="http://hongchaozhang.github.io/blog/categories/wwdc" style="font-size: 102.66666666666667%">wwdc(2)</a> <a href="http://hongchaozhang.github.io/blog/categories/xcode" style="font-size: 110.66666666666667%">xcode(8)</a> </ul>
+      </section>
+
+
+</header>
+			</div>
+		</div>
+		<div class="mid-col">
+
+
+
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">使用node-xlsx进行excel文件的读写</h1>
+	<div class="entry-content" itemprop="articleBody"><h3>解析excel文件</h3>
+
+<p>在我的应用中需要对excel文件内容进行搜索，所以需要一个解析excel文件的插件。</p>
+
+<p><a href="https://www.npmjs.com/package/node-xlsx">node-xlsx</a>插件可以让我们解析、修改、新建excel文件。</p>
+
+<!-- more -->
+
+
+<p>安装到所在文件夹：</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">npm install excel node-xlsx</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>或者安装为全局应用：</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">npm install -g excel node-xlsx</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>然后就可以这样解析excel文件：</p>
+
+<figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">xlsx</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-xlsx'</span><span class="p">);</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">xlsx</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'/myFile.xlsx'</span><span class="p">);</span> <span class="c1">// parses a file </span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>下面是一段样例代码：</p>
+
+<figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Include modules.</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">xlsx</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-xlsx'</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// read xlsx file and analyse</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">excelObj</span> <span class="o">=</span> <span class="nx">xlsx</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'fileName.xlsx'</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">sheet</span> <span class="k">in</span> <span class="nx">excelObj</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">if</span> <span class="p">(</span><span class="nx">sheet</span> <span class="o">!==</span> <span class="s1">'0'</span> <span class="o">&amp;&amp;</span> <span class="nx">excelObj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">sheet</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// sheet is '0', '1', ...</span>
+</span><span class="line">      <span class="kd">var</span> <span class="nx">sheetData</span> <span class="o">=</span> <span class="nx">excelObj</span><span class="p">[</span><span class="nx">sheet</span><span class="p">].</span><span class="nx">data</span><span class="p">;</span> <span class="c1">// data inside a sheet, which is an two-dimention array</span>
+</span><span class="line">      <span class="kd">var</span> <span class="nx">rowCount</span> <span class="o">=</span> <span class="nx">sheetData</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</span><span class="line">      <span class="nx">activityCountDic</span><span class="p">[</span><span class="nx">sheet</span><span class="p">]</span> <span class="o">=</span> <span class="nx">rowCount</span><span class="p">;</span>
+</span><span class="line">      <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">rowCount</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">          <span class="kd">var</span> <span class="nx">rowData</span> <span class="o">=</span> <span class="nx">sheetData</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span> <span class="c1">// data inside one row, which is an one-dimention array</span>
+</span><span class="line">          <span class="kd">var</span> <span class="nx">columnCount</span> <span class="o">=</span> <span class="nx">rowData</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</span><span class="line">          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">columnCount</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">              <span class="kd">var</span> <span class="nx">cellData</span> <span class="o">=</span> <span class="nx">rowData</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">toString</span><span class="p">();</span> <span class="c1">// data in j column of the given row</span>
+</span><span class="line">              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cellData</span><span class="p">);</span>
+</span><span class="line">          <span class="p">}</span>
+</span><span class="line">      <span class="p">}</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<h3>写入excel文件</h3>
+
+<figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Include modules.</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">xlsx</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-xlsx'</span><span class="p">);</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// 写入excel之后是一个一行两列的表格</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">data1</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class="line"><span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">]</span>
+</span><span class="line"><span class="p">];</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// 写入excel之后是一个三行两列的表格</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">data2</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class="line"><span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">],</span>
+</span><span class="line"><span class="p">[</span><span class="s1">'zhang san'</span><span class="p">,</span> <span class="s1">'10'</span><span class="p">],</span>
+</span><span class="line"><span class="p">[</span><span class="s1">'li si'</span><span class="p">,</span> <span class="s1">'11'</span><span class="p">]</span>
+</span><span class="line"><span class="p">];</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="nx">xlsx</span><span class="p">.</span><span class="nx">build</span><span class="p">([</span>
+</span><span class="line">  <span class="p">{</span>
+</span><span class="line">      <span class="nx">name</span><span class="o">:</span><span class="s1">'sheet1'</span><span class="p">,</span>
+</span><span class="line">      <span class="nx">data</span><span class="o">:</span><span class="nx">data1</span>
+</span><span class="line">  <span class="p">},</span> <span class="p">{</span>
+</span><span class="line">      <span class="nx">name</span><span class="o">:</span><span class="s1">'sheet2'</span><span class="p">,</span>
+</span><span class="line">      <span class="nx">data</span><span class="o">:</span><span class="nx">data2</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line">  <span class="p">]);</span>
+</span><span class="line">
+</span><span class="line"><span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="s1">'book.xlsx'</span><span class="p">,</span> <span class="nx">buffer</span><span class="p">,</span> <span class="p">{</span><span class="s1">'flag'</span><span class="o">:</span><span class="s1">'w'</span><span class="p">});</span> <span class="c1">// 如果文件存在，覆盖</span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<h3>运行</h3>
+
+<p>将上面的代码保存成js文件，比如<code>demo.js</code>，通过node运行即可:</p>
+
+<figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="nx">node</span> <span class="nx">demo</span><span class="p">.</span><span class="nx">js</span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>如果需要debug，可以使用VSCode。在开始运行的时候碰到下面的错误“Cannot find runtime ‘node’ on PATH. Is ‘node’ installed?”。需要将自动生成的launch.json文件添加一行：</p>
+
+<figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="json"><span class="line"><span class="s2">"runtimeExecutable"</span><span class="err">:</span> <span class="s2">"/Users/hozhang/.nvm/versions/node/v10.15.0/bin/node"</span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>改成：</p>
+
+<figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+</pre></td><td class="code"><pre><code class="json"><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="err">//</span> <span class="err">Use</span> <span class="err">IntelliSense</span> <span class="err">to</span> <span class="err">learn</span> <span class="err">about</span> <span class="err">possible</span> <span class="err">attributes.</span>
+</span><span class="line">    <span class="err">//</span> <span class="err">Hover</span> <span class="err">to</span> <span class="err">view</span> <span class="err">descriptions</span> <span class="err">of</span> <span class="err">existing</span> <span class="err">attributes.</span>
+</span><span class="line">    <span class="err">//</span> <span class="err">For</span> <span class="err">more</span> <span class="err">information,</span> <span class="err">visit:</span> <span class="err">https://go.microsoft.com/fwlink/?linkid=830387</span>
+</span><span class="line">    <span class="nt">"version"</span><span class="p">:</span> <span class="s2">"0.2.0"</span><span class="p">,</span>
+</span><span class="line">    <span class="nt">"configurations"</span><span class="p">:</span> <span class="p">[</span>
+</span><span class="line">
+</span><span class="line">        <span class="p">{</span>
+</span><span class="line">            <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"node"</span><span class="p">,</span>
+</span><span class="line">            <span class="nt">"request"</span><span class="p">:</span> <span class="s2">"launch"</span><span class="p">,</span>
+</span><span class="line">            <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Launch Program"</span><span class="p">,</span>
+</span><span class="line">            <span class="nt">"skipFiles"</span><span class="p">:</span> <span class="p">[</span>
+</span><span class="line">                <span class="s2">"&lt;node_internals&gt;/**"</span>
+</span><span class="line">            <span class="p">],</span>
+</span><span class="line">            <span class="nt">"program"</span><span class="p">:</span> <span class="s2">"${workspaceFolder}/age.js"</span><span class="p">,</span>
+</span><span class="line">          <span class="err">//</span> <span class="err">指定node的位置</span>
+</span><span class="line">            <span class="nt">"runtimeExecutable"</span><span class="p">:</span> <span class="s2">"/Users/hozhang/.nvm/versions/node/v10.15.0/bin/node"</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">]</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+
+
+
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright © 2022
+
+    Zhang Hongchao
+
+
+<!--Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a>--></footer>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

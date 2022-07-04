@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://ask.dcloud.net.cn/article/35021 -->
+<html class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+<meta name="renderer" content="webkit">
+<title>uni-app 全局变量的几种实现方式 - DCloud问答</title>
+<meta name="keywords" content="uni-app,全局,变量,几种,实现,方式">
+<meta name="description" content="uni-app 全局变量的几种实现方式 - 公用模块
+定义一个专用的模块，用来组织和管理这些全局的变量，在需要的页面引入。
+注意这种方式只支持多个vue页面或多个nvue页面之间公用，vue和nvue之间不公用。
+示例如下：
+在 uni-app 项目根目录下创建 common 目录，然后在 ...">
+<!--<base href="//ask.dcloud.net.cn/">--><base href="."><!--[if IE]></base><![endif]-->
+<link href="https://img-cdn-tc.dcloud.net.cn/static/css/classblack/img/favicon.png?v=2022051011" rel="shortcut icon" type="image/x-icon">
+<script src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/hm.js.下载"></script><script type="text/javascript">
+	window.source = "";
+</script>
+<link rel="stylesheet" type="text/css" href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/aw-font.css">
+
+<link href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/common.css" rel="stylesheet" type="text/css">
+<link href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/link.css" rel="stylesheet" type="text/css">
+<link href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/style.css" rel="stylesheet" type="text/css">
+<link href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/prettify.css" rel="stylesheet" type="text/css">
+<link href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/prettify.sons.css" rel="stylesheet" type="text/css">
+
+<link href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/classblack.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/ask.css">
+
+<script type="text/javascript">
+	var _2142FE814F7D875B9EA8B5B633FF0F04='';
+	var G_POST_HASH=_2142FE814F7D875B9EA8B5B633FF0F04;
+	var G_INDEX_SCRIPT = '';
+	var G_SITE_NAME = 'DCloud问答';
+	var G_BASE_URL = '//ask.dcloud.net.cn';
+	var G_STATIC_URL = '//img-cdn-tc.dcloud.net.cn/static';
+	var G_UPLOAD_URL = '//img-cdn-tc.dcloud.net.cn/uploads';
+	var G_USER_ID = 0;
+	var G_USER_NAME = '';
+	var G_UPLOAD_ENABLE = 'N';
+	var G_UNREAD_NOTIFICATION = 0;
+	var G_NOTIFICATION_INTERVAL = 300000;
+	var G_CAN_CREATE_TOPIC = '';
+
+
+        var USE_OPEN_SEARCH = true;
+    </script>
+<script src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/jquery.2.js.下载" type="text/javascript"></script>
+<script src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/jquery.form.js.下载" type="text/javascript"></script>
+<script src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/plug-in_module.js.下载" type="text/javascript"></script>
+<script src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/functions.js.下载" type="text/javascript"></script>
+<script src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/aw_template.js.下载" type="text/javascript"></script>
+<script src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/common.js.下载" type="text/javascript"></script>
+<script src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/app.js.下载" type="text/javascript"></script>
+<script src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/prettify.js.下载" type="text/javascript"></script>
+<script src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/jquery.lazyload.min.js.下载" type="text/javascript"></script>
+<script type="text/javascript" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/compatibility.js.下载"></script>
+<!--[if lte IE 8]>
+	<script type="text/javascript" src="//img-cdn-tc.dcloud.net.cn/static/js/respond.js"></script>
+<![endif]-->
+    <!-- 请置于所有广告位代码之前 -->
+    <script src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/ds.js.下载"></script>
+<style xmlns="http://www.w3.org/1999/html">
+    .ad-item {
+        position: relative;
+    }
+    .ad-item .close {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        background-color: #000000;
+        opacity: 0.5;
+        text-align: center;
+        right: 0px;
+        top: 0px;
+        line-height: 18px;
+        display: none;
+    }
+
+    .ad-item .close a {
+        font-size: 14px;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    .ad-item .guide {
+        display: none;
+    }
+
+    .ad-item:hover .close {
+        display: block;
+    }
+
+	.aw-dropdown-list em{
+		font-style: normal;
+		color: #ef5656;
+	}
+
+
+</style><style type="text/css">.fancybox-margin{margin-right:16px;}</style></head>
+
+<body>
+<div class="aw-top-menu-wrap ask">
+<div class="aw-top-menu clearfix">
+    <div class="container">
+        <!-- logo -->
+        <div class="aw-logo hidden-xs">
+            <a href="https://dcloud.io/" target="_blank">
+                <img alt="Brand" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/logo1@2x.png">
+            </a>
+            <img class="line" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/logo2@2x.png" alt="|">
+            <a href="https://ask.dcloud.net.cn/">
+                <img alt="Brand" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/logo3@2x.png">
+            </a>
+        </div>
+        <!-- end logo -->
+        <!-- 导航 -->
+        <div class="aw-top-nav navbar">
+            <div class="navbar-header">
+                <button class="navbar-toggle pull-left">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="https://ask.dcloud.net.cn/docs/">文档</a></li>
+                    <li><a href="https://ask.dcloud.net.cn/explore/" class="">问答</a></li>
+
+                    <!-- <li><a href="//ask.dcloud.net.cn/question/square/" class="">问题</a></li>
+
+                    <li><a href="//ask.dcloud.net.cn/article/square/" class="active">文章</a></li> -->
+
+                    <!--<li><a href="//ask.dcloud.net.cn/topic/" -->
+                        <!--&gt;话题</a></li>-->
+
+                    <!--<li><a href="//ask.dcloud.net.cn/people/list/" -->
+                        <!--&gt;排行</a></li>-->
+
+                                                        </ul>
+            </nav>
+        </div>
+        <!-- end 导航 -->
+
+		<!-- 用户栏 -->
+		<div class="aw-user-nav">
+			<!-- 登录&注册栏 -->
+						<span>
+							<a href="https://ask.dcloud.net.cn/account/register/">注册</a>
+							<a href="https://ask.dcloud.net.cn/account/login/">登录</a>
+						</span>
+						<!-- end 登录&注册栏 -->
+		</div>
+		<!-- end 用户栏 -->
+
+		<!--赞助 start-->
+		<div class="sponsor-wrap">
+			<img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/sponsor-icon@2x.png">
+			<a href="https://dev.dcloud.net.cn/sponsor/" target="_blank">赞助</a>
+		</div>
+		<!--赞助 end-->
+
+		<!-- 发起 -->
+				<!-- end 发起 -->
+
+		<!-- 搜索框 -->
+		<div class="aw-search-box hidden-xs hidden-sm">
+			<form class="navbar-search" action="https://ask.dcloud.net.cn/search/" id="global_search_form" method="post">
+				<div class="input-group">
+					<input value="" class="form-control" type="text" placeholder="搜索问题、话题" autocomplete="off" name="q" id="aw-search-query">
+					<span class="input-group-addon" title="搜索" id="global_search_btns" onclick="$(&#39;#global_search_form&#39;).submit();"><i class="fa fa-search"></i></span>
+					<div class="clearfix"></div>
+					<div class="aw-dropdown">
+						<i class="i-dropdown-triangle"></i>
+						<p class="title">输入关键字或相关内容进行搜索</p>
+						<ul class="aw-dropdown-list"></ul>
+						<p class="search"><span>搜索:</span><a onclick="$(&#39;#global_search_form&#39;).submit();"></a></p>
+						<p>
+							<a href="https://ask.dcloud.net.cn/" onclick="$(&#39;#header_publish&#39;).click();" class="pull-right btn btn-normal btn-success publish">发布问题</a></p>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- end 搜索框 -->
+    </div>
+</div>
+</div>
+
+<link rel="stylesheet" href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/github-markdown.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./uni-app 全局变量的几种实现方式 - DCloud问答_files/github-gist.min.css" type="text/css" media="all">
+<style>
+    .markdown-body img {
+        display: none;
+    }
+
+    .center_image {
+        max-width: 800px !important;
+        text-align: center;
+        /*position: relative;*/
+        /*left: 25%;*/
+    }
+</style>
+<style>
+    .markdown-body h2 {
+        border-bottom: none;
+    }
+
+    .markitup-box a {
+        color: #428bca;
+    }
+
+    iframe {
+        border: 1px solid #eee;
+        border-radius: 4px;
+    }
+
+    .markitup-box-message {
+        display: block;
+    }
+
+    .aw-suspend-panel {
+        position: fixed;
+        top: 200px;
+        margin-left: -70px;
+    }
+
+    .aw-suspend-panel .aw-panel-btn {
+        padding: 10px;
+        background: #eee;
+        border-radius: 50%;
+        margin-top: 10px;
+    }
+
+    .aw-suspend-panel .aw-panel-btn a:visited, .aw-suspend-panel .aw-panel-btn a:focus, .aw-suspend-panel .aw-panel-btn a:hover {
+        text-decoration: none;
+        color: #999;
+    }
+
+    .aw-article-comment-wrap .markitup-box code {
+        display: initial;
+    }
+
+    .aw-mod-body{
+        word-wrap: break-word;
+    }
+</style>
+<div class="aw-container-wrap">
+    <div class="aw-container aw-wecenter">
+        <div class="container ask-article">
+            <div class="row aw-content-wrap">
+                <div class="col-sm-12 col-md-9 aw-main-content" id="divcontainer">
+                    <div class="aw-mod aw-article-user">
+                        <!-- 发起人 -->
+                                                <div class="user-detail">
+                            <div class="aw-mod-body">
+                                <div class="aw-item">
+                                    <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/Trust">
+                                        <img alt="Trust" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/85_avatar_mid.jpg">
+
+                                                                            </a>
+                                    <div class="aw-item-content">
+                                        <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/Trust" data-id="86285">Trust</a>                                        <!-- <p>少说废话</p> -->
+                                        <ul>
+                                            <li>
+                                                发布：2018-09-13 12:08                                            </li>
+                                            <li>
+                                                更新：2022-04-02 22:05                                            </li>
+                                            <li>
+                                                阅读：288567                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                                <!-- end 发起人 -->
+                    </div>
+                    <div class="aw-mod aw-item aw-question-detail-title aw-article-detail-title">
+                        <div class="aw-mod-head">
+                            <h1>
+                                uni-app 全局变量的几种实现方式
+                                                            </h1>
+
+
+                                                        <div class="aw-category">
+                                分类：<span class="aw-category-name">uni-app</span>
+                            </div>
+
+                            <div class="aw-topic-editor" data-type="article" data-id="35021">
+                                                                <a href="https://ask.dcloud.net.cn/topic/vuex" class="aw-topic-name" data-id="1034"><span>vuex</span></a>
+                                                                <a href="https://ask.dcloud.net.cn/topic/Vue" class="aw-topic-name" data-id="800"><span>Vue</span></a>
+                                                                <a href="https://ask.dcloud.net.cn/topic/%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F" class="aw-topic-name" data-id="483"><span>全局变量</span></a>
+                                                                <a href="https://ask.dcloud.net.cn/topic/uniapp" class="aw-topic-name" data-id="955"><span>uniapp</span></a>
+
+                                                            </div>
+                        </div>
+                        <div class="aw-mod-body">
+                            <div class="aw-question-detail-txt markitup-box" id="markdownbody">
+                                <article class="markdown-body">
+                                    <h2>公用模块</h2>
+<p>定义一个专用的模块，用来组织和管理这些全局的变量，在需要的页面引入。  </p>
+<p><strong>注意这种方式只支持多个vue页面或多个nvue页面之间公用，vue和nvue之间不公用。</strong>  </p>
+<p>示例如下：<br>
+在 uni-app 项目根目录下创建 common 目录，然后在 common 目录下新建 helper.js 用于定义公用的方法。</p>
+<pre><a class="btn" data-clipboard-snippet="" data-toggle="popover" data-placement="bottom" data-content="" data-original-title="" title="">复制代码</a><code class="language-javascript hljs"><span class="hljs-keyword">const</span> websiteUrl = <span class="hljs-string">'http://uniapp.dcloud.io'</span>;
+<span class="hljs-keyword">const</span> now = <span class="hljs-built_in">Date</span>.now || <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime();
+};
+<span class="hljs-keyword">const</span> isArray = <span class="hljs-built_in">Array</span>.isArray || <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">obj</span>) </span>{
+    <span class="hljs-keyword">return</span> obj <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>;
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+    websiteUrl,
+    now,
+    isArray
+}</code></pre>
+<p>接下来在 pages/index/index.vue 中引用该模块</p>
+<pre><a class="btn" data-clipboard-snippet="" data-toggle="popover" data-placement="bottom" data-content="" data-original-title="" title="">复制代码</a><code class="language-javascript hljs">&lt;script&gt;
+    <span class="hljs-keyword">import</span> helper <span class="hljs-keyword">from</span> <span class="hljs-string">'../../common/helper.js'</span>;
+
+    <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+        data() {
+            <span class="hljs-keyword">return</span> {};
+        },
+        onLoad(){
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'now:'</span> + helper.now());
+        },
+        <span class="hljs-attr">methods</span>: {
+        }
+    }
+&lt;<span class="hljs-regexp">/script&gt;</span></code></pre>
+<p>这种方式维护起来比较方便，但是缺点就是每次都需要引入。  </p>
+<h2>挂载 Vue.prototype</h2>
+<p>将一些使用频率较高的常量或者方法，直接扩展到 Vue.prototype 上，每个 Vue 对象都会“继承”下来。  </p>
+<p><strong>注意这种方式只支持vue页面</strong>  </p>
+<p>示例如下：<br>
+在 main.js 中挂载属性/方法</p>
+<pre><a class="btn" data-clipboard-snippet="" data-toggle="popover" data-placement="bottom" data-content="" data-original-title="" title="">复制代码</a><code class="language-javascript hljs">Vue.prototype.websiteUrl = <span class="hljs-string">'http://uniapp.dcloud.io'</span>;
+Vue.prototype.now = <span class="hljs-built_in">Date</span>.now || <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime();
+};
+Vue.prototype.isArray = <span class="hljs-built_in">Array</span>.isArray || <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">obj</span>) </span>{
+    <span class="hljs-keyword">return</span> obj <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>;
+};</code></pre>
+<p>然后在 pages/index/index.vue 中调用</p>
+<pre><a class="btn" data-clipboard-snippet="" data-toggle="popover" data-placement="bottom" data-content="" data-original-title="" title="">复制代码</a><code class="language-javascript hljs">&lt;script&gt;
+    <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+        data() {
+            <span class="hljs-keyword">return</span> {};
+        },
+        onLoad(){
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'now:'</span> + <span class="hljs-keyword">this</span>.now());
+        },
+        <span class="hljs-attr">methods</span>: {
+        }
+    }
+&lt;<span class="hljs-regexp">/script&gt;</span></code></pre>
+<p>这种方式，只需要在 main.js 中定义好即可在每个页面中直接调用。  </p>
+<p><strong>Tips</strong>  </p>
+<ul><li>每个页面中不要在出现重复的属性或方法名。  </li>
+<li>建议在 Vue.prototype 上挂载的属性或方法，可以加一个统一的前缀。比如 $url、global_url 这样，在阅读代码时也容易与当前页面的内容区分开。  </li>
+</ul><h2>globalData</h2>
+<p>小程序中有个globalData概念，可以在 App 上声明全局变量。 Vue 之前是没有这类概念的，但 uni-app 引入了globalData概念，并且在包括H5、App等平台都实现了。<br>
+在 App.vue 可以定义 globalData ，也可以使用 API 读写这个值。  </p>
+<p>globalData支持vue和nvue共享数据。  </p>
+<p>globalData是一种比较简单的全局变量使用方式。  </p>
+<p>定义：App.vue</p>
+<pre><a class="btn" data-clipboard-snippet="" data-toggle="popover" data-placement="bottom" data-content="" data-original-title="" title="">复制代码</a><code class="language-html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+        <span class="hljs-attr">globalData</span>: {
+            <span class="hljs-attr">text</span>: <span class="hljs-string">'text'</span>
+        },
+        <span class="hljs-attr">onLaunch</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'App Launch'</span>)
+        },
+        <span class="hljs-attr">onShow</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'App Show'</span>)
+        },
+        <span class="hljs-attr">onHide</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'App Hide'</span>)
+        }
+    }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+    <span class="hljs-comment">/*每个页面公共css */</span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+</code></pre>
+<p>js中操作globalData的方式如下：  </p>
+<p>赋值：<code>getApp().globalData.text = 'test'</code>   </p>
+<p>取值：<code>console.log(getApp().globalData.text) // 'test'</code>   </p>
+<p>如果需要把globalData的数据绑定到页面上，可在页面的onshow声明周期里进行变量重赋值。HBuilderX 2.0.3起，nvue页面在<code>uni-app</code>编译模式下，也支持onshow。  </p>
+<h2>Vuex</h2>
+<p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。  </p>
+<p><strong> HBuilderX 2.2.5+起，支持vue和nvue之间共享。<a href="https://uniapp.dcloud.io/use-weex?id=vue-%e5%92%8c-nvue-%e5%85%b1%e4%ba%ab%e7%9a%84%e5%8f%98%e9%87%8f%e5%92%8c%e6%95%b0%e6%8d%ae" target="_blank">参考</a> </strong>  </p>
+<p>这里以登录后同步更新用户信息为例，简单说明下 Vuex 的用法，更多更详细的 Vuex 的内容，建议前往其官网 <a href="https://vuex.vuejs.org/zh/" target="_blank">Vuex</a> 学习下。  </p>
+<p>举例说明：  </p>
+<p>在 uni-app 项目根目录下新建 store 目录，在 store 目录下创建 index.js 定义状态值</p>
+<pre><a class="btn" data-clipboard-snippet="" data-toggle="popover" data-placement="bottom" data-content="" data-original-title="" title="">复制代码</a><code class="language-javascript hljs"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store({
+    <span class="hljs-attr">state</span>: {
+        <span class="hljs-attr">login</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">token</span>: <span class="hljs-string">''</span>,
+        <span class="hljs-attr">avatarUrl</span>: <span class="hljs-string">''</span>,
+        <span class="hljs-attr">userName</span>: <span class="hljs-string">''</span>
+    },
+    <span class="hljs-attr">mutations</span>: {
+        login(state, provider) {
+            <span class="hljs-built_in">console</span>.log(state)
+            <span class="hljs-built_in">console</span>.log(provider)
+            state.login = <span class="hljs-literal">true</span>;
+            state.token = provider.token;
+            state.userName = provider.userName;
+            state.avatarUrl = provider.avatarUrl;
+        },
+        logout(state) {
+            state.login = <span class="hljs-literal">false</span>;
+            state.token = <span class="hljs-string">''</span>;
+            state.userName = <span class="hljs-string">''</span>;
+            state.avatarUrl = <span class="hljs-string">''</span>;
+        }
+    }
+})</code></pre>
+<p>然后，需要在 main.js 挂载 Vuex</p>
+<pre><a class="btn" data-clipboard-snippet="" data-toggle="popover" data-placement="bottom" data-content="" data-original-title="" title="">复制代码</a><code class="language-javascript hljs"><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">'./store'</span>
+Vue.prototype.$store = store</code></pre>
+<p>最后，在 pages/index/index.vue 使用</p>
+<pre><a class="btn" data-clipboard-snippet="" data-toggle="popover" data-placement="bottom" data-content="" data-original-title="" title="">复制代码</a><code class="language-javascript hljs">&lt;script&gt;
+    <span class="hljs-keyword">import</span> {
+        mapState,
+        mapMutations
+    } <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span>;
+
+    <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+        <span class="hljs-attr">computed</span>: {
+            ...mapState([<span class="hljs-string">'avatarUrl'</span>, <span class="hljs-string">'login'</span>, <span class="hljs-string">'userName'</span>])
+        },
+        <span class="hljs-attr">methods</span>: {
+            ...mapMutations([<span class="hljs-string">'logout'</span>])
+        }
+    }
+&lt;<span class="hljs-regexp">/script&gt;</span></code></pre>
+<p>详细示例，请下载附件，在 HBuilderX 中运行。  </p>
+<p>示例操作步骤：<br>
+未登录时，提示去登录。跳转至登录页后，点击“登录”获取用户信息，同步更新状态后，返回到个人中心即可看到信息同步的结果。  </p>
+<p>注意：对比前面的方式，该方式更加适合处理全局的并且值会发生变化的情况。  </p>
+<h2>注意事项</h2>
+<p>*<em> </em> .vue 和 .nvue 并不是一个规范，因此一些在 .vue 中适用的方案并不适用于 .nvue。 Vue 上挂载属性，不能在 .nvue 中使用。**  </p>
+<h2>更多</h2>
+<p>关于登录状态的维护，还可以参考 uni-app 的登录模板示例。可以在 <a href="https://github.com/dcloudio/uni-app/tree/master/examples/login-template" target="_blank">github</a> 获取源码，也可以在新建 uni-app 时“从模板创建”选择登录模板。</p>                                </article>
+
+                                                                <div class="aw-comment-upload-img-list">
+                                                                                                                                            </div>
+
+                                                                <ul class="aw-comment-upload-file-list">
+                                                                                                            <li>
+                                        <a href="https://ask.dcloud.net.cn/file/download/file_name-dnVleC56aXA=__url-Ly9pbWctY2RuLXRjLmRjbG91ZC5uZXQuY24vdXBsb2Fkcy9hcnRpY2xlLzIwMTgwOTEzLzdmMTU2MDc3MDU0NDEzNTBlOTY2OTBmOTIwNDdhMWMx"><em class="aw-icon i-upload-file"></em>vuex.zip                                        </a></li>
+                                                                                                        </ul>
+                                                            </div>
+                            <div class="aw-question-detail-meta aw-article-detail-meta">
+								<span class="aw-article-vote disabled">
+									<a href="javascript:;" class="agree" onclick=""><i class="fa fa-thumbs-up"></i> <b>128</b> 赞</a>
+                                    <!-- <a href="javascript:;" class="disagree" onclick="article_vote(this, 35021, -1);"><i class="fa fa-thumbs-down"></i></a> -->
+								</span>
+
+                                                                <a class="aw-text-color-999 focus " href="javascript:;" onclick="focusArticle(this, 35021)"><i class="fa fa-star"></i><span>关注</span></a>
+
+                                <a class="aw-text-color-999" onclick="$.dialog(&#39;shareOut&#39;, {item_type:&#39;article&#39;, item_id:35021});"><i class="fa fa-share"></i>分享</a>
+
+                                                            </div>
+
+                                                        <div class="aw-article-voter">
+                                                                <a href="https://ask.dcloud.net.cn/people/Neil_HL" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="Neil_HL"><img alt="Neil_HL" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/60_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/fx4399" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="fx4399"><img alt="fx4399" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/03_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/%E5%B0%8FU" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="小U"><img alt="小U" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/1118b425d365b3d715a9204bfdf3855a.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/618952" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="2***@qq.com"><img alt="2***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/179ece7003553acca6190c7316e29fcb.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/Geeker" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="Geeker"><img alt="Geeker" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/65_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/425816" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="x***@sina.com"><img alt="x***@sina.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/1db4f2dd1cdab6ec8622e313e08027aa.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/zhangdaren" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="zhangdaren"><img alt="zhangdaren" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/ffe38aadb5eb2ccad5e2121737f6209c.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/357734" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="1***@qq.com"><img alt="1***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/764b60b71e5f55bca81124347193f3b9.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/%E8%BE%89%E8%BE%89" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="辉辉"><img alt="辉辉" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/ecd8424d19300cb21ba58ec27b4dd186.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/%E6%B5%B7%E4%B8%AD%E6%9C%88%E6%98%AF%E5%A4%A9%E4%B8%8A%E6%9C%88" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="海中月是天上月"><img alt="海中月是天上月" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/79_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/MARKF" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="MARKF"><img alt="MARKF" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/51_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/ftlh2019" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="沧桑"><img alt="沧桑" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/80ec9196f2e95dfadc1143bedf881b41.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/calmt" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="w***@163.com"><img alt="w***@163.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/4d8dfeed94ba9e074544599b49de5a1c.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/%E5%B0%8F%E5%B0%8F%E5%98%BB%E5%98%BB%E5%98%BB%E5%98%BB%E5%98%BB" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="小小嘻嘻嘻嘻嘻"><img alt="小小嘻嘻嘻嘻嘻" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/97aa7d31bbcca39d7392a1be45dc8204.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/osxcn" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="偶是小菜鸟"><img alt="偶是小菜鸟" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/90_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/%E7%BD%AA%E9%80%94" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="罪途"><img alt="罪途" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/52_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/285434" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="6***@qq.com"><img alt="6***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/6b5e37d4650ceff7803a7a7c023b86a7.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/721744" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="6***@qq.com"><img alt="6***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/eaf14423c541a34e68682a9b2d04fe36.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/266598" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="w***@163.com"><img alt="w***@163.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/2cd1d6a17b374490d878afde33024017.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/quitter" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="quitter"><img alt="quitter" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/12_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/atboy" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="望"><img alt="望" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/75_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/1066212" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="1***@qq.com"><img alt="1***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/b3187f06e3b7c95de829b0cfbd3d3ed3.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/%E7%99%BD%E5%B0%8F%E7%99%BD73" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="白小白73"><img alt="白小白73" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/35545bce0dbb836db04d2446dc940b41.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/chenlw" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="3***@qq.com"><img alt="3***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/8729cd42fa421555e75565add604c2e6.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/%E6%8B%9C%E4%BB%81%E5%B7%B2%E4%BC%A4" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="拜仁已伤"><img alt="拜仁已伤" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/279e8bcea8266969703d0da989916342.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/427364" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="7***@qq.com"><img alt="7***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/bbac9c8a707c17f413818f7225725ea5.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/937265" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="1***@qq.com"><img alt="1***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/a321d2f7c5c69d0da637bdac8e972858.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/YongwangLee" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="YongwangLee"><img alt="YongwangLee" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/95_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/1186933" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="8***@qq.com"><img alt="8***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/3e2d2023e9bae5199820de9d0b7b1409.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/976053" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="2***@qq.com"><img alt="2***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/4b9d56445150838fa4ba900e93f500c8.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/coolcolt" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="脉脉情缘"><img alt="脉脉情缘" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/58_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/geekcode" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="s***@gmail.com"><img alt="s***@gmail.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/2562309ba252f69386c59746a7c6d31d.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/262286" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="6***@qq.com"><img alt="6***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/1c5d113a81abba34947b70fdf77d6dfb.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/963539" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="7***@qq.com"><img alt="7***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/6329c9ac194e5ceff02b960a28ca7dba.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/echoer" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="echoer"><img alt="echoer" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/22e45325f7a7bcf9f49b2ebbe685d449.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/134282" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="w***@163.com"><img alt="w***@163.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/606fdd0c576911ea2dd1d2a6f885cae2.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/271083" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="6***@qq.com"><img alt="6***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/a300f9ccd4447b55c19e7246e00098ef.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/itwander" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="f***@163.com"><img alt="f***@163.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/c90b5fd673c2aaa47f5811bda45ab440.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/1192057" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="1***@qq.com"><img alt="1***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/e5aab4ca6521a96fa4dfe283cccd1df0.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/xunbaohui" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="2***@qq.com"><img alt="2***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/97_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/1257300" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="1***@qq.com"><img alt="1***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/d2d7ec4dca291b7dac6ee095ff3ddf62.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/Heng_vv" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="Heng_vv"><img alt="Heng_vv" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/64_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/%E9%98%BF%E9%A1%BA" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="阿顺"><img alt="阿顺" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/28_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/%E6%9E%97%E4%B8%8A%E7%9A%93" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="林上皓"><img alt="林上皓" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/12_avatar_mid(1).jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/%E5%90%B4%E8%80%81%E4%BA%8C%E6%B5%8B%E8%AF%95%E9%A1%B9%E7%9B%AE" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="吴老二测试项目"><img alt="吴老二测试项目" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/7923cb4308220f7c28afc7d1b7f00ef0.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/van" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="t***@sina.cn"><img alt="t***@sina.cn" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/26_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/MK" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="MK"><img alt="MK" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/8cb34a40ae5e7df6174672e4536ae948.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/1288712" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="6***@qq.com"><img alt="6***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/c506b0e41a37399d9e4481213e3cb9d1.png"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/zolysoft" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="b***@qq.com"><img alt="b***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/63_avatar_mid.jpg"></a>
+                                                                <a href="https://ask.dcloud.net.cn/people/853165" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="8***@qq.com"><img alt="8***@qq.com" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/b47176cf41cd717ed26f059c3272e699.png"></a>
+                                                            </div>
+                                                    </div>
+                    </div>
+                    <!--				广告位-->
+                    <!--                    -->
+                    <!--                    -->
+
+                    <!--                    <div style="padding-top: 10px; padding-bottom: 20px; margin-bottom:20px;border-bottom: 0.5px dashed #cccccc">-->
+                    <!--                        <script type="text/javascript">-->
+                    <!--                            (function () {-->
+                    <!--                                var s = "_" + Math.random().toString(36).slice(2);-->
+                    <!--                                document.write('<div style="" id="' + s + '"></div>');-->
+                    <!--                                (window.slotbydup = window.slotbydup || []).push({-->
+                    <!--                                    id: "u5360938",-->
+                    <!--                                    container: s-->
+                    <!--                                });-->
+                    <!--                            })();-->
+                    <!--                        </script>-->
+                    <!--                    </div>-->
+                    <!--                    &lt;!&ndash; 多条广告如下脚本只需引入一次 &ndash;&gt;-->
+                    <!--                    <script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/c.js" async="async"-->
+                    <!--                            defer="defer">-->
+                    <!--                    </script>-->
+                    <!--                    -->
+                    <!--                    -->
+                    <!--                    -->
+                    <!--		广点通广告位-->
+                    <div id="containerId"></div>
+                    <script type="text/javascript">
+                        var browser = {
+                            versions: function () {
+                                var u = navigator.userAgent, app = navigator.appVersion;
+                                return {         //移动终端浏览器版本信息
+                                    trident: u.indexOf('Trident') > -1, //IE内核
+                                    presto: u.indexOf('Presto') > -1, //opera内核
+                                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                                };
+                            }(),
+                            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+                        }
+
+                        if (browser.versions.mobile) {//判断是否是移动设备打开。browser代码在下面
+                            var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+
+                            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                                //在微信中打开
+                            }
+                            if (ua.match(/WeiBo/i) == "weibo") {
+                                //在新浪微博客户端打开
+                            }
+                            if (ua.match(/QQ/i) == "qq") {
+                                //在QQ空间打开
+                            }
+                            if (browser.versions.ios) {
+                                //是否在IOS浏览器打开
+                            }
+                            if (browser.versions.android) {
+                                //是否在安卓浏览器打开
+                            }
+                        } else {
+
+                            // var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+                            // if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/QQ/i) == "qq") {
+                            //     //在微信中打开
+                            //     var placement_id = '3021110663720082'
+                            //     // H5 SDK 在线文档地址：http://developers.adnet.qq.com/doc/web/js_develop
+                            //     // 全局命名空间申明TencentGDT对象
+                            //     window.TencentGDT = window.TencentGDT || [];
+                            //     // 广告初始化
+                            //     window.TencentGDT.push({
+                            //         placement_id: placement_id, // {String} - 广告位id - 必填
+                            //         app_id: '1110582546', // {String} - appid - 必填
+                            //         type: 'native', // {String} - 原生广告类型 - 必填
+                            //         muid_type: '1', // {String} - 移动终端标识类型，1：imei，2：idfa，3：mac号 - 选填
+                            //         muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
+                            //         count: 1, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
+                            //         onComplete: function (res) {
+                            //             if (res && res.constructor === Array) {
+                            //                 // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
+                            //                 // res[0] 代表取广告数组第一个数据
+                            //                 // containerId：广告容器ID
+                            //                 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId')
+                            //             } else {
+                            //                 // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
+                            //                 // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率
+                            //                 setTimeout(function () {
+                            //                     window.TencentGDT.NATIVE.loadAd(placement_id)
+                            //                 }, 3000)
+                            //             }
+                            //         }
+                            //     });
+                            //     // H5 SDK接入全局只需运行一次
+                            //     (function () {
+                            //         var doc = document,
+                            //             h = doc.getElementsByTagName('head')[0],
+                            //             s = doc.createElement('script');
+                            //         s.async = true;
+                            //         s.src = '//qzs.qq.com/qzone/biz/res/i.js';
+                            //         h && h.insertBefore(s, h.firstChild);
+                            //     })();
+                            // }
+
+                        }
+                    </script>
+
+                    <!--				</div>-->
+
+                    <div class="aw-mod aw-question-comment-box aw-article-comment-box" id="reply">
+                        <div class="aw-mod-head">
+                            <ul class="nav nav-tabs aw-reset-nav-tabs">
+
+                                <h2>95 个评论</h2>
+                            </ul>
+                        </div>
+
+                        <!-- 回复编辑器 -->
+                        <div class="aw-mod aw-mod-article-replay-box">
+                            <a name="answer_form"></a>
+                                                        <p align="center">要回复文章请先<a href="https://ask.dcloud.net.cn/account/login/">登录</a>或<a href="https://ask.dcloud.net.cn/account/register/">注册</a></p>
+                                                    </div>
+                        <!-- end 回复编辑器 -->
+                                                <div class="aw-mod-body aw-dynamic-topic aw-article-detail aw-article-comment-wrap">
+                                                        <div class="aw-item">
+                                <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/2009802">
+                                    <img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/f6a56ff01e968733abfa49b7b6204c6f.png" alt="f***@163.com">
+                                                                    </a>
+                                <div class="aw-item-content">
+                                    <p>
+                                        <a href="https://ask.dcloud.net.cn/people/2009802">f***@163.com</a>
+                                                                                                                    </p>
+                                    <div class="markitup-box">
+                                                                                <div class="markitup-box-message">请问第三种如果用ts来写怎么写？我在页面中用getApp().globalData.mpType取不到值</div>
+                                    </div>
+                                    <div class="aw-item-meta">
+                                        <span>2022-04-02 22:05</span>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                        <div class="aw-item">
+                                <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/oveui">
+                                    <img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/86_avatar_mid.jpg" alt="o***@qq.com">
+                                                                    </a>
+                                <div class="aw-item-content">
+                                    <p>
+                                        <a href="https://ask.dcloud.net.cn/people/oveui">o***@qq.com</a>
+                                                                                                                    </p>
+                                    <div class="markitup-box">
+                                                                                <div class="markitup-box-message">Vue.prototype简单好用</div>
+                                    </div>
+                                    <div class="aw-item-meta">
+                                        <span>2021-12-29 18:04</span>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                        <div class="aw-item">
+                                <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/San%E6%AF%9B">
+                                    <img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/95_avatar_mid(1).jpg" alt="San毛">
+                                                                    </a>
+                                <div class="aw-item-content">
+                                    <p>
+                                        <a href="https://ask.dcloud.net.cn/people/San%E6%AF%9B">San毛</a>
+                                                                                                                    </p>
+                                    <div class="markitup-box">
+                                                                                <div class="markitup-box-message">uniapp+ts,getApp().globalData为啥在微信开发者工具中报错?<br>
+TypeError: Cannot read property 'globalData' of undefined</div>
+                                    </div>
+                                    <div class="aw-item-meta">
+                                        <span>2021-12-18 14:38</span>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                        <div class="aw-item">
+                                <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/liunewshine">
+                                    <img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/8cd0609795fe169c5210477837fcdfa1.png" alt="liunewshine">
+                                                                    </a>
+                                <div class="aw-item-content">
+                                    <p>
+                                        <a href="https://ask.dcloud.net.cn/people/liunewshine">liunewshine</a>
+                                                                                                                    </p>
+                                    <div class="markitup-box">
+                                                                                <div class="markitup-box-message">globalData是响应式的吗？支持Vue.observable这种简单的类似vuex的功能吗</div>
+                                    </div>
+                                    <div class="aw-item-meta">
+                                        <span>2021-08-05 11:19</span>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                        <div class="aw-item">
+                                <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/1575627">
+                                    <img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/71b1413b9cc3071e49a7eae47f479359.png" alt="4***@qq.com">
+                                                                    </a>
+                                <div class="aw-item-content">
+                                    <p>
+                                        <a href="https://ask.dcloud.net.cn/people/1575627">4***@qq.com</a>
+                                                                                                                    </p>
+                                    <div class="markitup-box">
+                                                                                <div class="markitup-box-message">”挂载 Vue.prototype“ 这种定义全局函数的时候，在函数内部不能访问uniCloud云函数吗？</div>
+                                    </div>
+                                    <div class="aw-item-meta">
+                                        <span>2021-01-13 16:58</span>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                        <div class="aw-item">
+                                <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/zhuyifang">
+                                    <img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/a67e57b52e7731b8405eee3ad29dc484.png" alt="z***@qq.com">
+                                                                    </a>
+                                <div class="aw-item-content">
+                                    <p>
+                                        <a href="https://ask.dcloud.net.cn/people/zhuyifang">z***@qq.com</a>
+                                                                                                                    </p>
+                                    <div class="markitup-box">
+                                                                                <div class="markitup-box-message">那么意思是：在 nvue 中如果要实现全局方法共享，只能是一个一个引入了？也就是文章开头的公用模块</div>
+                                    </div>
+                                    <div class="aw-item-meta">
+                                        <span>2020-12-31 19:58</span>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                        <div class="aw-item">
+                                <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/1651198">
+                                    <img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/6e3081e6f32fb1ac266486d88c445bd6.png" alt="2***@qq.com">
+                                                                    </a>
+                                <div class="aw-item-content">
+                                    <p>
+                                        <a href="https://ask.dcloud.net.cn/people/1651198">2***@qq.com</a>
+                                                                                                                    </p>
+                                    <div class="markitup-box">
+                                                                                <div class="markitup-box-message">我创建了一个 demo 注释掉 Vue.prototype.$store = store 这行代码跑了一下， 也是正常的， 这行代码好像是多余的！！！</div>
+                                    </div>
+                                    <div class="aw-item-meta">
+                                        <span>2020-12-31 16:55</span>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                        <div class="aw-item">
+                                <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/1651198">
+                                    <img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/6e3081e6f32fb1ac266486d88c445bd6.png" alt="2***@qq.com">
+                                                                    </a>
+                                <div class="aw-item-content">
+                                    <p>
+                                        <a href="https://ask.dcloud.net.cn/people/1651198">2***@qq.com</a>
+                                                                                                                    </p>
+                                    <div class="markitup-box">
+                                                                                <div class="markitup-box-message">用 uni-app 开发的时候在 app.vue 里为什么需要多加 Vue.prototype.$store = store 这一行代码？ 一般不是实例化 app组件的时候将 store 传入选项对象中就可以了吗 ？开发 app 时有什么不一样吗？</div>
+                                    </div>
+                                    <div class="aw-item-meta">
+                                        <span>2020-12-31 16:36</span>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                        <div class="aw-item">
+                                <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/1599906">
+                                    <img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/322e4eb17eba20e2d981eb84421b0520.png" alt="y***@qq.com">
+                                                                    </a>
+                                <div class="aw-item-content">
+                                    <p>
+                                        <a href="https://ask.dcloud.net.cn/people/1599906">y***@qq.com</a>
+                                                                                                                    </p>
+                                    <div class="markitup-box">
+                                         回复 <a href="https://ask.dcloud.net.cn/people/leolai">无赖君子                                        ：</a>                                        <div class="markitup-box-message">万一uni api更新了和你挂载的属性冲突了怎么办？</div>
+                                    </div>
+                                    <div class="aw-item-meta">
+                                        <span>2020-11-26 17:34</span>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                        <div class="aw-item">
+                                <a class="aw-user-name" href="https://ask.dcloud.net.cn/people/1615408">
+                                    <img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/1fd23d20a52b7e3edd1f35f418104ed3.png" alt="1***@qq.com">
+                                                                    </a>
+                                <div class="aw-item-content">
+                                    <p>
+                                        <a href="https://ask.dcloud.net.cn/people/1615408">1***@qq.com</a>
+                                                                                                                    </p>
+                                    <div class="markitup-box">
+                                                                                <div class="markitup-box-message">这个比$on  好用多了    那个在h5页面可以用；微信小程序本页面可以用，兄弟页面不可以用，bug,求解决</div>
+                                    </div>
+                                    <div class="aw-item-meta">
+                                        <span>2020-11-22 00:42</span>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    </div>
+
+
+                                                <div class="clearfix"><div class="page-control clearfix"><ul class="pagination pull-right"><li class="active"><a href="javascript:;">1</a></li><li><a href="https://ask.dcloud.net.cn/article/id-35021__page-2#reply">2</a></li><li><a href="https://ask.dcloud.net.cn/article/id-35021__page-3#reply">3</a></li><li><a href="https://ask.dcloud.net.cn/article/id-35021__page-4#reply">4</a></li><li><a href="https://ask.dcloud.net.cn/article/id-35021__page-2#reply">&gt;</a></li><li><a href="https://ask.dcloud.net.cn/article/id-35021__page-10#reply">&gt;&gt;</a></li></ul></div></div>
+                                            </div>
+                </div>
+                <!-- 侧边栏 -->
+                <div class="col-sm-12 col-md-3 aw-side-bar hidden-sm hidden-xs">
+                    <!--导航栏-->
+                    <div class="aw-side-bar-mod user-detail catalog" id="navigatorpart" style="width: 253px; position: fixed; overflow: hidden scroll; height: auto; max-height: 600px; top: 0px; z-index: 10;">
+                        <div class="aw-mod-head">
+                            <h3>目录</h3>
+                        </div>
+                    <ul class="catalog-list"><li><a id="ditem0">公用模块</a></li><li><a id="ditem1">挂载 Vue.prototype</a></li><li><a id="ditem2">globalData</a></li><li><a id="ditem3">Vuex</a></li><li><a id="ditem4">注意事项</a></li><li><a id="ditem5">更多</a></li></ul></div>
+                    <div class="aw-side-bar-mod user-detail" id="navigatorpart2" style="border-bottom: none; display: block; height: 255px;">
+
+                    </div>
+
+                    <!--公告文章-->
+                                        <div class="aw-side-bar-mod aw-text-align-justify side-bar-list-wrap">
+                        <div class="aw-mod-head under-line">
+    <h3>公告</h3>
+    <a class="more" href="https://ask.dcloud.net.cn/notice/list/">更多&gt;</a>
+</div>
+<div class="aw-mod-body">
+    <ul class="aw-li-border-bottom">
+                <li>
+            <a target="_blank" href="https://ask.dcloud.net.cn/article/39870">uni-app海外月活过亿，2022出海吧；uni-ad全面支持web和微信小程序；uni统计发布2.0版且全面开源</a>
+        </li>
+                <li>
+            <a target="_blank" href="https://ask.dcloud.net.cn/article/39355">uni-app提供开箱即用的SSR支持</a>
+        </li>
+                <li>
+            <a target="_blank" href="https://ask.dcloud.net.cn/article/37834"> uni-app 项目支持 vue 3.0 介绍，及升级指南</a>
+        </li>
+                <li>
+            <a target="_blank" href="https://ask.dcloud.net.cn/article/39073">Android应用市场上架uni-app(5+App)应用合规指南，以及收到工信部或应用市场合规整改通知的解决办法</a>
+        </li>
+                <li>
+            <a target="_blank" href="https://ask.dcloud.net.cn/article/39133">2021年插件大赛获奖结果</a>
+        </li>
+            </ul>
+</div>                    </div>
+                                        <!--end 公告文章-->
+
+                                        <!-- 相关问题 -->
+                    <div class="aw-side-bar-mod aw-text-align-justify side-bar-list-wrap">
+                        <div class="aw-mod-head">
+                            <h3>相关问题</h3>
+                        </div>
+                        <div class="aw-mod-body">
+                            <ul class="aw-li-border-bottom">
+                                                                <li>
+                                    <a href="https://ask.dcloud.net.cn/question/7694">需要用到登录回调，请问如何实现跨webview使用的全局对象？</a>
+                                </li>
+                                                                <li>
+                                    <a href="https://ask.dcloud.net.cn/question/4970">Hbuilder中怎么样使用本地全局变量？</a>
+                                </li>
+                                                                <li>
+                                    <a href="https://ask.dcloud.net.cn/question/58319">less全局变量如何实现？在APP.VUE 里面定义less 其他页面调用提示不存在 </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://ask.dcloud.net.cn/question/75330">uni-app如何新增scss文件的全局变量</a>
+                                </li>
+                                                                <li>
+                                    <a href="https://ask.dcloud.net.cn/question/30684">【报Bug】分环境的全局变量设置</a>
+                                </li>
+                                                                <li>
+                                    <a href="https://ask.dcloud.net.cn/question/57631">uni-app 关于全局变量</a>
+                                </li>
+                                                            </ul>
+                        </div>
+                    </div>
+                    <!-- end 相关问题 -->
+
+                    <!-- 右侧广告 -->
+                                        <div class="aw-side-bar-mod aw-text-align-justify aw-no-border-bottom ad-sale">
+	<div class="aw-mod-body">
+		<!--<script>-->
+            <!--(function() {-->
+                <!--var s = "_" + Math.random().toString(36).slice(2);-->
+                <!--document.write('<div id="' + s + '"></div>');-->
+                <!--(window.slotbydup=window.slotbydup || []).push({-->
+                    <!--id: '5551298',-->
+                    <!--container: s,-->
+                    <!--size: '200,200',-->
+                    <!--display: 'inlay-fix'-->
+                <!--});-->
+            <!--})();-->
+		<!--</script>-->
+<!--		<a href="mailto:bd@dcloud.io?subject=DCloud社区广告投放&body=联系方式:">-->
+<!--			&lt;!&ndash;广告位招租&ndash;&gt;-->
+<!--			<img width="100%" src="//img.cdn.aliyun.dcloud.net.cn/ask/img/%E5%B9%BF%E5%91%8A%E4%BD%8D%E6%8B%9B%E7%A7%9F.jpg">-->
+<!--		</a>-->
+
+		<!--	广告位1	-->
+		<!--	网易仿糗百课程	-->
+		<div class="aw-sponsor-item">
+<!--			<a class="aw-sponsor-item-link" href="https://study.163.com/course/courseMain.htm?courseId=1209401825&share=2&shareId=480000001892585" target="_blank">-->
+<!--				<img class="aw-sponsor-item-image" width="100%" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4f226ab7-4418-4059-b117-7c9c8b33b87c/fb246519-31f3-42a3-8335-13a5476ffe6f.png">-->
+<!--			</a>-->
+<!--			<div class="aw-sponsor-item-tip">广告</div>-->
+			<a href="https://www.dcloud.io/hr/" target="_blank">
+				<!--广告位招租-->
+				<img width="100%" alt="DCloud招聘啦" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/a6344fcf-d1ef-4165-82dc-93e376bfce83.png">
+			</a>
+		</div>
+
+
+		<!--	广告位2	-->
+<!--		<div class="aw-sponsor-item">-->
+<!--			<a href="mailto:bd@dcloud.io?subject=DCloud社区广告投放&body=联系方式:">-->
+<!--				&lt;!&ndash;广告位招租&ndash;&gt;-->
+<!--				<img width="100%" alt="DCloud社区广告位招租"-->
+<!--					 src="//img.cdn.aliyun.dcloud.net.cn/ask/img/%E5%B9%BF%E5%91%8A%E4%BD%8D%E6%8B%9B%E7%A7%9F.jpg">-->
+<!--			</a>-->
+<!--		</div>-->
+		<!--			广告位3-->
+				<div class="aw-sponsor-item">
+			<a class="aw-sponsor-item-link" href="https://www.bilibili.com/video/BV17p4y1a71x?p=1&amp;vd_source=b123f8c166833c59567e6923b9aa2013" target="_blank">
+				<img class="aw-sponsor-item-image" width="100%" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/38e71194-33df-4dca-afc3-5f685cf1c050.png">
+			</a>
+			<div class="aw-sponsor-item-tip" style="color: #5b6466;border-color: #5b6466">广告</div>
+		</div>
+			</div>
+</div>
+                                        <!-- end 右侧广告 -->
+                </div>
+                <!-- end 侧边栏 -->
+            </div>
+        </div>
+
+            </div>
+
+    <script type="text/javascript" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/highlight.min.js.下载"></script>
+    <script type="text/javascript" src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/clipboard.min.js.下载"></script>
+    <script type="text/javascript">
+        //隐藏textnode的值为\n的节点
+        function hideTextNode(node) {
+            var _index = 0, children = node.childNodes, len = children.length;
+            for (; _index < len; _index++) {
+                var node = children[_index], type = node.nodeType;
+                if (type == 1) hideTextNode(node);
+                else if (node.nodeType == 3 && node.nodeValue == '\\n') {
+                    node.parentNode.removeChild(node);
+                    _index--;
+                    len--;
+                }
+            }
+        }
+
+        setTimeout(function () {
+            hideTextNode(markdownbody);
+        }, 1)
+
+        function clearTooltip(e) {
+            e.currentTarget.removeAttribute('data-content');
+            $('.markdown-body pre .btn').popover('hide');
+        }
+
+        function showTooltip(elem, msg) {
+            elem.setAttribute('data-content', msg);
+            $('.markdown-body pre .btn').popover('show');
+        }
+
+        function fallbackMessage(action) {
+            var actionMsg = '';
+            var actionKey = (action === 'cut' ? 'X' : 'C');
+            if (/iPhone|iPad/i.test(navigator.userAgent)) {
+                actionMsg = 'No support :(';
+            } else if (/Mac/i.test(navigator.userAgent)) {
+                actionMsg = 'Press ⌘-' + actionKey + ' to ' + action;
+            } else {
+                actionMsg = 'Press ' + actionKey + ' to ' + action;
+            }
+            return actionMsg;
+        }
+
+        $(document).ready(function () {
+            if (window.source == 'doc') {
+                $('a[href]').each(function (index, tag) {
+                    var t = $(tag);
+                    var href = t.attr('href');
+                    if (!href) return;
+                    href = href.toLowerCase();
+                    if (href.indexOf('http') == 0 || href.indexOf('/') == 0) {
+//					console.log(t.html());
+                        t.attr('target', '_blank');
+                    }
+                })
+            }
+            hljs.configure({
+                tabReplace: '    ', // 4 spaces
+            });
+            hljs.initHighlightingOnLoad();
+
+            var snippets = document.querySelectorAll('.markdown-body pre');
+            [].forEach.call(snippets, function (snippet) {
+                snippet.firstChild.insertAdjacentHTML('beforebegin', '<a class="btn" data-clipboard-snippet data-toggle="popover" data-placement="bottom" data-content="">复制代码</a>');
+            });
+            var clipboardSnippets = new ClipboardJS('[data-clipboard-snippet]', {
+                target: function (trigger) {
+                    var elem = trigger.nextElementSibling;
+                    if (elem.nodeName != 'CODE') {
+                        elem = elem.nextElementSibling;
+                    }
+                    return elem;
+                }
+            });
+            clipboardSnippets.on('success', function (e) {
+                e.clearSelection();
+                showTooltip(e.trigger, '已复制!');
+            });
+            clipboardSnippets.on('error', function (e) {
+                showTooltip(e.trigger, fallbackMessage(e.action));
+            });
+
+            var btns = document.querySelectorAll('.markdown-body pre .btn');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener('mouseleave', clearTooltip);
+                btns[i].addEventListener('blur', clearTooltip);
+            }
+
+            $('.markdown-body pre .btn').popover({
+                'trigger': 'manual'
+            });
+
+            if ($('.aw-article-vote.disabled').length) {
+                $('.aw-article-vote.disabled a').attr('onclick', '');
+            }
+            var anchors = {};
+            var allhs = $("#markdownbody h2,#markdownbody h3,#markdownbody h4,#markdownbody h5,#markdownbody h6"),
+                len = allhs.length,
+                ul = document.createElement('ul'),
+                tagarr = [],
+                index = 0;
+            ul.className = 'catalog-list';
+            if (len == 0) {
+                navigatorpart.setAttribute('nodata', 'true');
+                navigatorpart.style.display = 'none';
+                navigatorpart.parentNode.children[2].style.cssText = 'padding-top:0'
+            }
+            for (; index < len; index++) {
+                var item = allhs[index],
+                    id = 'ditem' + index,
+                    li = document.createElement('li'),
+                    a = document.createElement('a');
+                a.id = id;
+                // a.innerHTML = '<img src="/static/css/default/img/unselected-article.png"/>' + item.innerHTML;
+                a.innerHTML = item.innerText;
+                li.appendChild(a);
+                anchors[id] = item;
+                tagarr.push({tagname: item.tagName, ul: ul});
+                ul.appendChild(li);
+                getChilds(li, index + 1, ul);
+            }
+
+            navigatorpart.appendChild(ul);
+            $(ul).find('a').each(function (index, a) {
+                if (a.parentNode.children.length == 1) {
+                    $(a.children[0]).replaceWith('<span>&nbsp;&nbsp;&nbsp;</span>')
+                }
+            })
+            setTimeout(function () {
+                navigatorpart2.style.height = navigatorpart.clientHeight + 'px';
+//			navigatorpart.style.width = navigatorpart2.clientWidth + 'px'
+            }, 100);
+            var top = $("#divcontainer").offset().top;
+            if (len != 0) {
+                $(window).scroll(function (e) {
+                    if (window.pageYOffset >= top) {
+                        navigatorpart2.style.display = 'block';
+                        navigatorpart.style.cssText = 'width:' + navigatorpart2.clientWidth + 'px;position:fixed;overflow-y:scroll;overflow-x:hidden;height:auto;max-height:600px;top:0;z-index:10;';
+                    } else {
+                        navigatorpart2.style.display = 'none';
+                        navigatorpart.style.cssText = 'overflow-y:scroll!important;overflow-x:hidden;height:auto;max-height:600px;';
+                    }
+                });
+            }
+            var activeTitle = null;
+            $(ul).find('li a').click(function (e) {
+                if (activeTitle) {
+                    $(activeTitle).removeClass('active-title');
+                }
+                activeTitle = e.target;
+                $(e.target).addClass('active-title');
+
+// 			var img =e.target;
+// 			var ul = $(this).parent().find('>ul');
+// 			if(img.tagName != 'IMG'){
+// 				img = this.children[0];
+// 			}
+// 			if(ul.css('display') == 'block') {
+// 				ul.css('display', 'none');
+// 				img.src = '/static/css/default/img/unselected-article.png'
+// 			}
+// 			else {
+// 				ul.css('display', 'block');
+// 				img.src = '/static/css/default/img/selected-article.png'
+// 			}
+// 			if(e.target.tagName == 'IMG'){
+// 				return;
+// 			}
+                if (window.parent.scrollFunc) {
+                    window.parent.scrollFunc($(anchors[this.id]).offset().top - $("#divcontainer").offset().top);
+                    return;
+                }
+                $(window).scrollTop($(anchors[this.id]).offset().top, 100);
+            })
+
+            function getChilds(dom, hindex, uldom) {
+                if (hindex == len) return;
+                var ul = document.createElement('ul'),
+                    id = 'ditem' + hindex,
+                    li = document.createElement('li'),
+                    a = document.createElement('a'),
+                    hasChild = false;
+                var item = allhs[hindex],
+                    tagname = item.tagName,
+                    pretagname = tagarr[tagarr.length - 1].tagname,
+                    ispop = false;
+                if (tagname == pretagname) {
+
+                } else {
+                    if (getHnum(tagname) < getHnum(pretagname)) {
+                        while (true) {
+                            ispop = true;
+                            tagarr.pop();
+                            var last = tagarr[tagarr.length - 1];
+                            if (getHnum(tagname) >= getHnum(last.tagname)) {
+                                ul = last.ul;
+                                break;
+                            }
+                        }
+//					tagarr.pop();
+//					return true;
+                    } else tagarr.push({tagname: tagname, ul: ul});
+                }
+                index = hindex;
+                a.id = id;
+                // a.innerHTML = '<img src="/static/css/default/img/unselected-article.png"/>' + item.innerHTML;
+                a.innerHTML = item.innerText;
+                li.appendChild(a);
+                anchors[id] = item;
+                if (tagname == pretagname) {
+                    hasChild = true;
+                    uldom.appendChild(li);
+                    getChilds(li, index + 1, uldom);
+                } else {
+                    hasChild = true;
+                    ul.appendChild(li);
+                    if (!ispop) {
+                        dom.appendChild(ul);
+                    }
+                    getChilds(li, index + 1, ul);
+                }
+            }
+
+            function getHnum(tagname) {
+                return parseInt(tagname.charAt(1), 10);
+            }
+
+            function collapsed(node, display) {
+                var tagname = node.tagName,
+                    next = node.nextElementSibling,
+                    level = parseInt(tagname.charAt(1), 10);
+                var i = 0;
+                while (true) {
+                    if (!next) return;
+//				console.log(next.tagName + ':' + next.outerHTML)
+                    if (!next.className || next.className.indexOf('collapsed') < 0) {
+                        next.style.display = display;
+                        next = next.nextElementSibling;
+                    } else {
+                        var nextlevel = parseInt(next.tagName.charAt(1), 10);
+                        if (nextlevel <= level) return;
+                        next.style.display = display;
+                        if (next.className) next.className = next.className.replace('zhedie', '');
+                        next = next.nextElementSibling;
+                    }
+
+                    i++;
+//				if(i > 100){alert('to largin');return;}
+                }
+            }
+
+            $("#markdownbody .zhedie").each(function (index, node) {
+                collapsed(node, 'none');
+            });
+            $("#markdownbody .collapsed").click(function () {
+                var This = $(this);
+                if (This.hasClass('zhedie')) {
+                    This.removeClass('zhedie');
+//				console.log("This.removeClass('zhedie');")
+                    collapsed(this, '');
+                } else {
+//				console.log("This.addClass('zhedie');")
+                    This.addClass('zhedie');
+                    collapsed(this, 'none');
+                }
+//			alert(window.parent.onsizechange)
+                if (window.parent.onsizechange) {
+                    window.parent.onsizechange();
+                }
+
+            });
+            setTimeout(function () {
+                $("#markdownbody img").lazyload({
+                    'container': markdownbody,
+                    'failure_limit': 5,
+                    load: function (remain, setting) {
+                        if (window.parent.onsizechange) {
+                            window.parent.onsizechange();
+                        }
+                    }
+                });
+            }, 500)
+
+        });
+
+        (function () {
+            document.onkeydown = function (event) {
+                var keyCode = event.keyCode || event.which || event.charCode;
+                var ctrlKey = event.ctrlKey || event.metaKey;
+                if (ctrlKey && keyCode === 13) {
+                    save_article_comment($('#answer_form'));
+                    event.preventDefault();
+                    return false;
+                }
+            };
+        }());
+    </script>
+
+        <style>
+    .bdqctloud_div {
+        padding-top: 20px;
+        margin-bottom: 20px;
+        border: 1px dashed #cccccc;
+        position: relative;
+        border-left: none;
+        border-right: none;
+        padding-bottom: 20px;
+        padding-left: 20px;
+    }
+
+    .bdqctloud_left {
+        position: relative;
+        margin-left: 3vw;
+        width: 500px;
+    }
+
+    .bdqctloud_articel{
+        position: relative;
+        margin-left: 2vw;
+        width: 500px;
+    }
+
+    .dcloud_news {
+        color: #f9f9f9 !important;
+        cursor: default;
+    }
+
+    .aw-footer .divider {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    /*.ad_dev_right{*/
+    /*	position: relative;*/
+    /*	left: 580px;*/
+    /*	top: 25px;*/
+    /*}*/
+</style>
+<div class="aw-footer-wrap">
+<!--底部广告-->
+
+<!--end 底部广告-->
+<!--友情链接 start-->
+<div class="links aw-wecenter">
+
+    <div class="links-title">友情链接</div>
+    <div class="links-body">
+        <a class="links-item" href="https://www.w3cschool.cn/" title="学编程，从w3cschool开始。" target="_blank">W3Cschool</a>
+        <a class="links-item" href="https://www.yszyun.com/" title="优势智云" target="_blank">优势智云</a>
+        <a class="links-item" href="http://bbs.itheima.com/" title="黑马程序员" target="_blank">黑马程序员</a>
+        <a class="links-item" href="https://www.proginn.com/" title="程序员客栈" target="_blank">程序员客栈</a>
+        <a class="links-item" href="https://www.getui.com/" title="个推" target="_blank">个推</a>
+        <a class="links-item" href="http://www.insideria.cn/" title="锐亚教育" target="_blank">锐亚教育</a>
+        <a class="links-item" href="https://www.jisuapp.cn/" target="_blank" title="即速应用">即速应用</a>
+        <a class="links-item" href="https://news.dcloud.net.cn/" target="_blank" title="DCloud新闻">DCloud新闻</a>
+        <a class="links-item" href="https://www.infoq.cn/?utm_source=dcloud&amp;utm_medium=youlian" target="_blank" title="InfoQ">InfoQ</a>
+        <a class="links-item" href="https://maximtop.com/" target="_blank" title="美信拓扑">美信拓扑</a>
+        <a class="links-item" href="https://heapdump.cn/" target="_blank" title="HeapDump性能社区">HeapDump性能社区</a>
+        <a class="links-item" href="https://www.diygw.com/" target="_blank" title="diygw可视化">diygw可视化</a>
+        <a class="links-item" href="mailto:bd@dcloud.io" title="申请友链">申请友链</a>
+
+    </div>
+    <!--		<div class="aw-ad-item" style="line-height: 14px">-->
+    <!--		广告位-->
+    <!--		<div style="padding-top: 22px; margin-bottom:20px ;border: 1px solid #cccccc;">-->
+    <!--			<script type="text/javascript" smua="d=p&s=b&u=u3592833&w=1140&h=130" src="//www.nkscdn.com/smu0/o.js"></script>-->
+    <!--		</div>-->
+    <!--    <div class="bdqctloud_div">-->
+    <!--&lt;!&ndash;            星辰广告废弃&ndash;&gt;-->
+    <!--&lt;!&ndash;        <div class="xingchen">&ndash;&gt;-->
+    <!--&lt;!&ndash;            <script type="text/javascript" smua="d=p&s=b&u=u3592833&w=500&h=100"&ndash;&gt;-->
+    <!--&lt;!&ndash;                    src="//www.nkscdn.com/smu0/o.js"></script>&ndash;&gt;-->
+    <!--&lt;!&ndash;        </div>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;        &ndash;&gt;-->
+    <!--&lt;!&ndash;            <div class="bdqctloud_left bdqctloud_articel">&ndash;&gt;-->
+    <!--&lt;!&ndash;                <div class="_ru2kawjpp9p"></div>&ndash;&gt;-->
+    <!--&lt;!&ndash;                <script type="text/javascript">&ndash;&gt;-->
+    <!--&lt;!&ndash;                    (window.slotbydup = window.slotbydup || []).push({&ndash;&gt;-->
+    <!--&lt;!&ndash;                        id: "u5988424",&ndash;&gt;-->
+    <!--&lt;!&ndash;                        container: "_ru2kawjpp9p",&ndash;&gt;-->
+    <!--&lt;!&ndash;                        async: true&ndash;&gt;-->
+    <!--&lt;!&ndash;                    });&ndash;&gt;-->
+    <!--&lt;!&ndash;                </script>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;            </div>&ndash;&gt;-->
+    <!--&lt;!&ndash;        &ndash;&gt;-->
+
+
+    <!--    </div>-->
+
+
+    <!--		</div>-->
+
+</div>
+<!--友情链接 end-->
+
+<!--copyright-->
+<div class="aw-footer">
+    <div class="container">
+        <div class="muted credit">
+            <div class="logo">
+                <img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/ask-footer@2x.png">
+            </div>
+            <p>DCloud 即数字天堂(北京)网络技术有限公司是W3C成员及HTML5中国产业联盟发起单位</p>
+            <p>
+                <a href="https://beian.miit.gov.cn/" target="_blank">京ICP备12046007号-4</a>
+                <span class="divider">|</span>
+                <a target="_blank" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802035340">京公网安备：11010802035340号</a>
+                <span class="divider">|</span>
+                国家信息安全等级保护三级，证书编号：11010813802-20001
+            </p>
+        </div>
+    </div>
+    <span class="hidden-xs" style="margin-right: 5px;">Powered By <a href="http://www.wecenter.com/?copyright" target="blank">WeCenter 2.5.8</a></span>
+    <span>|</span>
+
+    <span class="hidden-xs" style="margin-left: 5px;"><a href="mailto:bd@dcloud.io" target="blank">商务合作：bd@dcloud.io</a>、<a href="https://ask.dcloud.net.cn/article/37443" target="_blank">广告投放</a>
+
+  			</span>
+<!--    <p><a class="dcloud_news" href="https://news.dcloud.net.cn" target="_blank" title="DCloud新闻">DCloud新闻</a></p>-->
+
+    </div>
+</div>
+
+
+<a class="aw-back-top hidden-xs" href="javascript:;" onclick="$.scrollTo(1, 600, {queue:true});" style="display: inline;"><i class="fa fa-arrow-up"></i></a>
+
+
+<!-- DO NOT REMOVE -->
+<div id="aw-ajax-box" class="aw-ajax-box"></div>
+
+<div style="display:none;" id="__crond"><img src="./uni-app 全局变量的几种实现方式 - DCloud问答_files/1656647659" width="1" height="1"></div>
+
+<!-- Escape time: 0.59675407409668 -->
+<script type="text/javascript" id="bdshare_js" data="type=tools"></script>
+<!-- / DO NOT REMOVE -->
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?1aa4e79e9d9a938cfe5605a1d0269239";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script>
+    (function ($) {
+        $('.ad-item').on('click', '.close', function () {
+            var self = this;
+            var level = $(self).data('level');
+            if (level && (level > 0)) {
+                $.ajax({
+                    url: '//' + location.host + '/account/ajax/set_ad_sign/' + '?ad_type=' + $(self).data('type'),
+                    success: function (data) {
+                        var result = JSON.parse(data);
+                        if (result.code === 200) {
+                            $(self).parent().parent().css('display', 'none');
+                        }
+                    }
+                });
+            } else {
+                $(self).css('display', 'none');
+                $(self).next().css('display', 'inline-block');
+            }
+        });
+    }(window.jQuery));
+</script>
+
+
+
+    <script>
+        var width = 0;
+        var height = 0;
+        $('.markdown-body img').each(function (i) {//遍历
+            if ($(this).height() > height) {
+                height = $(this).height();
+            }
+            if ($(this).width() > width) {
+                width = $(this).width();
+            }
+        })
+        // var width = $('.markdown-body img').width();
+        // var height = $('.markdown-body img').height();
+        var result = width - height;
+        if (width > height && height * 0.2 < result) {
+            $('.markdown-body img').attr('class', 'center_image')
+        }
+        $('.markdown-body img').show();
+
+    </script>
+    <script>
+        function editShowStatus() {
+            var id = "35021"
+            $.post(G_BASE_URL + '/question/ajax/edit_show_status/', 'type=2&id=' + id, function (result) {
+                result = JSON.parse(result)
+                if (result['errno'] == '1') {
+                    $('#dont_over_div').hide();
+                } else {
+                    $('#alert_div').text(result['err'])
+                    $('#alert_div').show();
+                }
+
+            });
+        }
+        function addBlack() {
+            var id = "35021"
+            $.post(G_BASE_URL + '/question/ajax/edit_show_status/', 'type=2&show_status=2&id=' + id, function (result) {
+                result = JSON.parse(result)
+                if (result['errno'] == '1') {
+                    $('#add_black_div').hide();
+                    location.reload();
+                } else {
+                    $('#add_black_alert_div').text(result['err'])
+                    $('#add_black_alert_div').show();
+                }
+            });
+        }
+    </script>
+</div></body></html>

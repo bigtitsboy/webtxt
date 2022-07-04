@@ -75,9 +75,9 @@ $emit父子组件传值触发方法，要写在父组件中子组件标签上，
 div边框半圆角
 .test{
   width:100px;
-  height:50px; 
+  height:50px;
   background-color:#fff;
-  border-radius:50px 50px 0 0; 
+  border-radius:50px 50px 0 0;
   border:2px solid #666;
   border-bottom:none;
 }
@@ -98,7 +98,7 @@ table tr 元素不支持padding属性  tr  td th 元素不支持margin属性
 文字按左右两端对齐
                 text-align: justify;
                 text-align-last: justify;
-                text-justify: inter-ideograph;   
+                text-justify: inter-ideograph;
 
 this.$refs.askpage.$data.xxxx 获取子组件的data的值
 
@@ -113,13 +113,13 @@ this.$refs['formName']或者this.$refs.formName  两种refs的使用方法
 
 span 换行
 span{
-    word-break:normal; 
-    width:auto; 
-    display:block; 
+    word-break:normal;
+    width:auto;
+    display:block;
     white-space:pre-wrap;
     word-wrap : break-word ;
     overflow: hidden ;
-} 
+}
 
   font-size: inherit; 自动匹配合适大小
 
@@ -135,7 +135,7 @@ js类型判断:Object.prototype.toString.call()
 vue v-for渲染数组 页面第一次渲染无法出来的情况：在修改数组的操作最后用push方法提醒vue数组已经更新
 如在axios赋值数组后 对数组使用push
 
-计算属性 computed 的机制 https://www.cnblogs.com/zero-zm/p/12102668.html 
+计算属性 computed 的机制 https://www.cnblogs.com/zero-zm/p/12102668.html
 当依赖的data对象中的属性值发生变化时，将会触发计算方法，在data对象中生成新的变量，并且会将新的变量缓存起来；（只要依赖的（方法中使用到的）data对象属性值不发生改变，将不会触发计算方法；）
 
 动态绑定disabled属性     :disabled="item.num ===1?'disabled':false"   只有值为false才停止disable !!!
@@ -155,7 +155,7 @@ border-radius: 40px  变成button
 this.$cookies.set('test', '{a:1,b:2}',0,'/')   //意思为创建一个名为 test 的cookie ，值为{a:1,b:2},时间为0，即会话结束就删除cookie，存放在根目录 / 下  修改cookie就是重新设置cookie覆盖旧的
 https://blog.csdn.net/eva_feng/article/details/105026754
 
-vue强制页面半刷新更新数据（不会影响vuex数据） 
+vue强制页面半刷新更新数据（不会影响vuex数据）
   组件中直接使用    this.$forceUpdate()  不需要再main中引入
 
 当设置了多个子路由，只能在一个子路由上使用响应拦截器不能多个子路由都使用
@@ -381,7 +381,7 @@ overflow超出部分省略号
 	　　display: -webkit-box !important;
 	　　text-overflow: ellipsis;
 	　　overflow: hidden;
-	　　-webkit-line-clamp: 2;  
+	　　-webkit-line-clamp: 2;
 	　　-webkit-box-orient: vertical;
 	　　word-break:break-all;
 	}
@@ -427,9 +427,9 @@ axios({
 })
 
 获取对象的长度length res为obj类型
-Object.keys(res).length 获取对象的length   
+Object.keys(res).length 获取对象的length
 
-axios的使用 import axios from 'axios'  Vue.prototype.$axios = axios 
+axios的使用 import axios from 'axios'  Vue.prototype.$axios = axios
 因为axios中的this指向是axios内部不属于vue 所以axios中then和catch的回调函数最好使用()=>{}来写函数,可以让this指向vue
   this.$axios({
     method: "post",//指定请求方式
@@ -607,7 +607,7 @@ display:inline-block不在同一行或字体图标不居中 在样式加上verti
 如name=‘my’
 .my-enter,.my-my-leave-to
 
-②v-for='count in 4'循环数字{{count}}可以使用  
+②v-for='count in 4'循环数字{{count}}可以使用
 <!-- 注意：如果使用v-for迭代数字的话，前面 count 的值从 1 开始-->
 
 对于绝对定位position:absolute的子元素，其基准点是相对于离其最近的一层定位父元素而言。如果其所有父级元素均无定位，则是相对于body而言。
@@ -672,7 +672,7 @@ Vuex数据会级联更新，当赋值数据 a=b时两者的id相同，b的数据
 条件为x.id == xxx.id  value=>  return value > 14 返回大于14的值
 findindex是对list每一项进行遍历，xxx.xxx.findindex( x=>x.id == xxx.id) 没找到返回-1 找到返回对应的索引值不在继续寻找
 x为list的每一项相当于foreach中的x
-xxx.xxx.filter( x=> x.id == xxx.id) 将满足条件的x return一个数组出来 全局遍历  没有index选项
+xxx.xxx.filter( x=> x.id == xxx.id) 将满足条件的x return一个数组出来 全局遍历
 js中replace只替换一次字符，需要多次替换用str.split('xxx').join('xxx') split是以xxx为条件分割字符串
 "2:3:4:5".split(":")	//将返回["2", "3", "4", "5"]		 join把数组拼接成字符串
 或者 替换多个子串 通过 /g 运算符使用正则表达式 replace(/sentence/g, 'message');
@@ -773,7 +773,7 @@ v-for 使用得行内加上一个key的属性 并且用v-bind关联且key的值�
 
 foreach 和 some和map 都可以遍历集合，xxx（function（item，index）{}），但some在方法return True 后会中断遍历
 1、forEach：用来遍历数组中的每一项，这个方法执行没有返回值，如果return会返回undifine
-2、map：数组中每一个对象都调用map的箭头函数方法然后return 支持return，用变量接收map会得到map返回的一个数组 
+2、map：数组中每一个对象都调用map的箭头函数方法然后return 支持return，用变量接收map会得到map返回的一个数组
 
 注意使用indexOf是不能找到数组里的NaN的要用includes
 indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。如果要检索的字符串值没有出现，则该方法返回 -1。 搜索空字符串返回0/s///
